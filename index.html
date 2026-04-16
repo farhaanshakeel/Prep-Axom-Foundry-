@@ -9,6 +9,7 @@
 </head>
 <body>
 <div id="particles"></div>
+
 <aside id="sidebar">
   <div class="logo-wrap">
     <div class="logo-text">Prep Axiom<br>Foundry</div>
@@ -27,9 +28,12 @@
     <a href="https://discord.gg/PNbzya3Jk" class="discord-btn" target="_blank">Join Discord →</a>
   </div>
 </aside>
+
 <button id="hamburger" aria-label="Menu"><span></span><span></span><span></span></button>
+
 <main id="main">
 
+  <!-- ══ HERO ══ -->
   <section id="hero">
     <div class="hero-grid"></div>
     <div class="hero-glow"></div>
@@ -51,6 +55,7 @@
     </div>
   </section>
 
+  <!-- ══ ABOUT ══ -->
   <section id="about">
     <div class="reveal">
       <div class="section-label">// 01 — About</div>
@@ -59,7 +64,7 @@
     </div>
     <div class="about-grid">
       <div class="about-text reveal">
-        <p><strong>The Prep Axiom Foundry</strong> is a peer-led global academic community built for students serious about olympiad and other competetive exams especially for mathematics and physics, including biology and chemistry. <strong>A community of students</strong>.</p>
+        <p><strong>The Prep Axiom Foundry</strong> is a peer-led global academic community built for students serious about olympiad and other competitive exams, especially mathematics and physics, including biology and chemistry. <strong>A community of students.</strong></p>
         <p>Here, students form study groups, teach each other, take moderated tests, and compete in weekly challenges — all while being supported by mentors who have walked the same path.</p>
         <p>We also believe that academic excellence and mental wellbeing go hand in hand. Our <strong>Student Advocate</strong> is always available — because no student should burn out preparing alone.</p>
         <div class="about-quote">
@@ -78,6 +83,7 @@
     </div>
   </section>
 
+  <!-- ══ FEATURES ══ -->
   <section id="features">
     <div class="reveal">
       <div class="section-label">// 02 — Features</div>
@@ -94,10 +100,11 @@
       <div class="feature-card reveal"><span class="feature-num">07</span><span class="feature-icon">🔥</span><div class="feature-title">Stump The Mentor</div><p class="feature-desc">Think you have a problem hard enough to stump our mentors? Submit it. Win and earn a permanent Hall of Fame spot.</p></div>
       <div class="feature-card reveal"><span class="feature-num">08</span><span class="feature-icon">📊</span><div class="feature-title">PAF Leaderboard</div><p class="feature-desc">Track your contributions — problems solved, teaching sessions, test scores. Rise through the ranks. Earn your place.</p></div>
       <div class="feature-card reveal"><span class="feature-num">09</span><span class="feature-icon">🌍</span><div class="feature-title">Global Community</div><p class="feature-desc">Connect with serious students from across the world. Early Member badge available to the first 50 who join.</p></div>
-      <div class="feature-card reveal"><span class="feature-num">10</span><span class="feature-icon">�</span><div class="feature-title">More features</div><p class="feature-desc">Join Discord server for furthur information.</p></div>
+      <div class="feature-card reveal"><span class="feature-num">10</span><span class="feature-icon">✨</span><div class="feature-title">More Features</div><p class="feature-desc">Join our Discord server for further information on upcoming features and community events.</p></div>
     </div>
   </section>
 
+  <!-- ══ HALL OF FAME ══ -->
   <section id="halloffame">
     <div class="reveal">
       <div class="section-label">// 03 — Hall of Fame</div>
@@ -105,6 +112,18 @@
       <div class="section-divider"></div>
     </div>
     <div class="hof-grid reveal">
+      <!--
+        TO ADD A SOLVED PROBLEM, copy this block:
+        <div class="hof-card">
+          <div class="hof-badge">Geometry</div>
+          <div class="hof-question">Your question here</div>
+          <div class="hof-summary">One sentence summary</div>
+          <div class="hof-meta">
+            <span class="hof-solver">// solved by username</span>
+            <span class="hof-trophy">🏆</span>
+          </div>
+        </div>
+      -->
       <div class="hof-empty">
         <div style="font-size:48px">🏛️</div>
         <p>THE HALL AWAITS ITS FIRST SCHOLARS</p>
@@ -113,6 +132,7 @@
     </div>
   </section>
 
+  <!-- ══ SYLLABUS ══ -->
   <section id="syllabus">
     <div class="reveal">
       <div class="section-label">// 04 — Syllabus</div>
@@ -120,17 +140,17 @@
       <div class="section-divider"></div>
     </div>
 
-    <!-- NOTE ABOVE TABS -->
     <p class="syllabus-note reveal">
       📌 Please note — our primary focus is <strong>Mathematics and Physics</strong>, but we also explore <strong>Biology</strong> and <strong>Chemistry</strong> as supplementary subjects.
     </p>
 
     <div class="syllabus-tabs reveal">
       <button class="tab-btn active" onclick="switchTab('math')">Mathematics</button>
-<button class="tab-btn" onclick="switchTab('physics')">Physics</button>
-<button class="tab-btn" onclick="switchTab('biology')">Biology</button>
+      <button class="tab-btn" onclick="switchTab('physics')">Physics</button>
+      <button class="tab-btn" onclick="switchTab('biology')">Biology</button>
     </div>
 
+    <!-- MATH TAB -->
     <div id="tab-math" class="tab-content active reveal">
       <div class="syllabus-topic"><div class="topic-title">Number Theory</div><ul class="topic-list"><li>Divisibility</li><li>Prime Numbers</li><li>GCD & LCM</li><li>Modular Arithmetic</li><li>Fermat's Theorem</li><li>Chinese Remainder</li><li>Diophantine Equations</li></ul></div>
       <div class="syllabus-topic"><div class="topic-title">Algebra</div><ul class="topic-list"><li>Polynomials</li><li>Vieta's Formulas</li><li>Inequalities</li><li>AM-GM</li><li>Cauchy-Schwarz</li><li>Functional Equations</li><li>Sequences & Series</li></ul></div>
@@ -138,20 +158,41 @@
       <div class="syllabus-topic"><div class="topic-title">Combinatorics</div><ul class="topic-list"><li>Counting Principles</li><li>Permutations</li><li>Pigeonhole</li><li>Inclusion-Exclusion</li><li>Binomial Theorem</li><li>Graph Theory</li><li>Probability</li></ul></div>
     </div>
 
-<div id="tab-physics" class="tab-content reveal"> <div class="syllabus-topic"><div class="topic-title">Mechanics</div><ul class="topic-list"><li>Kinematics</li><li>Newton's Laws</li><li>Work & Energy</li><li>Momentum</li><li>Rotational Motion</li><li>Gravitation</li></ul></div> <div class="syllabus-topic"><div class="topic-title">Electromagnetism</div><ul class="topic-list"><li>Coulomb's Law</li><li>Electric Fields</li><li>Circuits</li><li>Magnetic Fields</li><li>Faraday's Law</li><li>Maxwell's Equations</li></ul></div> <div class="syllabus-topic"><div class="topic-title">Waves & Optics</div><ul class="topic-list"><li>Wave Properties</li><li>Interference</li><li>Diffraction</li><li>Reflection & Refraction</li><li>Doppler Effect</li></ul></div> <div class="syllabus-topic"><div class="topic-title">Modern Physics</div><ul class="topic-list"><li>Special Relativity</li><li>Photoelectric Effect</li><li>Atomic Models</li><li>Nuclear Physics</li><li>Quantum Basics</li></ul></div> </div> 
+    <!-- PHYSICS TAB -->
+    <div id="tab-physics" class="tab-content reveal">
+      <div class="syllabus-topic"><div class="topic-title">Mechanics</div><ul class="topic-list"><li>Kinematics</li><li>Newton's Laws</li><li>Work & Energy</li><li>Momentum</li><li>Rotational Motion</li><li>Gravitation</li></ul></div>
+      <div class="syllabus-topic"><div class="topic-title">Electromagnetism</div><ul class="topic-list"><li>Coulomb's Law</li><li>Electric Fields</li><li>Circuits</li><li>Magnetic Fields</li><li>Faraday's Law</li><li>Maxwell's Equations</li></ul></div>
+      <div class="syllabus-topic"><div class="topic-title">Waves & Optics</div><ul class="topic-list"><li>Wave Properties</li><li>Interference</li><li>Diffraction</li><li>Reflection & Refraction</li><li>Doppler Effect</li></ul></div>
+      <div class="syllabus-topic"><div class="topic-title">Modern Physics</div><ul class="topic-list"><li>Special Relativity</li><li>Photoelectric Effect</li><li>Atomic Models</li><li>Nuclear Physics</li><li>Quantum Basics</li></ul></div>
+    </div>
 
-   <div id="tab-biology" class="tab-content reveal">
-  <div class="syllabus-topic">
-    <div class="topic-title">Open Learning</div>
-    <ul class="topic-list">
-      <li>Whatever you want to study</li>
-      <li>Must be pre-university level</li>
-      <li>Grade 10, 11 or 12 standard</li>
-      <li>Suggest topics in Discord</li>
-      <li>Community decides together</li>
-    </ul>
-  </div>
-</div>
+    <!-- BIOLOGY TAB -->
+    <div id="tab-biology" class="tab-content reveal">
+      <div class="syllabus-topic">
+        <div class="topic-title">Open Learning</div>
+        <ul class="topic-list">
+          <li>Student-suggested topics</li>
+          <li>Pre-university level only</li>
+          <li>Grade 10, 11 or 12 standard</li>
+          <li>Suggest topics in Discord</li>
+          <li>Community decides together</li>
+        </ul>
+      </div>
+      <div class="syllabus-topic">
+        <div class="topic-title">How It Works</div>
+        <ul class="topic-list">
+          <li>Post your topic in #resources</li>
+          <li>Community votes on it</li>
+          <li>Mentor approves the level</li>
+          <li>Study group forms around it</li>
+        </ul>
+      </div>
+    </div>
+
+  </section>
+  <!-- ══ END SYLLABUS ══ -->
+
+  <!-- ══ TEAM ══ -->
   <section id="team">
     <div class="reveal">
       <div class="section-label">// 05 — Team</div>
@@ -170,8 +211,7 @@
         <div class="team-name">Nuven</div>
         <div class="team-role">👑 Co-Founder</div>
         <p class="team-bio">Co-founder of PAF and fellow science enthusiast, building this community alongside Auvalen with shared ambition and purpose.</p>
-      </div>  
-    
+      </div>
       <div class="team-card reveal">
         <div class="team-avatar">F</div>
         <div class="team-name">Faizan Shakeel</div>
@@ -199,6 +239,7 @@
     </div>
   </section>
 
+  <!-- ══ JOIN ══ -->
   <section id="join">
     <div class="reveal">
       <div class="section-label">// 06 — Join Us</div>
@@ -223,6 +264,27 @@
   </section>
 
 </main>
+
+<!-- ══ FOOTER ══ -->
+<footer id="footer">
+  <div class="footer-inner">
+    <div class="footer-logo">THE PREP AXIOM FOUNDRY</div>
+    <div class="footer-links">
+      <a href="#hero">Home</a>
+      <a href="#about">About</a>
+      <a href="#features">Features</a>
+      <a href="#halloffame">Hall of Fame</a>
+      <a href="#syllabus">Syllabus</a>
+      <a href="#team">Team</a>
+      <a href="https://discord.gg/PNbzya3Jk" target="_blank">Discord</a>
+    </div>
+    <div class="footer-copy">
+      © 2026 The Prep Axiom Foundry. All rights reserved.<br>
+      <span>Founded by Auvalen & Nuven · Built by students, for students.</span>
+    </div>
+  </div>
+</footer>
+
 <script src="script.js"></script>
 </body>
 </html>
