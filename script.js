@@ -76,9 +76,9 @@ function animateCounter(el, target, duration = 2000) {
   }, 16);
 }
 setTimeout(() => {
-  animateCounter(document.getElementById('counter-members'), 0);   // ← change 0 to real number
-  animateCounter(document.getElementById('counter-problems'), 0);  // ← change 0 to real number
-  animateCounter(document.getElementById('counter-countries'), 0); // ← change 0 to real number
+  animateCounter(document.getElementById('counter-members'), 10);   // ← change 0 to real number
+  animateCounter(document.getElementById('counter-problems'), 3+);  // ← change 0 to real number
+  animateCounter(document.getElementById('counter-countries'), 3+); // ← change 0 to real number
 }, 1200);
 
 // ── SYLLABUS TABS
