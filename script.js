@@ -48,25 +48,9 @@ const revealObserver = new IntersectionObserver(entries => {
 }, { threshold: 0.1, rootMargin: '0px 0px -60px 0px' });
 document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
 
-// ── TYPING EFFECT (available for future use)
-function typeWriter(element, text, speed = 60) {
-  let i = 0;
-  element.textContent = '';
-  const cursor = document.createElement('span');
-  cursor.className = 'typed-cursor';
-  element.parentNode.appendChild(cursor);
-  const interval = setInterval(() => {
-    element.textContent += text[i++];
-    if (i >= text.length) {
-      clearInterval(interval);
-      setTimeout(() => cursor.remove(), 2000);
-    }
-  }, speed);
-}
-
 // ── COUNTERS
-// To update numbers: change the values below (e.g. 42, 150, 12)
 function animateCounter(el, target, duration = 2000) {
+  if (!el) return;
   let start = 0;
   const step = target / (duration / 16);
   const timer = setInterval(() => {
@@ -76,9 +60,9 @@ function animateCounter(el, target, duration = 2000) {
   }, 16);
 }
 setTimeout(() => {
-  animateCounter(document.getElementById('counter-members'), 12);    // ← update this number
-  animateCounter(document.getElementById('counter-problems'), 3+);   // ← update this number
-  animateCounter(document.getElementById('counter-countries'), 4);  // ← update this number
+  animateCounter(document.getElementById('counter-members'), 12);
+  animateCounter(document.getElementById('counter-problems'), 3);
+  animateCounter(document.getElementById('counter-countries'), 4);
 }, 1200);
 
 // ── SYLLABUS TABS
