@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Members — The Prep Axiom Foundry</title>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700;900&family=Rajdhani:wght@300;400;500;600&family=Share+Tech+Mono&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="styles.css"/>
+  <style>
+    .page-wrap { min-height: 100vh; padding: 100px 80px 60px; display: flex; flex-direction: column; justify-content: center; }
+    .members-note { font-size: 13px; color: var(--grey); border-left: 2px solid #f0c040; padding: 12px 18px; background: rgba(240,192,64,0.05); margin-bottom: 40px; line-height: 1.6; }
+    .members-note strong { color: #f0c040; }
+    .members-stats { display: flex; gap: 40px; margin-bottom: 48px; flex-wrap: wrap; }
+    .mstat { display: flex; flex-direction: column; gap: 4px; }
+    .mstat-num { font-family: 'Orbitron', sans-serif; font-size: 36px; font-weight: 900; color: #f0c040; }
+    .mstat-label { font-family: 'Share Tech Mono', monospace; font-size: 10px; letter-spacing: 3px; color: var(--grey); text-transform: uppercase; }
+    .members-section-label { font-family: 'Share Tech Mono', monospace; font-size: 10px; letter-spacing: 4px; color: var(--grey); text-transform: uppercase; margin: 40px 0 20px; display: flex; align-items: center; gap: 16px; }
+    .members-section-label::after { content: ''; flex: 1; height: 1px; background: rgba(0,170,255,0.1); }
+    .members-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 14px; }
+    .member-card { background: rgba(3,13,26,0.8); border: 1px solid rgba(0,170,255,0.12); padding: 18px 20px; position: relative; transition: all 0.3s; clip-path: polygon(0 0, calc(100% - 12px) 0, 100% 12px, 100% 100%, 0 100%); }
+    .member-card:hover { border-color: rgba(0,170,255,0.35); transform: translateY(-3px); background: rgba(0,170,255,0.04); }
+    .member-card.gold { border-color: rgba(240,192,64,0.3); background: rgba(240,192,64,0.04); }
+    .member-card.gold:hover { border-color: rgba(240,192,64,0.6); }
+    .member-num { position: absolute; top: 10px; right: 12px; font-family: 'Share Tech Mono', monospace; font-size: 9px; color: rgba(240,192,64,0.3); }
+    .member-badge { display: inline-block; padding: 3px 8px; font-family: 'Share Tech Mono', monospace; font-size: 9px; letter-spacing: 1.5px; text-transform: uppercase; margin-bottom: 10px; border: 1px solid; }
+    .badge-gold { color: #f0c040; border-color: rgba(240,192,64,0.4); background: rgba(240,192,64,0.08); }
+    .badge-blue { color: var(--blue); border-color: rgba(0,170,255,0.3); background: rgba(0,170,255,0.06); }
+    .badge-grey { color: var(--grey); border-color: rgba(122,154,181,0.2); }
+    .member-name { font-family: 'Orbitron', sans-serif; font-size: 12px; font-weight: 700; letter-spacing: 1px; color: var(--white); margin-bottom: 5px; }
+    .member-info { font-family: 'Share Tech Mono', monospace; font-size: 10px; color: var(--grey); letter-spacing: 0.5px; }
+    .open-spots { padding: 40px; border: 1px dashed rgba(0,170,255,0.12); text-align: center; color: var(--grey); font-family: 'Share Tech Mono', monospace; font-size: 11px; letter-spacing: 2px; margin-top: 40px; }
+    .open-spots a { color: var(--blue); text-decoration: none; }
+    .open-spots a:hover { text-decoration: underline; }
+    @media (max-width: 900px) { .page-wrap { padding: 80px 24px 40px; } .members-grid { grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); } }
+  </style>
+</head>
+<body>
+<div id="particles"></div>
+
+<aside id="sidebar">
+  <div class="logo-wrap">
+    <div class="logo-text">Prep Axiom<br>Foundry</div>
+    <div class="logo-sub">// PAF — EST. 2026</div>
+  </div>
+  <nav>
+    <a href="index.html"><span class="nav-icon">⬡</span>Home</a>
+    <a href="index.html#about"><span class="nav-icon">◈</span>About</a>
+    <a href="index.html#features"><span class="nav-icon">◆</span>Features</a>
+    <a href="index.html#halloffame"><span class="nav-icon">🏆</span>Hall of Fame</a>
+    <a href="index.html#syllabus"><span class="nav-icon">📐</span>Syllabus</a>
+    <a href="index.html#team"><span class="nav-icon">◉</span>Team</a>
+    <a href="index.html#join"><span class="nav-icon">▶</span>Join Us</a>
+    <a href="members.html" class="active"><span class="nav-icon">🌟</span>Members</a>
+    <a href="contact.html"><span class="nav-icon">✉</span>Contact</a>
+  </nav>
+  <div class="sidebar-footer">
+    <a href="https://discord.gg/PNbzya3Jk" class="discord-btn" target="_blank">Join Discord →</a>
+  </div>
+</aside>
+
+<button id="hamburger" aria-label="Menu"><span></span><span></span><span></span></button>
+
+<main id="main">
+<div class="page-wrap">
+
+  <div class="reveal">
+    <div class="section-label">// Early Members</div>
+    <h2 class="section-title">The <span class="accent">Founding</span> Guild</h2>
+    <div class="section-divider"></div>
+  </div>
+
+  <p class="members-note reveal">
+    🌟 These are the <strong>founding members of PAF</strong> — students who believed before it was anything.
+    The first 50 receive a permanent <strong>Early Member</strong> badge that can never be earned again. Excluding founders and core team.
+  </p>
+
+  <div class="members-stats reveal">
+    <div class="mstat"><span class="mstat-num">7</span><span class="mstat-label">Total Members</span></div>
+    <div class="mstat"><span class="mstat-num">43</span><span class="mstat-label">Spots Left</span></div>
+    <div class="mstat"><span class="mstat-num">4</span><span class="mstat-label">Countries</span></div>
+  </div>
+
+  <!-- FOUNDERS -->
+  <div class="members-section-label reveal">// Founders</div>
+  <div class="members-grid">
+    <div class="member-card gold reveal">
+      <span class="member-num">#001</span>
+      <div class="member-badge badge-gold">👑 Founder</div>
+      <div class="member-name">Auvalen</div>
+      <div class="member-info">Physics & Mathematics</div>
+    </div>
+    <div class="member-card gold reveal">
+      <span class="member-num">#002</span>
+      <div class="member-badge badge-gold">👑 Co-Founder</div>
+      <div class="member-name">Nuven</div>
+      <div class="member-info">Science & Mathematics</div>
+    </div>
+  </div>
+
+  <!-- CORE TEAM -->
+  <div class="members-section-label reveal">// Core Team</div>
+  <div class="members-grid">
+    <div class="member-card gold reveal">
+      <span class="member-num">#003</span>
+      <div class="member-badge badge-gold">🎓 Lead Mentor</div>
+      <div class="member-name">Blake</div>
+      <div class="member-info">Mathematics Mentor</div>
+    </div>
+    <div class="member-card gold reveal">
+      <span class="member-num">#004</span>
+      <div class="member-badge badge-gold">⚡ Shadow Mentor</div>
+      <div class="member-name">Faizan Shakeel</div>
+      <div class="member-info">IIT Bombay · Engineering</div>
+    </div>
+    <div class="member-card gold reveal">
+      <span class="member-num">#005</span>
+      <div class="member-badge badge-gold">💛 Advocate</div>
+      <div class="member-name">Fam</div>
+      <div class="member-info">Student Advocate</div>
+    </div>
+  </div>
+
+  <!-- EARLY MEMBERS -->
+  <div class="members-section-label reveal">// Early Members</div>
+  <div class="members-grid">
+
+    <!--
+      ════════════════════════════════════════
+      HOW TO ADD A NEW MEMBER:
+      Copy one block below, increase the number,
+      fill in the name and country/subject.
+      ════════════════════════════════════════
+
+      <div class="member-card reveal">
+        <span class="member-num">#007</span>
+        <div class="member-badge badge-blue">🌟 Early Member</div>
+        <div class="member-name">Username</div>
+        <div class="member-info">Country · Subject</div>
+      </div>
+    -->
+
+    <div class="member-card reveal">
+      <span class="member-num">#006</span>
+      <div class="member-badge badge-blue">🌟 Early Member</div>
+      <div class="member-name">Namaru</div>
+      <div class="member-info"> @guyopkl68—</div>
+    </div>
+
+    <div class="member-card reveal">
+      <span class="member-num">#007</span>
+      <div class="member-badge badge-blue">🌟 Early Member</div>
+      <div class="member-name"> Mariam</div>
+      <div class="member-info">@mariamkdz_04270</div>
+    </div
+    
+      <div class="member-card reveal">
+      <span class="member-num">#008</span>
+      <div class="member-badge badge-blue">🌟 Early Member</div>
+      <div class="member-name"> Jynex</div>
+      <div class="member-info">@jynex404</div>
+    </div>
+    
+        <div class="member-card reveal">
+      <span class="member-num">#009</span>
+      <div class="member-badge badge-blue">🌟 Early Member</div>
+      <div class="member-name"> Void</div>
+      <div class="member-info">@night_authority</div>
+    </div>
+
+
+      <div class="member-card reveal">
+      <span class="member-num">#010</span>
+      <div class="member-badge badge-blue">🌟 Early Member</div>
+      <div class="member-name"> ev</div>
+      <div class="member-info">@ev</div>
+    </div>
+    
+        <div class="member-card reveal">
+      <span class="member-num">#011</span>
+      <div class="member-badge badge-blue">🌟 Early Member</div>
+      <div class="member-name"> Pablon</div>
+      <div class="member-info">@pablon</div>
+    </div>
+    
+    <div class="member-card reveal">
+      <span class="member-num">#012</span>
+      <div class="member-badge badge-blue">🌟 Early Member</div>
+      <div class="member-name"> Jonathan</div>
+      <div class="member-info">@jonathan58978</div>
+    </div>
+    
+
+
+
+
+    <!-- Add more members here -->
+
+  </div>
+
+  <div class="open-spots reveal">
+    43 FOUNDING SPOTS REMAINING —
+    <a href="https://discord.gg/PNbzya3Jk" target="_blank">JOIN NOW →</a>
+  </div>
+
+</div>
+</main>
+
+<footer id="footer">
+  <div class="footer-inner">
+    <div class="footer-logo">THE PREP AXIOM FOUNDRY</div>
+    <div class="footer-links">
+      <a href="index.html">Home</a>
+      <a href="members.html">Members</a>
+      <a href="contact.html">Contact</a>
+      <a href="https://discord.gg/PNbzya3Jk" target="_blank">Discord</a>
+    </div>
+    <div class="footer-copy">
+      © 2026 The Prep Axiom Foundry. All rights reserved.<br>
+      <span>Founded by Auvalen & Nuven · Built by students, for students.</span>
+    </div>
+  </div>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>
