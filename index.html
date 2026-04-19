@@ -8,6 +8,16 @@
   <link rel="stylesheet" href="styles.css"/>
 </head>
 <body>
+
+<!-- ══ INTRO SCREEN ══ -->
+<div id="intro-screen">
+  <div id="intro-logo">
+    <img src="logo.png" alt="PAF Logo" id="intro-img"/>
+    <div id="intro-title">THE PREP AXIOM FOUNDRY</div>
+    <div id="intro-sub">// EST. 2026 · GLOBAL ACADEMIC GUILD</div>
+  </div>
+</div>
+
 <div id="particles"></div>
 
 <aside id="sidebar">
@@ -23,6 +33,8 @@
     <a href="#syllabus"><span class="nav-icon">📐</span>Syllabus</a>
     <a href="#team"><span class="nav-icon">◉</span>Team</a>
     <a href="#join"><span class="nav-icon">▶</span>Join Us</a>
+    <a href="members.html"><span class="nav-icon">🌟</span>Members</a>
+    <a href="contact.html"><span class="nav-icon">✉</span>Contact</a>
   </nav>
   <div class="sidebar-footer">
     <a href="https://discord.gg/PNbzya3Jk" class="discord-btn" target="_blank">Join Discord →</a>
@@ -33,7 +45,6 @@
 
 <main id="main">
 
-  <!-- ══ HERO ══ -->
   <section id="hero">
     <div class="hero-grid"></div>
     <div class="hero-glow"></div>
@@ -55,7 +66,6 @@
     </div>
   </section>
 
-  <!-- ══ ABOUT ══ -->
   <section id="about">
     <div class="reveal">
       <div class="section-label">// 01 — About</div>
@@ -83,7 +93,6 @@
     </div>
   </section>
 
-  <!-- ══ FEATURES ══ -->
   <section id="features">
     <div class="reveal">
       <div class="section-label">// 02 — Features</div>
@@ -104,7 +113,6 @@
     </div>
   </section>
 
-  <!-- ══ HALL OF FAME ══ -->
   <section id="halloffame">
     <div class="reveal">
       <div class="section-label">// 03 — Hall of Fame</div>
@@ -113,7 +121,7 @@
     </div>
     <div class="hof-grid reveal">
       <!--
-        TO ADD A SOLVED PROBLEM, copy this block:
+        TO ADD A SOLVED PROBLEM copy this block:
         <div class="hof-card">
           <div class="hof-badge">Geometry</div>
           <div class="hof-question">Your question here</div>
@@ -132,67 +140,38 @@
     </div>
   </section>
 
-  <!-- ══ SYLLABUS ══ -->
   <section id="syllabus">
     <div class="reveal">
       <div class="section-label">// 04 — Syllabus</div>
       <h2 class="section-title">What We <span class="accent">Study</span></h2>
       <div class="section-divider"></div>
     </div>
-
     <p class="syllabus-note reveal">
       📌 Please note — our primary focus is <strong>Mathematics and Physics</strong>, but we also explore <strong>Biology</strong> and <strong>Chemistry</strong> as supplementary subjects.
     </p>
-
     <div class="syllabus-tabs reveal">
-      <button class="tab-btn active" onclick="switchTab('math')">Mathematics</button>
-      <button class="tab-btn" onclick="switchTab('physics')">Physics</button>
-      <button class="tab-btn" onclick="switchTab('biology')">Biology</button>
+      <button class="tab-btn active" onclick="switchTab(event,'math')">Mathematics</button>
+      <button class="tab-btn" onclick="switchTab(event,'physics')">Physics</button>
+      <button class="tab-btn" onclick="switchTab(event,'biology')">Biology</button>
     </div>
-
-    <!-- MATH TAB -->
     <div id="tab-math" class="tab-content active reveal">
       <div class="syllabus-topic"><div class="topic-title">Number Theory</div><ul class="topic-list"><li>Divisibility</li><li>Prime Numbers</li><li>GCD & LCM</li><li>Modular Arithmetic</li><li>Fermat's Theorem</li><li>Chinese Remainder</li><li>Diophantine Equations</li></ul></div>
       <div class="syllabus-topic"><div class="topic-title">Algebra</div><ul class="topic-list"><li>Polynomials</li><li>Vieta's Formulas</li><li>Inequalities</li><li>AM-GM</li><li>Cauchy-Schwarz</li><li>Functional Equations</li><li>Sequences & Series</li></ul></div>
       <div class="syllabus-topic"><div class="topic-title">Geometry</div><ul class="topic-list"><li>Triangle Congruence</li><li>Circle Theorems</li><li>Cyclic Quads</li><li>Power of a Point</li><li>Ptolemy's Theorem</li><li>Ceva & Menelaus</li><li>Trigonometry</li></ul></div>
       <div class="syllabus-topic"><div class="topic-title">Combinatorics</div><ul class="topic-list"><li>Counting Principles</li><li>Permutations</li><li>Pigeonhole</li><li>Inclusion-Exclusion</li><li>Binomial Theorem</li><li>Graph Theory</li><li>Probability</li></ul></div>
     </div>
-
-    <!-- PHYSICS TAB -->
     <div id="tab-physics" class="tab-content reveal">
       <div class="syllabus-topic"><div class="topic-title">Mechanics</div><ul class="topic-list"><li>Kinematics</li><li>Newton's Laws</li><li>Work & Energy</li><li>Momentum</li><li>Rotational Motion</li><li>Gravitation</li></ul></div>
       <div class="syllabus-topic"><div class="topic-title">Electromagnetism</div><ul class="topic-list"><li>Coulomb's Law</li><li>Electric Fields</li><li>Circuits</li><li>Magnetic Fields</li><li>Faraday's Law</li><li>Maxwell's Equations</li></ul></div>
       <div class="syllabus-topic"><div class="topic-title">Waves & Optics</div><ul class="topic-list"><li>Wave Properties</li><li>Interference</li><li>Diffraction</li><li>Reflection & Refraction</li><li>Doppler Effect</li></ul></div>
       <div class="syllabus-topic"><div class="topic-title">Modern Physics</div><ul class="topic-list"><li>Special Relativity</li><li>Photoelectric Effect</li><li>Atomic Models</li><li>Nuclear Physics</li><li>Quantum Basics</li></ul></div>
     </div>
-
-    <!-- BIOLOGY TAB -->
     <div id="tab-biology" class="tab-content reveal">
-      <div class="syllabus-topic">
-        <div class="topic-title">Open Learning</div>
-        <ul class="topic-list">
-          <li>Student-suggested topics</li>
-          <li>Pre-university level only</li>
-          <li>Grade 10, 11 or 12 standard</li>
-          <li>Suggest topics in Discord</li>
-          <li>Community decides together</li>
-        </ul>
-      </div>
-      <div class="syllabus-topic">
-        <div class="topic-title">How It Works</div>
-        <ul class="topic-list">
-          <li>Post your topic in #resources</li>
-          <li>Community votes on it</li>
-          <li>Mentor approves the level</li>
-          <li>Study group forms around it</li>
-        </ul>
-      </div>
+      <div class="syllabus-topic"><div class="topic-title">Open Learning</div><ul class="topic-list"><li>Student-suggested topics</li><li>Pre-university level only</li><li>Grade 10, 11 or 12 standard</li><li>Suggest topics in Discord</li><li>Community decides together</li></ul></div>
+      <div class="syllabus-topic"><div class="topic-title">How It Works</div><ul class="topic-list"><li>Post your topic in #resources</li><li>Community votes on it</li><li>Mentor approves the level</li><li>Study group forms around it</li></ul></div>
     </div>
-
   </section>
-  <!-- ══ END SYLLABUS ══ -->
 
-  <!-- ══ TEAM ══ -->
   <section id="team">
     <div class="reveal">
       <div class="section-label">// 05 — Team</div>
@@ -200,56 +179,22 @@
       <div class="section-divider"></div>
     </div>
     <div class="team-grid">
-      <div class="team-card reveal">
-        <div class="team-avatar">A</div>
-        <div class="team-name">Auvalen</div>
-        <div class="team-role">👑 Founder</div>
-        <p class="team-bio">A mathematics and physics enthusiast — a student and writer who is ambitious for his higher goals and ready to grow his mates.</p>
-      </div>
-      <div class="team-card reveal">
-        <div class="team-avatar">N</div>
-        <div class="team-name">Nuven</div>
-        <div class="team-role">👑 Co-Founder</div>
-        <p class="team-bio">Co-founder of PAF and fellow science enthusiast, building this community alongside Auvalen with shared ambition and purpose.</p>
-      </div>
-      <div class="team-card reveal">
-        <div class="team-avatar">F</div>
-        <div class="team-name">Faizan Shakeel</div>
-        <div class="team-role">⚡ Supporter & Shadow Mentor</div>
-        <p class="team-bio">An undergraduate student doing engineering at IIT Bombay. A quiet but powerful presence guiding PAF from behind the scenes.</p>
-      </div>
-      <div class="team-card reveal">
-        <div class="team-avatar">B</div>
-        <div class="team-name">Blake</div>
-        <div class="team-role">🎓 Lead Mentor</div>
-        <p class="team-bio">Experienced mathematics mentor and educator who believes in peer-led learning. Guiding PAF members through the hardest problems with patience and depth.</p>
-      </div>
-      <div class="team-card reveal">
-        <div class="team-avatar">F</div>
-        <div class="team-name">Fam</div>
-        <div class="team-role">💛 Student Advocate</div>
-        <p class="team-bio">A trustworthy advocate who will become your friend and help you get through anything stressful that affects your academics.</p>
-      </div>
-      <div class="team-card reveal">
-        <div class="team-avatar">?</div>
-        <div class="team-name">You?</div>
-        <div class="team-role">💙 Advocate or Admin?</div>
-        <p class="team-bio">We're looking for a compassionate person to support members' wellbeing or moderate the community. Think that's you? Join us.</p>
-      </div>
+      <div class="team-card reveal"><div class="team-avatar">A</div><div class="team-name">Auvalen</div><div class="team-role">👑 Founder</div><p class="team-bio">A mathematics and physics enthusiast — a student and writer who is ambitious for his higher goals and ready to grow his mates.</p></div>
+      <div class="team-card reveal"><div class="team-avatar">N</div><div class="team-name">Nuven</div><div class="team-role">👑 Co-Founder</div><p class="team-bio">Co-founder of PAF and fellow science enthusiast, building this community alongside Auvalen with shared ambition and purpose.</p></div>
+      <div class="team-card reveal"><div class="team-avatar">F</div><div class="team-name">Faizan Shakeel</div><div class="team-role">⚡ Supporter & Shadow Mentor</div><p class="team-bio">An undergraduate student doing engineering at IIT Bombay. A quiet but powerful presence guiding PAF from behind the scenes.</p></div>
+      <div class="team-card reveal"><div class="team-avatar">B</div><div class="team-name">Blake</div><div class="team-role">🎓 Lead Mentor</div><p class="team-bio">Experienced mathematics mentor and educator who believes in peer-led learning. Guiding PAF members through the hardest problems with patience and depth.</p></div>
+      <div class="team-card reveal"><div class="team-avatar">F</div><div class="team-name">Fam</div><div class="team-role">💛 Student Advocate</div><p class="team-bio">A trustworthy advocate who will become your friend and help you get through anything stressful that affects your academics.</p></div>
+      <div class="team-card reveal"><div class="team-avatar">?</div><div class="team-name">You?</div><div class="team-role">💙 Advocate or Admin?</div><p class="team-bio">We're looking for a compassionate person to support members' wellbeing or moderate the community. Think that's you? Join us.</p></div>
     </div>
   </section>
 
-  <!-- ══ JOIN ══ -->
   <section id="join">
     <div class="reveal">
       <div class="section-label">// 06 — Join Us</div>
       <h2 class="section-title">Ready To <span class="accent">Forge</span> Your Mind?</h2>
       <div class="section-divider"></div>
     </div>
-    <p class="join-desc reveal">
-      The first <strong>50 members</strong> receive a permanent <strong>Early Member</strong> badge.
-      You will never be able to earn this again. The hall is open.
-    </p>
+    <p class="join-desc reveal">The first <strong>50 members</strong> receive a permanent <strong>Early Member</strong> badge. You will never be able to earn this again. The hall is open.</p>
     <div class="join-steps reveal">
       <div class="join-step"><div class="step-num">01</div><div class="step-text">Click Join The Guild</div><span class="join-arrow">›</span></div>
       <div class="join-step"><div class="step-num">02</div><div class="step-text">Read Rules & Get Role</div><span class="join-arrow">›</span></div>
@@ -257,25 +202,23 @@
       <div class="join-step"><div class="step-num">04</div><div class="step-text">Start Learning</div></div>
     </div>
     <div class="reveal">
-      <a href="https://discord.gg/PNbzya3Jk" class="btn-primary" target="_blank" style="font-size:13px;padding:20px 52px;">
-        Join The Foundry →
-      </a>
+      <a href="https://discord.gg/PNbzya3Jk" class="btn-primary" target="_blank" style="font-size:13px;padding:20px 52px;">Join The Foundry →</a>
     </div>
   </section>
 
 </main>
 
-<!-- ══ FOOTER ══ -->
 <footer id="footer">
   <div class="footer-inner">
     <div class="footer-logo">THE PREP AXIOM FOUNDRY</div>
     <div class="footer-links">
       <a href="#hero">Home</a>
       <a href="#about">About</a>
-      <a href="#features">Features</a>
       <a href="#halloffame">Hall of Fame</a>
       <a href="#syllabus">Syllabus</a>
       <a href="#team">Team</a>
+      <a href="members.html">Members</a>
+      <a href="contact.html">Contact</a>
       <a href="https://discord.gg/PNbzya3Jk" target="_blank">Discord</a>
     </div>
     <div class="footer-copy">
