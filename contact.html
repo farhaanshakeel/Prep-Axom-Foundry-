@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Contact — The Prep Axiom Foundry</title>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700;900&family=Rajdhani:wght@300;400;500;600&family=Share+Tech+Mono&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="styles.css"/>
+</head>
+<body>
+<div id="particles"></div>
+<aside id="sidebar">
+  <div class="logo-wrap">
+    <div class="logo-text">Prep Axiom<br>Foundry</div>
+    <div class="logo-sub">// PAF — EST. 2026</div>
+  </div>
+  <nav>
+    <a href="index.html"><span class="nav-icon">⬡</span>Home</a>
+    <a href="index.html#about"><span class="nav-icon">◈</span>About</a>
+    <a href="index.html#features"><span class="nav-icon">◆</span>Features</a>
+    <a href="index.html#halloffame"><span class="nav-icon">🏆</span>Hall of Fame</a>
+    <a href="index.html#syllabus"><span class="nav-icon">📐</span>Syllabus</a>
+    <a href="index.html#team"><span class="nav-icon">◉</span>Team</a>
+    <a href="index.html#join"><span class="nav-icon">▶</span>Join Us</a>
+    <a href="members.html"><span class="nav-icon">🌟</span>Members</a>
+    <a href="contact.html" class="active"><span class="nav-icon">✉</span>Contact</a>
+  </nav>
+  <div class="sidebar-footer">
+    <a href="https://discord.gg/PNbzya3Jk" class="discord-btn" target="_blank">Join Discord →</a>
+  </div>
+</aside>
+<button id="hamburger" aria-label="Menu"><span></span><span></span><span></span></button>
+<main id="main">
+<div class="page-wrap">
+  <div class="reveal">
+    <div class="section-label">// Contact</div>
+    <h2 class="section-title">Get In <span class="accent">Touch</span></h2>
+    <div class="section-divider"></div>
+  </div>
+  <div class="contact-grid">
+    <div class="contact-info reveal">
+      <p>Have a question about PAF? Want to collaborate, apply as a mentor or advocate, or just say hello? Fill in the form — <strong>every message is read by the founding team.</strong></p>
+      <p>For the fastest response, reach us directly on Discord.</p>
+      <div class="contact-items">
+        <div class="contact-item"><span class="contact-item-icon">💬</span><div><div class="contact-item-label">Discord</div><div class="contact-item-value"><a href="https://discord.gg/PNbzya3Jk" target="_blank">discord.gg/PNbzya3Jk</a></div></div></div>
+        <div class="contact-item"><span class="contact-item-icon">🌐</span><div><div class="contact-item-label">Website</div><div class="contact-item-value">prepaxiomfoundry.in</div></div></div>
+        <div class="contact-item"><span class="contact-item-icon">📍</span><div><div class="contact-item-label">Based In</div><div class="contact-item-value">India · Global Community</div></div></div>
+      </div>
+    </div>
+    <div class="reveal">
+      <!--
+        SETUP — ONE TIME:
+        1. Go to formspree.io (free)
+        2. Sign up, create a new form
+        3. Copy your Form ID (e.g. xpzvwkab)
+        4. Replace YOUR_FORM_ID below
+        All messages go straight to your email.
+      -->
+      <form class="contact-form" id="contactForm" action="https://formspree.io/f/mqewqjyr" method="POST">
+        <div class="form-group"><label class="form-label" for="name">Your Name</label><input class="form-input" type="text" id="name" name="name" placeholder="Enter your name" required/></div>
+        <div class="form-group"><label class="form-label" for="email">Email Address</label><input class="form-input" type="email" id="email" name="email" placeholder="your@email.com" required/></div>
+        <div class="form-group">
+          <label class="form-label" for="subject">Topic</label>
+          <select class="form-select" id="subject" name="subject" required>
+            <option value="" disabled selected>Select a topic</option>
+            <option value="General Question">General Question</option>
+            <option value="Want To Join PAF">I Want To Join PAF</option>
+            <option value="Collaboration">Collaboration</option>
+            <option value="Mentor Application">Mentor Application</option>
+            <option value="Student Advocate Application">Student Advocate Application</option>
+            <option value="Report Issue">Report an Issue</option>
+            <option value="Other">Other</option>
+          </select>
+        </div>
+        <div class="form-group"><label class="form-label" for="message">Message</label><textarea class="form-textarea" id="message" name="message" placeholder="Write your message here..." required></textarea></div>
+        <p class="form-note">// Sent directly to the PAF founding team's inbox.</p>
+        <button class="form-submit" type="submit">Send Message →</button>
+        <div class="success-banner" id="successBanner">✓ MESSAGE SENT — We will get back to you soon.</div>
+      </form>
+    </div>
+  </div>
+</div>
+</main>
+<footer id="footer">
+  <div class="footer-inner">
+    <div class="footer-logo">THE PREP AXIOM FOUNDRY</div>
+    <div class="footer-links">
+      <a href="index.html">Home</a><a href="members.html">Members</a>
+      <a href="contact.html">Contact</a>
+      <a href="https://discord.gg/PNbzya3Jk" target="_blank">Discord</a>
+    </div>
+    <div class="footer-copy">© 2026 The Prep Axiom Foundry. All rights reserved.<br><span>Founded by Auvalen & Nuven · Built by students, for students.</span></div>
+  </div>
+</footer>
+<script src="script.js"></script>
+<script>
+  var form = document.getElementById('contactForm');
+  if (form) {
+    form.addEventListener('submit', function() {
+      setTimeout(function() {
+        document.getElementById('successBanner').style.display = 'block';
+        form.reset();
+      }, 600);
+    });
+  }
+</script>
+</body>
+</html>
