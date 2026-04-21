@@ -75,7 +75,7 @@ function animateCounter(el, target) {
   }, 16);
 }
 setTimeout(function() {
-  animateCounter(document.getElementById('counter-members'), 12);
+  animateCounter(document.getElementById('counter-members'), 17);
   animateCounter(document.getElementById('counter-problems'), 3);
   animateCounter(document.getElementById('counter-countries'), 4);
 }, 3400);
