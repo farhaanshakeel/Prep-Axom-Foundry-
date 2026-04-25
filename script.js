@@ -75,9 +75,9 @@ function animateCounter(el, target) {
   }, 16);
 }
 setTimeout(function() {
-  animateCounter(document.getElementById('counter-members'), 19);
-  animateCounter(document.getElementById('counter-problems'), 3);
-  animateCounter(document.getElementById('counter-countries'), 4);
+  animateCounter(document.getElementById('counter-members'), 20);
+  animateCounter(document.getElementById('counter-problems'), 10);
+  animateCounter(document.getElementById('counter-countries'), 5);
 }, 3400);
 
 // ── SYLLABUS TABS
