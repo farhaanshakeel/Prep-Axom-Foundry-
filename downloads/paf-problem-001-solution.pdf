@@ -193,7 +193,7 @@ endobj
 << /Type /Page /Parent 2 0 R /MediaBox [0 0 595.28 841.89] /Resources << /Font << /F1 << /Type /Font /Subtype /Type1 /BaseFont /Helvetica >> /F2 << /Type /Font /Subtype /Type1 /BaseFont /Helvetica-Bold >> /F3 << /Type /Font /Subtype /Type1 /BaseFont /Courier-Bold >> /F4 << /Type /Font /Subtype /Type1 /BaseFont /Times-Italic >> /F5 << /Type /Font /Subtype /Type1 /BaseFont /Courier >> >> >> /Contents 5 0 R >>
 endobj
 7 0 obj
-<< /Length 5029 >>
+<< /Length 5334 >>
 stream
 0.008 0.016 0.031 rg 0 0 595.28 841.89 re f
 0.02 0.12 0.18 RG 0.22 w 28 0 m 28 841.89 l S
@@ -274,18 +274,21 @@ BT 0.92 0.96 1 rg /F4 14 Tf 0 Tc 72 251.89 Td (H = u/k - \(g/k^2\) ln\( \(ku + g
 0 0.45 0.66 RG 0.6 w 58 191.89 479.28 28 re S
 BT 0 0.666 1 rg /F3 9 Tf 2.4 Tc 70 201.89 Td (PART \(d\)) Tj ET
 BT 0.92 0.96 1 rg /F2 11 Tf 1.2 Tc 168 201.89 Td (Height Loss Optimization) Tj ET
-BT 0.65 0.74 0.84 rg /F1 12 Tf 0 Tc 58 175.89 Td (Without drag, the maximum height is:) Tj ET
-0 0.14 0.22 rg 58 114.88999999999999 479.28 38 re f
-0 0.55 0.8 RG 0.6 w 58 114.88999999999999 479.28 38 re S
-BT 0.92 0.96 1 rg /F4 14 Tf 0 Tc 74 124.88999999999999 Td (H0 = u^2 / \(2g\)) Tj ET
-BT 0.65 0.74 0.84 rg /F1 12 Tf 0 Tc 58 104.88999999999999 Td (Define the height loss due to air resistance as Delta H\(k\) = H0 - H\(k\). Therefore:) Tj ET
+0.02 0.07 0.10 rg 58 100.88999999999999 479.28 75 re f
+0.0 0.40 0.55 RG 0.6 w 58 100.88999999999999 479.28 75 re S
+0 0.666 1 rg 58 100.88999999999999 3 75 re f
+BT 0 0.666 1 rg /F3 8.5 Tf 2 Tc 72 159.89 Td (FINAL ANSWER \(D\)) Tj ET
+BT 0.65 0.74 0.84 rg /F1 11 Tf 0 Tc 72 143.89 Td (NO SOLUTION EXISTS. There is no positive value of k for which d\(Delta H\)/dk = 0. The) Tj ET
+BT 0.65 0.74 0.84 rg /F1 11 Tf 0 Tc 72 128.89 Td (height loss strictly increases with k, so the problem has no interior stationary) Tj ET
+BT 0.65 0.74 0.84 rg /F1 11 Tf 0 Tc 72 113.88999999999999 Td (point. The infimum is approached only in the limit k -> 0+.) Tj ET
+BT 0.65 0.74 0.84 rg /F1 12 Tf 0 Tc 58 90.88999999999999 Td (Without drag, the maximum height is:) Tj ET
 endstream
 endobj
 8 0 obj
 << /Type /Page /Parent 2 0 R /MediaBox [0 0 595.28 841.89] /Resources << /Font << /F1 << /Type /Font /Subtype /Type1 /BaseFont /Helvetica >> /F2 << /Type /Font /Subtype /Type1 /BaseFont /Helvetica-Bold >> /F3 << /Type /Font /Subtype /Type1 /BaseFont /Courier-Bold >> /F4 << /Type /Font /Subtype /Type1 /BaseFont /Times-Italic >> /F5 << /Type /Font /Subtype /Type1 /BaseFont /Courier >> >> >> /Contents 7 0 R >>
 endobj
 9 0 obj
-<< /Length 5283 >>
+<< /Length 5572 >>
 stream
 0.008 0.016 0.031 rg 0 0 595.28 841.89 re f
 0.02 0.12 0.18 RG 0.22 w 28 0 m 28 841.89 l S
@@ -329,54 +332,55 @@ BT 0.65 0.74 0.84 rg /F3 9 Tf 1.6 Tc 407.28 817.89 Td (PHYSICS - MECHANICS) Tj E
 BT 0.45 0.55 0.66 rg /F3 8 Tf 1.4 Tc 501.28 32 Td (Page 4) Tj ET
 0 0.14 0.22 rg 58 743.89 479.28 38 re f
 0 0.55 0.8 RG 0.6 w 58 743.89 479.28 38 re S
-BT 0.92 0.96 1 rg /F4 12 Tf 0 Tc 74 754.89 Td (Delta H\(k\) = u^2/\(2g\) - u/k + \(g/k^2\) ln\( \(ku + g\) / g \)) Tj ET
-BT 0.65 0.74 0.84 rg /F1 12 Tf 0 Tc 58 733.89 Td (Find the value of k for which d\(Delta H\)/dk = 0.) Tj ET
-BT 0 0.666 1 rg /F2 11 Tf 0.6 Tc 58 710.89 Td (Step 1 - Differentiate) Tj ET
-0 0.14 0.22 rg 58 654.89 479.28 38 re f
-0 0.55 0.8 RG 0.6 w 58 654.89 479.28 38 re S
-BT 0.92 0.96 1 rg /F4 11.5 Tf 0 Tc 74 666.14 Td (d\(Delta H\)/dk = u/k^2  -  \(2g/k^3\) ln\( \(ku + g\)/g \)  +  gu / [k^2 \(ku + g\)]) Tj ET
-BT 0 0.666 1 rg /F2 11 Tf 0.6 Tc 58 644.89 Td (Step 2 - Substitute and Analyze) Tj ET
-BT 0.65 0.74 0.84 rg /F1 12 Tf 0 Tc 58 626.89 Td (Let x = ku/g, with x > 0. The condition d\(Delta H\)/dk = 0 reduces to:) Tj ET
-0 0.14 0.22 rg 58 565.89 479.28 38 re f
-0 0.55 0.8 RG 0.6 w 58 565.89 479.28 38 re S
-BT 0.92 0.96 1 rg /F4 14 Tf 0 Tc 74 575.89 Td (x \(x + 2\) / \(x + 1\)  =  2 ln\(1 + x\)) Tj ET
-BT 0.65 0.74 0.84 rg /F1 12 Tf 0 Tc 58 555.89 Td (Define F\(x\) = x\(x + 2\)/\(x + 1\) - 2 ln\(1 + x\). Then:) Tj ET
+BT 0.92 0.96 1 rg /F4 14 Tf 0 Tc 74 753.89 Td (H0 = u^2 / \(2g\)) Tj ET
+BT 0.65 0.74 0.84 rg /F1 12 Tf 0 Tc 58 733.89 Td (Define the height loss due to air resistance as Delta H\(k\) = H0 - H\(k\). Therefore:) Tj ET
+0 0.14 0.22 rg 58 672.89 479.28 38 re f
+0 0.55 0.8 RG 0.6 w 58 672.89 479.28 38 re S
+BT 0.92 0.96 1 rg /F4 12 Tf 0 Tc 74 683.89 Td (Delta H\(k\) = u^2/\(2g\) - u/k + \(g/k^2\) ln\( \(ku + g\) / g \)) Tj ET
+BT 0.65 0.74 0.84 rg /F1 12 Tf 0 Tc 58 662.89 Td (We are asked to find the value of k for which d\(Delta H\)/dk = 0.) Tj ET
+BT 0 0.666 1 rg /F2 11 Tf 0.6 Tc 58 639.89 Td (Step 1 - Differentiate) Tj ET
+0 0.14 0.22 rg 58 583.89 479.28 38 re f
+0 0.55 0.8 RG 0.6 w 58 583.89 479.28 38 re S
+BT 0.92 0.96 1 rg /F4 11.5 Tf 0 Tc 74 595.14 Td (d\(Delta H\)/dk = u/k^2  -  \(2g/k^3\) ln\( \(ku + g\)/g \)  +  gu / [k^2 \(ku + g\)]) Tj ET
+BT 0 0.666 1 rg /F2 11 Tf 0.6 Tc 58 573.89 Td (Step 2 - Substitute and Analyse) Tj ET
+BT 0.65 0.74 0.84 rg /F1 12 Tf 0 Tc 58 555.89 Td (Let x = ku/g, with x > 0. The condition d\(Delta H\)/dk = 0 reduces to:) Tj ET
 0 0.14 0.22 rg 58 494.89 479.28 38 re f
 0 0.55 0.8 RG 0.6 w 58 494.89 479.28 38 re S
-BT 0.92 0.96 1 rg /F4 14 Tf 0 Tc 74 504.89 Td (F'\(x\) = x^2 / \(x + 1\)^2  >  0   for all x > 0) Tj ET
-BT 0.65 0.74 0.84 rg /F1 12 Tf 0 Tc 58 484.89 Td (So F is strictly increasing on \(0, infinity\). Also F\(0\) = 0, hence F\(x\) > 0 for all) Tj ET
-BT 0.65 0.74 0.84 rg /F1 12 Tf 0 Tc 58 467.89 Td (x > 0.) Tj ET
-BT 0 0.666 1 rg /F2 11 Tf 0.6 Tc 58 444.89 Td (Step 3 - Conclusion) Tj ET
-BT 0.65 0.74 0.84 rg /F1 12 Tf 0 Tc 58 426.89 Td (No positive value of k satisfies d\(Delta H\)/dk = 0. The derivative is strictly) Tj ET
-BT 0.65 0.74 0.84 rg /F1 12 Tf 0 Tc 58 409.89 Td (positive for all k > 0, meaning height loss increases monotonically with k.) Tj ET
-0 0.22 0.32 rg 58 336.89 479.28 50 re f
-0 0.666 1 RG 0.6 w 58 336.89 479.28 50 re S
-BT 0 0.666 1 rg /F3 9 Tf 2.2 Tc 72 370.89 Td (Result \(d\)) Tj ET
-BT 0.92 0.96 1 rg /F4 14 Tf 0 Tc 72 350.89 Td (d\(Delta H\)/dk > 0 for all k > 0    =>    minimum at k -> 0+) Tj ET
-BT 0 0.666 1 rg /F2 11 Tf 0.6 Tc 58 324.89 Td (Physical Interpretation) Tj ET
-BT 0 0.666 1 rg /F2 12 Tf 0 Tc 62 306.89 Td (-) Tj ET
-BT 0.65 0.74 0.84 rg /F1 12 Tf 0 Tc 72 306.89 Td (More drag implies a lower maximum height.) Tj ET
-BT 0 0.666 1 rg /F2 12 Tf 0 Tc 62 287.89 Td (-) Tj ET
-BT 0.65 0.74 0.84 rg /F1 12 Tf 0 Tc 72 287.89 Td (A larger drag coefficient implies greater height loss.) Tj ET
-BT 0 0.666 1 rg /F2 12 Tf 0 Tc 62 268.89 Td (-) Tj ET
-BT 0.65 0.74 0.84 rg /F1 12 Tf 0 Tc 72 268.89 Td (No optimal positive value of k exists.) Tj ET
-BT 0 0.666 1 rg /F2 12 Tf 0 Tc 62 249.89 Td (-) Tj ET
-BT 0.65 0.74 0.84 rg /F1 12 Tf 0 Tc 72 249.89 Td (Best case: k -> 0+ \(no air resistance\).) Tj ET
-0 0.19 0.29 rg 58 196.89 479.28 28 re f
-0 0.45 0.66 RG 0.6 w 58 196.89 479.28 28 re S
-BT 0 0.666 1 rg /F3 9 Tf 2.4 Tc 70 206.89 Td (PART \(summary\)) Tj ET
-BT 0.92 0.96 1 rg /F2 11 Tf 1.2 Tc 168 206.89 Td (Final Answers) Tj ET
-0 0.22 0.32 rg 58 130.89 479.28 50 re f
-0 0.666 1 RG 0.6 w 58 130.89 479.28 50 re S
-BT 0 0.666 1 rg /F3 9 Tf 2.2 Tc 72 164.89 Td (\(a\)  Equation of Motion) Tj ET
-BT 0.92 0.96 1 rg /F4 14 Tf 0 Tc 72 144.89 Td (dv/dt + kv = -g) Tj ET
+BT 0.92 0.96 1 rg /F4 14 Tf 0 Tc 74 504.89 Td (x \(x + 2\) / \(x + 1\)  =  2 ln\(1 + x\)) Tj ET
+BT 0.65 0.74 0.84 rg /F1 12 Tf 0 Tc 58 484.89 Td (Define F\(x\) = x\(x + 2\)/\(x + 1\) - 2 ln\(1 + x\). Then:) Tj ET
+0 0.14 0.22 rg 58 423.89 479.28 38 re f
+0 0.55 0.8 RG 0.6 w 58 423.89 479.28 38 re S
+BT 0.92 0.96 1 rg /F4 14 Tf 0 Tc 74 433.89 Td (F'\(x\) = x^2 / \(x + 1\)^2  >  0   for all x > 0) Tj ET
+BT 0.65 0.74 0.84 rg /F1 12 Tf 0 Tc 58 413.89 Td (So F is strictly increasing on \(0, infinity\), and F\(0\) = 0. Therefore F\(x\) > 0 for) Tj ET
+BT 0.65 0.74 0.84 rg /F1 12 Tf 0 Tc 58 396.89 Td (every x > 0.) Tj ET
+BT 0 0.666 1 rg /F2 11 Tf 0.6 Tc 58 373.89 Td (Step 3 - Conclusion) Tj ET
+BT 0.65 0.74 0.84 rg /F1 12 Tf 0 Tc 58 355.89 Td (The equation d\(Delta H\)/dk = 0 has no positive root. The derivative is strictly) Tj ET
+BT 0.65 0.74 0.84 rg /F1 12 Tf 0 Tc 58 338.89 Td (positive for all k > 0, which means height loss increases monotonically as k) Tj ET
+BT 0.65 0.74 0.84 rg /F1 12 Tf 0 Tc 58 321.89 Td (increases. Hence:) Tj ET
+0 0.22 0.32 rg 58 248.89 479.28 50 re f
+0 0.666 1 RG 0.6 w 58 248.89 479.28 50 re S
+BT 0 0.666 1 rg /F3 9 Tf 2.2 Tc 72 282.89 Td (Result \(d\)) Tj ET
+BT 0.92 0.96 1 rg /F4 14 Tf 0 Tc 72 262.89 Td (No positive solution exists.   d\(Delta H\)/dk > 0 for all k > 0.) Tj ET
+BT 0 0.666 1 rg /F2 11 Tf 0.6 Tc 58 236.89 Td (Physical Interpretation) Tj ET
+BT 0 0.666 1 rg /F2 12 Tf 0 Tc 62 218.89 Td (-) Tj ET
+BT 0.65 0.74 0.84 rg /F1 12 Tf 0 Tc 72 218.89 Td (More drag implies a lower maximum height.) Tj ET
+BT 0 0.666 1 rg /F2 12 Tf 0 Tc 62 199.89 Td (-) Tj ET
+BT 0.65 0.74 0.84 rg /F1 12 Tf 0 Tc 72 199.89 Td (A larger drag coefficient implies greater height loss.) Tj ET
+BT 0 0.666 1 rg /F2 12 Tf 0 Tc 62 180.89 Td (-) Tj ET
+BT 0.65 0.74 0.84 rg /F1 12 Tf 0 Tc 72 180.89 Td (No "optimal" positive value of k exists - the function never turns around.) Tj ET
+BT 0 0.666 1 rg /F2 12 Tf 0 Tc 62 161.89 Td (-) Tj ET
+BT 0.65 0.74 0.84 rg /F1 12 Tf 0 Tc 72 161.89 Td (Loss is minimised only in the idealised limit k -> 0+ \(no air resistance\).) Tj ET
+0 0.19 0.29 rg 58 108.88999999999999 479.28 28 re f
+0 0.45 0.66 RG 0.6 w 58 108.88999999999999 479.28 28 re S
+BT 0 0.666 1 rg /F3 9 Tf 2.4 Tc 70 118.88999999999999 Td (PART \(summary\)) Tj ET
+BT 0.92 0.96 1 rg /F2 11 Tf 1.2 Tc 168 118.88999999999999 Td (Final Answers) Tj ET
 endstream
 endobj
 10 0 obj
 << /Type /Page /Parent 2 0 R /MediaBox [0 0 595.28 841.89] /Resources << /Font << /F1 << /Type /Font /Subtype /Type1 /BaseFont /Helvetica >> /F2 << /Type /Font /Subtype /Type1 /BaseFont /Helvetica-Bold >> /F3 << /Type /Font /Subtype /Type1 /BaseFont /Courier-Bold >> /F4 << /Type /Font /Subtype /Type1 /BaseFont /Times-Italic >> /F5 << /Type /Font /Subtype /Type1 /BaseFont /Courier >> >> >> /Contents 9 0 R >>
 endobj
 11 0 obj
-<< /Length 5886 >>
+<< /Length 6498 >>
 stream
 0.008 0.016 0.031 rg 0 0 595.28 841.89 re f
 0.02 0.12 0.18 RG 0.22 w 28 0 m 28 841.89 l S
@@ -420,55 +424,61 @@ BT 0.65 0.74 0.84 rg /F3 9 Tf 1.6 Tc 407.28 817.89 Td (PHYSICS - MECHANICS) Tj E
 BT 0.45 0.55 0.66 rg /F3 8 Tf 1.4 Tc 501.28 32 Td (Page 5) Tj ET
 0 0.22 0.32 rg 58 731.89 479.28 50 re f
 0 0.666 1 RG 0.6 w 58 731.89 479.28 50 re S
-BT 0 0.666 1 rg /F3 9 Tf 2.2 Tc 72 765.89 Td (\(b\)  Time To Maximum Height) Tj ET
-BT 0.92 0.96 1 rg /F4 14 Tf 0 Tc 72 745.89 Td (T = \(1/k\) ln\( \(ku + g\) / g \)) Tj ET
+BT 0 0.666 1 rg /F3 9 Tf 2.2 Tc 72 765.89 Td (\(a\)  Equation of Motion) Tj ET
+BT 0.92 0.96 1 rg /F4 14 Tf 0 Tc 72 745.89 Td (dv/dt + kv = -g) Tj ET
 0 0.22 0.32 rg 58 669.89 479.28 50 re f
 0 0.666 1 RG 0.6 w 58 669.89 479.28 50 re S
-BT 0 0.666 1 rg /F3 9 Tf 2.2 Tc 72 703.89 Td (\(c\)  Maximum Height) Tj ET
-BT 0.92 0.96 1 rg /F4 14 Tf 0 Tc 72 683.89 Td (H = u/k - \(g/k^2\) ln\( \(ku + g\) / g \)) Tj ET
+BT 0 0.666 1 rg /F3 9 Tf 2.2 Tc 72 703.89 Td (\(b\)  Time To Maximum Height) Tj ET
+BT 0.92 0.96 1 rg /F4 14 Tf 0 Tc 72 683.89 Td (T = \(1/k\) ln\( \(ku + g\) / g \)) Tj ET
 0 0.22 0.32 rg 58 607.89 479.28 50 re f
 0 0.666 1 RG 0.6 w 58 607.89 479.28 50 re S
-BT 0 0.666 1 rg /F3 9 Tf 2.2 Tc 72 641.89 Td (\(d\)  Height Loss Optimization) Tj ET
-BT 0.92 0.96 1 rg /F4 14 Tf 0 Tc 72 621.89 Td (d\(Delta H\)/dk > 0 for all k > 0;  minimum at k -> 0+) Tj ET
-BT 0.92 0.96 1 rg /F2 18 Tf -0.1 Tc 58 595.89 Td (Common Student Mistakes) Tj ET
-0 0.666 1 RG 1 w 58 574.29 m 118 574.29 l S
-0 0.22 0.32 rg 58 534.29 479.28 22 re f
-0 0.45 0.66 RG 0.6 w 58 534.29 479.28 22 re S
-BT 0 0.666 1 rg /F3 8.5 Tf 1.8 Tc 68 541.29 Td (MISTAKE) Tj ET
-BT 0 0.666 1 rg /F3 8.5 Tf 1.8 Tc 268 541.29 Td (WHY IT IS WRONG) Tj ET
-0.012 0.051 0.085 rg 58 496.28999999999996 479.28 38 re f
-0 0.30 0.45 RG 0.6 w 58 496.28999999999996 479.28 38 re S
-BT 0.92 0.96 1 rg /F1 10.5 Tf 0 Tc 68 518.29 Td (Using v = u - gt) Tj ET
-BT 0.65 0.74 0.84 rg /F1 10.5 Tf 0 Tc 268 518.29 Td (Acceleration is not constant when drag depends on) Tj ET
-BT 0.65 0.74 0.84 rg /F1 10.5 Tf 0 Tc 268 504.28999999999996 Td (velocity.) Tj ET
-0.018 0.063 0.10 rg 58 458.28999999999996 479.28 38 re f
-0 0.30 0.45 RG 0.6 w 58 458.28999999999996 479.28 38 re S
-BT 0.92 0.96 1 rg /F1 10.5 Tf 0 Tc 68 480.28999999999996 Td (Using v^2 = u^2 - 2gH) Tj ET
-BT 0.65 0.74 0.84 rg /F1 10.5 Tf 0 Tc 268 480.28999999999996 Td (Same reason - SUVAT equations require constant) Tj ET
-BT 0.65 0.74 0.84 rg /F1 10.5 Tf 0 Tc 268 466.28999999999996 Td (acceleration.) Tj ET
-0.012 0.051 0.085 rg 58 420.28999999999996 479.28 38 re f
-0 0.30 0.45 RG 0.6 w 58 420.28999999999996 479.28 38 re S
-BT 0.92 0.96 1 rg /F1 10.5 Tf 0 Tc 68 442.28999999999996 Td (Wrong sign of drag force) Tj ET
-BT 0.65 0.74 0.84 rg /F1 10.5 Tf 0 Tc 268 442.28999999999996 Td (Drag always opposes motion. Sign depends on) Tj ET
-BT 0.65 0.74 0.84 rg /F1 10.5 Tf 0 Tc 268 428.28999999999996 Td (direction of v.) Tj ET
-0.018 0.063 0.10 rg 58 382.28999999999996 479.28 38 re f
-0 0.30 0.45 RG 0.6 w 58 382.28999999999996 479.28 38 re S
-BT 0.92 0.96 1 rg /F1 10.5 Tf 0 Tc 68 404.28999999999996 Td (Forgetting integration limits) Tj ET
-BT 0.65 0.74 0.84 rg /F1 10.5 Tf 0 Tc 268 404.28999999999996 Td (Produces sign and logarithm errors when evaluating) Tj ET
-BT 0.65 0.74 0.84 rg /F1 10.5 Tf 0 Tc 268 390.28999999999996 Td (definite integrals.) Tj ET
-0.012 0.051 0.085 rg 58 344.28999999999996 479.28 38 re f
-0 0.30 0.45 RG 0.6 w 58 344.28999999999996 479.28 38 re S
-BT 0.92 0.96 1 rg /F1 10.5 Tf 0 Tc 68 366.28999999999996 Td (Assuming "minimum" means derivative) Tj ET
-BT 0.92 0.96 1 rg /F1 10.5 Tf 0 Tc 68 352.28999999999996 Td (= 0) Tj ET
-BT 0.65 0.74 0.84 rg /F1 10.5 Tf 0 Tc 268 366.28999999999996 Td (Only valid for interior extrema. Boundary minima) Tj ET
-BT 0.65 0.74 0.84 rg /F1 10.5 Tf 0 Tc 268 352.28999999999996 Td (must be checked separately.) Tj ET
-0.02 0.07 0.10 rg 58 257.28999999999996 479.28 75 re f
-0.0 0.40 0.55 RG 0.6 w 58 257.28999999999996 479.28 75 re S
-0 0.666 1 rg 58 257.28999999999996 3 75 re f
-BT 0 0.666 1 rg /F3 8.5 Tf 2 Tc 72 316.28999999999996 Td (EXAMINER'S NOTE) Tj ET
-BT 0.65 0.74 0.84 rg /F1 11 Tf 0 Tc 72 300.28999999999996 Td (This is a calculus mechanics problem, not a standard SUVAT problem. The moment drag) Tj ET
-BT 0.65 0.74 0.84 rg /F1 11 Tf 0 Tc 72 285.28999999999996 Td (depends on velocity, use differential equations rather than constant-acceleration) Tj ET
-BT 0.65 0.74 0.84 rg /F1 11 Tf 0 Tc 72 270.28999999999996 Td (formulas.) Tj ET
+BT 0 0.666 1 rg /F3 9 Tf 2.2 Tc 72 641.89 Td (\(c\)  Maximum Height) Tj ET
+BT 0.92 0.96 1 rg /F4 14 Tf 0 Tc 72 621.89 Td (H = u/k - \(g/k^2\) ln\( \(ku + g\) / g \)) Tj ET
+0 0.22 0.32 rg 58 545.89 479.28 50 re f
+0 0.666 1 RG 0.6 w 58 545.89 479.28 50 re S
+BT 0 0.666 1 rg /F3 9 Tf 2.2 Tc 72 579.89 Td (\(d\)  Height Loss Optimization) Tj ET
+BT 0.92 0.96 1 rg /F4 14 Tf 0 Tc 72 559.89 Td (No solution exists. d\(Delta H\)/dk > 0 for all k > 0.) Tj ET
+BT 0.92 0.96 1 rg /F2 18 Tf -0.1 Tc 58 533.89 Td (Common Student Mistakes) Tj ET
+0 0.666 1 RG 1 w 58 512.29 m 118 512.29 l S
+0 0.22 0.32 rg 58 472.28999999999996 479.28 22 re f
+0 0.45 0.66 RG 0.6 w 58 472.28999999999996 479.28 22 re S
+BT 0 0.666 1 rg /F3 8.5 Tf 1.8 Tc 68 479.28999999999996 Td (MISTAKE) Tj ET
+BT 0 0.666 1 rg /F3 8.5 Tf 1.8 Tc 268 479.28999999999996 Td (WHY IT IS WRONG) Tj ET
+0.012 0.051 0.085 rg 58 434.28999999999996 479.28 38 re f
+0 0.30 0.45 RG 0.6 w 58 434.28999999999996 479.28 38 re S
+BT 0.92 0.96 1 rg /F1 10.5 Tf 0 Tc 68 456.28999999999996 Td (Using v = u - gt) Tj ET
+BT 0.65 0.74 0.84 rg /F1 10.5 Tf 0 Tc 268 456.28999999999996 Td (Acceleration is not constant when drag depends on) Tj ET
+BT 0.65 0.74 0.84 rg /F1 10.5 Tf 0 Tc 268 442.28999999999996 Td (velocity.) Tj ET
+0.018 0.063 0.10 rg 58 396.28999999999996 479.28 38 re f
+0 0.30 0.45 RG 0.6 w 58 396.28999999999996 479.28 38 re S
+BT 0.92 0.96 1 rg /F1 10.5 Tf 0 Tc 68 418.28999999999996 Td (Using v^2 = u^2 - 2gH) Tj ET
+BT 0.65 0.74 0.84 rg /F1 10.5 Tf 0 Tc 268 418.28999999999996 Td (Same reason - SUVAT equations require constant) Tj ET
+BT 0.65 0.74 0.84 rg /F1 10.5 Tf 0 Tc 268 404.28999999999996 Td (acceleration.) Tj ET
+0.012 0.051 0.085 rg 58 358.28999999999996 479.28 38 re f
+0 0.30 0.45 RG 0.6 w 58 358.28999999999996 479.28 38 re S
+BT 0.92 0.96 1 rg /F1 10.5 Tf 0 Tc 68 380.28999999999996 Td (Wrong sign of drag force) Tj ET
+BT 0.65 0.74 0.84 rg /F1 10.5 Tf 0 Tc 268 380.28999999999996 Td (Drag always opposes motion. Sign depends on) Tj ET
+BT 0.65 0.74 0.84 rg /F1 10.5 Tf 0 Tc 268 366.28999999999996 Td (direction of v.) Tj ET
+0.018 0.063 0.10 rg 58 320.28999999999996 479.28 38 re f
+0 0.30 0.45 RG 0.6 w 58 320.28999999999996 479.28 38 re S
+BT 0.92 0.96 1 rg /F1 10.5 Tf 0 Tc 68 342.28999999999996 Td (Forgetting integration limits) Tj ET
+BT 0.65 0.74 0.84 rg /F1 10.5 Tf 0 Tc 268 342.28999999999996 Td (Produces sign and logarithm errors when evaluating) Tj ET
+BT 0.65 0.74 0.84 rg /F1 10.5 Tf 0 Tc 268 328.28999999999996 Td (definite integrals.) Tj ET
+0.012 0.051 0.085 rg 58 268.28999999999996 479.28 52 re f
+0 0.30 0.45 RG 0.6 w 58 268.28999999999996 479.28 52 re S
+BT 0.92 0.96 1 rg /F1 10.5 Tf 0 Tc 68 304.28999999999996 Td (Assuming a stationary point must) Tj ET
+BT 0.92 0.96 1 rg /F1 10.5 Tf 0 Tc 68 290.28999999999996 Td (exist) Tj ET
+BT 0.65 0.74 0.84 rg /F1 10.5 Tf 0 Tc 268 304.28999999999996 Td (Strictly monotonic functions have no interior) Tj ET
+BT 0.65 0.74 0.84 rg /F1 10.5 Tf 0 Tc 268 290.28999999999996 Td (critical points. Always check the sign of the) Tj ET
+BT 0.65 0.74 0.84 rg /F1 10.5 Tf 0 Tc 268 276.28999999999996 Td (derivative.) Tj ET
+0.02 0.07 0.10 rg 58 166.28999999999996 479.28 90 re f
+0.0 0.40 0.55 RG 0.6 w 58 166.28999999999996 479.28 90 re S
+0 0.666 1 rg 58 166.28999999999996 3 90 re f
+BT 0 0.666 1 rg /F3 8.5 Tf 2 Tc 72 240.28999999999996 Td (EXAMINER'S NOTE) Tj ET
+BT 0.65 0.74 0.84 rg /F1 11 Tf 0 Tc 72 224.28999999999996 Td (This is a calculus mechanics problem, not a standard SUVAT problem. The moment drag) Tj ET
+BT 0.65 0.74 0.84 rg /F1 11 Tf 0 Tc 72 209.28999999999996 Td (depends on velocity, use differential equations rather than constant-acceleration) Tj ET
+BT 0.65 0.74 0.84 rg /F1 11 Tf 0 Tc 72 194.28999999999996 Td (formulas. Part \(d\) is a trap: students often assume a critical point exists. It does) Tj ET
+BT 0.65 0.74 0.84 rg /F1 11 Tf 0 Tc 72 179.28999999999996 Td (not - one must verify by analysing the sign of the derivative.) Tj ET
 endstream
 endobj
 12 0 obj
@@ -484,13 +494,13 @@ xref
 0000006063 00000 n 
 0000011231 00000 n 
 0000011657 00000 n 
-0000016738 00000 n 
-0000017164 00000 n 
-0000022499 00000 n 
-0000022926 00000 n 
-0000028865 00000 n 
+0000017043 00000 n 
+0000017469 00000 n 
+0000023093 00000 n 
+0000023520 00000 n 
+0000030071 00000 n 
 trailer
 << /Size 13 /Root 1 0 R >>
 startxref
-29293
+30499
 %%EOF
