@@ -45,6 +45,7 @@
 
 <main id="main">
 
+  <!-- ══ HERO ══ -->
   <section id="hero">
     <div class="hero-grid"></div>
     <div class="hero-glow"></div>
@@ -66,6 +67,7 @@
     </div>
   </section>
 
+  <!-- ══ ABOUT ══ -->
   <section id="about">
     <div class="reveal">
       <div class="section-label">// 01 — About</div>
@@ -93,6 +95,7 @@
     </div>
   </section>
 
+  <!-- ══ FEATURES ══ -->
   <section id="features">
     <div class="reveal">
       <div class="section-label">// 02 — Features</div>
@@ -113,64 +116,104 @@
     </div>
   </section>
 
+  <!-- ══ HALL OF FAME ══ -->
   <section id="halloffame">
     <div class="reveal">
       <div class="section-label">// 03 — Hall of Fame</div>
       <h2 class="section-title">Solved <span class="accent">Problems</span></h2>
       <div class="section-divider"></div>
     </div>
- <div class="hof-grid reveal">
 
-  <!-- PROBLEM #001 CARD -->
-  <<a href="problem-001.html"> style="text-decoration:none;">
-    <div class="hof-card">
-      <div class="hof-badge">Problem #001</div>
-      <div style="font-family:'Share Tech Mono',monospace; font-size:10px; letter-spacing:2px; color:var(--grey); text-transform:uppercase; float:right; margin-top:-28px;">Physics — Mechanics</div>
-      <div class="hof-question">Air Resistance Optimization</div>
-      <p class="hof-summary">A vertical-throw problem with velocity-dependent drag. Free body diagrams, kinematics, differential equations, and height loss optimization.</p>
-      <div style="font-family:'Share Tech Mono',monospace; font-size:10px; letter-spacing:1.5px; color:var(--grey); text-transform:uppercase; margin-bottom:16px;">FBD · Kinematics · ODEs · Optimization</div>
-      <div class="hof-meta">
-        <span class="hof-solver">Open Problem →</span>
-        <span class="hof-trophy">📖</span>
+    <div class="hof-grid reveal">
+
+      <!-- PROBLEM #001 CARD -->
+      <a href="problem-001.html" style="text-decoration:none;">
+        <div class="hof-card">
+          <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:14px;">
+            <div class="hof-badge">Problem #001</div>
+            <div style="font-family:'Share Tech Mono',monospace; font-size:10px; letter-spacing:2px; color:var(--grey); text-transform:uppercase;">Physics — Mechanics</div>
+          </div>
+          <div class="hof-question">Air Resistance Optimization</div>
+          <p class="hof-summary">A vertical-throw problem with velocity-dependent drag. Free body diagrams, kinematics, differential equations, and height loss optimization.</p>
+          <div style="font-family:'Share Tech Mono',monospace; font-size:10px; letter-spacing:1.5px; color:var(--grey); text-transform:uppercase; margin-bottom:16px;">FBD · Kinematics · ODEs · Optimization</div>
+          <div class="hof-meta">
+            <span class="hof-solver">Open Problem →</span>
+            <span class="hof-trophy">📖</span>
+          </div>
+        </div>
+      </a>
+
+      <!-- EMPTY SLOT -->
+      <div class="hof-empty">
+        <div style="font-size:48px">— · —</div>
+        <p>THE HALL AWAITS ITS NEXT SCHOLARS</p>
+        <p style="margin-top:8px; font-size:12px; opacity:0.5;">Solve a featured problem and claim your place here.</p>
       </div>
-    </div>
-  </a>
 
-  <!-- EMPTY SLOT -->
-  <div class="hof-empty">
-    <div style="font-size:48px">— · —</div>
-    <p>THE HALL AWAITS ITS NEXT SCHOLARS</p>
-    <p style="margin-top:8px;font-size:12px;opacity:0.5">Solve a featured problem and claim your place here.</p>
-  </div>
+      <!-- ══ INDUCTED SCHOLARS ══ -->
+      <div style="grid-column:1/-1; margin-top:32px;">
 
-</div>
+        <!-- Section label -->
+        <div style="font-family:'Share Tech Mono',monospace; font-size:10px; letter-spacing:4px; color:var(--grey); text-transform:uppercase; margin-bottom:20px; display:flex; align-items:center; gap:16px;">
+          // Inducted Scholars
+          <span style="flex:1; height:1px; background:rgba(0,170,255,0.1); display:block;"></span>
+        </div>
 
-<!-- SCHOLARS SECTION -->
-<div style="grid-column: 1/-1; margin-top: 16px;">
-  <div style="font-family:'Share Tech Mono',monospace; font-size:10px; letter-spacing:4px; color:var(--grey); text-transform:uppercase; margin-bottom:20px; display:flex; align-items:center; gap:16px;">
-    // Inducted Scholars
-    <span style="flex:1; height:1px; background:rgba(0,170,255,0.1); display:block;"></span>
-  </div>
+        <p style="font-size:13px; color:var(--grey); line-height:1.7; max-width:680px; margin-bottom:24px;">
+          Effort matters. Students who attempt our featured problems — partially or in full — earn their place here permanently.
+        </p>
 
-  <!-- SCHOLAR CARD — copy this block for each new scholar -->
-  <div class="hof-card" style="display:flex; align-items:center; gap:20px; margin-bottom:14px;">
-    <div style="width:56px; height:56px; border-radius:50%; border:2px solid rgba(0,170,255,0.35); background:rgba(0,170,255,0.08); display:flex; align-items:center; justify-content:center; font-family:'Orbitron',sans-serif; font-size:20px; font-weight:900; color:var(--blue); flex-shrink:0;">
-      Z
-    </div>
-    <div style="flex:1;">
-      <div style="display:flex; align-items:center; gap:10px; margin-bottom:6px; flex-wrap:wrap;">
-        <span style="font-family:'Orbitron',sans-serif; font-size:15px; letter-spacing:1.5px; text-transform:uppercase; color:var(--white);">Zishan23</span>
-        <span style="padding:2px 8px; font-family:'Share Tech Mono',monospace; font-size:9px; letter-spacing:2px; text-transform:uppercase; border:1px solid rgba(255,209,102,0.4); background:rgba(255,209,102,0.08); color:#ffd166;">Partial Entry</span>
+        <!-- SCHOLAR CARD: Zishan23 -->
+        <div class="hof-card" style="display:flex; align-items:center; gap:20px; margin-bottom:14px;">
+          <div style="width:56px; height:56px; border-radius:50%; border:2px solid rgba(0,170,255,0.35); background:rgba(0,170,255,0.08); display:flex; align-items:center; justify-content:center; font-family:'Orbitron',sans-serif; font-size:20px; font-weight:900; color:var(--blue); flex-shrink:0;">
+            Z
+          </div>
+          <div style="flex:1;">
+            <div style="display:flex; align-items:center; gap:10px; margin-bottom:6px; flex-wrap:wrap;">
+              <span style="font-family:'Orbitron',sans-serif; font-size:15px; letter-spacing:1.5px; text-transform:uppercase; color:var(--white);">Zishan23</span>
+              <span style="padding:2px 8px; font-family:'Share Tech Mono',monospace; font-size:9px; letter-spacing:2px; text-transform:uppercase; border:1px solid rgba(255,209,102,0.4); background:rgba(255,209,102,0.08); color:#ffd166;">🟡 Partial Entry</span>
+            </div>
+            <div style="font-family:'Share Tech Mono',monospace; font-size:10px; letter-spacing:2px; color:var(--blue); text-transform:uppercase; margin-bottom:6px;">Problem #001</div>
+            <p style="font-size:13px; color:var(--grey); line-height:1.6;">The only student who attempted Problem #001. Did not complete the full solution, but the effort was recognised — better than not trying at all.</p>
+          </div>
+        </div>
+
+        <!--
+          TO ADD A NEW SCHOLAR — copy the block below and fill in:
+          - Change "?" to first letter of their name
+          - Change the name
+          - Change the badge to "🟡 Partial Entry" or "✅ Full Entry"
+          - Change the badge colors (gold for partial, blue for full)
+          - Change Problem #00X to the correct problem
+          - Write their note
+
+        <div class="hof-card" style="display:flex; align-items:center; gap:20px; margin-bottom:14px;">
+          <div style="width:56px; height:56px; border-radius:50%; border:2px solid rgba(0,170,255,0.35); background:rgba(0,170,255,0.08); display:flex; align-items:center; justify-content:center; font-family:'Orbitron',sans-serif; font-size:20px; font-weight:900; color:var(--blue); flex-shrink:0;">
+            ?
+          </div>
+          <div style="flex:1;">
+            <div style="display:flex; align-items:center; gap:10px; margin-bottom:6px; flex-wrap:wrap;">
+              <span style="font-family:'Orbitron',sans-serif; font-size:15px; letter-spacing:1.5px; text-transform:uppercase; color:var(--white);">USERNAME</span>
+              FOR FULL ENTRY (blue badge):
+              <span style="padding:2px 8px; font-family:'Share Tech Mono',monospace; font-size:9px; letter-spacing:2px; text-transform:uppercase; border:1px solid rgba(0,170,255,0.4); background:rgba(0,170,255,0.1); color:var(--blue);">✅ Full Entry</span>
+              FOR PARTIAL ENTRY (gold badge):
+              <span style="padding:2px 8px; font-family:'Share Tech Mono',monospace; font-size:9px; letter-spacing:2px; text-transform:uppercase; border:1px solid rgba(255,209,102,0.4); background:rgba(255,209,102,0.08); color:#ffd166;">🟡 Partial Entry</span>
+            </div>
+            <div style="font-family:'Share Tech Mono',monospace; font-size:10px; letter-spacing:2px; color:var(--blue); text-transform:uppercase; margin-bottom:6px;">Problem #00X</div>
+            <p style="font-size:13px; color:var(--grey); line-height:1.6;">Write their note here.</p>
+          </div>
+        </div>
+        -->
+
       </div>
-      <div style="font-family:'Share Tech Mono',monospace; font-size:10px; letter-spacing:2px; color:var(--blue); text-transform:uppercase; margin-bottom:6px;">Problem #001</div>
-      <p style="font-size:13px; color:var(--grey); line-height:1.6;">The only student who attempted Problem #001. Did not complete the full solution, but the effort was recognised — better than not trying.</p>
-    </div>
-  </div>
+      <!-- end scholars -->
 
-</div>
+    </div>
+    <!-- end hof-grid -->
 
   </section>
 
+  <!-- ══ SYLLABUS ══ -->
   <section id="syllabus">
     <div class="reveal">
       <div class="section-label">// 04 — Syllabus</div>
@@ -203,6 +246,7 @@
     </div>
   </section>
 
+  <!-- ══ TEAM ══ -->
   <section id="team">
     <div class="reveal">
       <div class="section-label">// 05 — Team</div>
@@ -219,6 +263,7 @@
     </div>
   </section>
 
+  <!-- ══ JOIN ══ -->
   <section id="join">
     <div class="reveal">
       <div class="section-label">// 06 — Join Us</div>
@@ -254,7 +299,7 @@
     </div>
     <div class="footer-copy">
       © 2026 The Prep Axiom Foundry. All rights reserved.<br>
-      <span>Founded by Auvalen & Nuven · Built by students, for students.</span>
+      <span>Founded by Auvalen &amp; Nuven · Built by students, for students.</span>
     </div>
   </div>
 </footer>
