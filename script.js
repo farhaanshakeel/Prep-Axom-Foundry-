@@ -1,14 +1,42 @@
-// ── INTRO SCREEN
+// ── INTRO SCREEN + SKIP BUTTON
 window.addEventListener('load', function() {
-  setTimeout(function() {
-    var intro = document.getElementById('intro-screen');
-    if (intro) {
-      intro.classList.add('intro-hide');
-      setTimeout(function() {
-        intro.style.display = 'none';
-      }, 700);
-    }
-  }, 3200);
+  var intro = document.getElementById('intro-screen');
+  if (!intro) return;
+
+  // Create skip button
+  var skipBtn = document.createElement('button');
+  skipBtn.textContent = 'Skip';
+  skipBtn.style.cssText = [
+    'position:absolute', 'bottom:32px', 'right:32px',
+    'background:transparent', 'border:1px solid rgba(0,170,255,0.4)',
+    'color:#0af', 'font-family:"Share Tech Mono",monospace',
+    'font-size:11px', 'letter-spacing:2px', 'text-transform:uppercase',
+    'padding:8px 20px', 'cursor:pointer', 'transition:all 0.2s',
+    'z-index:10000'
+  ].join(';');
+  skipBtn.addEventListener('mouseenter', function() {
+    skipBtn.style.background = 'rgba(0,170,255,0.12)';
+    skipBtn.style.borderColor = '#0af';
+  });
+  skipBtn.addEventListener('mouseleave', function() {
+    skipBtn.style.background = 'transparent';
+    skipBtn.style.borderColor = 'rgba(0,170,255,0.4)';
+  });
+  intro.appendChild(skipBtn);
+
+  function hideIntro() {
+    intro.classList.add('intro-hide');
+    setTimeout(function() { intro.style.display = 'none'; }, 700);
+  }
+
+  // Auto-hide after 3.2s
+  var autoTimer = setTimeout(hideIntro, 3200);
+
+  // Skip button hides immediately
+  skipBtn.addEventListener('click', function() {
+    clearTimeout(autoTimer);
+    hideIntro();
+  });
 });
 
 // ── PARTICLES
@@ -63,6 +91,8 @@ var revealObserver = new IntersectionObserver(function(entries) {
 document.querySelectorAll('.reveal').forEach(function(el) { revealObserver.observe(el); });
 
 // ── COUNTERS
+// Reads target values from data-target attributes on the counter elements
+// To update counts: change data-target="X" in index.html, no JS changes needed
 function animateCounter(el, target) {
   if (!el) return;
   var start = 0;
@@ -74,20 +104,89 @@ function animateCounter(el, target) {
     el.textContent = Math.floor(start);
   }, 16);
 }
+
 setTimeout(function() {
-  animateCounter(document.getElementById('counter-members'), 20);
-  animateCounter(document.getElementById('counter-problems'), 10);
-  animateCounter(document.getElementById('counter-countries'), 5);
+  var els = [
+    document.getElementById('counter-members'),
+    document.getElementById('counter-problems'),
+    document.getElementById('counter-countries')
+  ];
+  els.forEach(function(el) {
+    if (!el) return;
+    // Read from data-target attribute — update the number in HTML, not here
+    var target = parseInt(el.getAttribute('data-target'), 10);
+    if (!isNaN(target)) animateCounter(el, target);
+  });
 }, 3400);
 
-// ── SYLLABUS TABS
-function switchTab(e, tab) {
-  document.querySelectorAll('.tab-content').forEach(function(t) { t.classList.remove('active'); });
-  document.querySelectorAll('.tab-btn').forEach(function(b) { b.classList.remove('active'); });
-  var content = document.getElementById('tab-' + tab);
-  if (content) content.classList.add('active');
-  if (e && e.target) e.target.classList.add('active');
-}
+// ── SYLLABUS TABS — event listeners, no inline onclick needed
+document.addEventListener('DOMContentLoaded', function() {
+  var tabBtns = document.querySelectorAll('.tab-btn');
+  tabBtns.forEach(function(btn) {
+    btn.addEventListener('click', function() {
+      var tab = btn.getAttribute('data-tab');
+      if (!tab) return;
+      document.querySelectorAll('.tab-content').forEach(function(t) { t.classList.remove('active'); });
+      document.querySelectorAll('.tab-btn').forEach(function(b) { b.classList.remove('active'); });
+      var content = document.getElementById('tab-' + tab);
+      if (content) content.classList.add('active');
+      btn.classList.add('active');
+    });
+  });
+});
+
+// ── CONTACT FORM — tied to actual Formspree response
+document.addEventListener('DOMContentLoaded', function() {
+  var form = document.getElementById('contactForm');
+  var banner = document.getElementById('successBanner');
+  var errorBanner = document.getElementById('errorBanner');
+  var submitBtn = form ? form.querySelector('.form-submit') : null;
+
+  if (!form) return;
+
+  form.addEventListener('submit', function(e) {
+    e.preventDefault();
+
+    // Show loading state
+    if (submitBtn) {
+      submitBtn.textContent = 'Sending...';
+      submitBtn.disabled = true;
+    }
+
+    var data = new FormData(form);
+
+    fetch(form.action, {
+      method: 'POST',
+      body: data,
+      headers: { 'Accept': 'application/json' }
+    })
+    .then(function(response) {
+      if (response.ok) {
+        // SUCCESS
+        if (banner) banner.style.display = 'block';
+        if (errorBanner) errorBanner.style.display = 'none';
+        form.reset();
+      } else {
+        // SERVER ERROR
+        return response.json().then(function(data) {
+          throw new Error(data.errors ? data.errors.map(function(e){ return e.message; }).join(', ') : 'Server error');
+        });
+      }
+    })
+    .catch(function(err) {
+      // NETWORK / FORMSPREE ERROR
+      if (errorBanner) errorBanner.style.display = 'block';
+      if (banner) banner.style.display = 'none';
+      console.error('Form error:', err);
+    })
+    .finally(function() {
+      if (submitBtn) {
+        submitBtn.textContent = 'Send Message →';
+        submitBtn.disabled = false;
+      }
+    });
+  });
+});
 
 // ── SMOOTH SCROLL
 document.querySelectorAll('a[href^="#"]').forEach(function(a) {
