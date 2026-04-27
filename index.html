@@ -4,6 +4,26 @@
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>The Prep Axiom Foundry</title>
+
+  <!-- ── SEO META ── -->
+  <meta name="description" content="The Prep Axiom Foundry — a peer-led global academic community for students serious about olympiad mathematics and physics. Built by students, for students."/>
+  <meta name="keywords" content="olympiad, mathematics, physics, study community, IOQM, RMO, IPhO, peer learning, PAF"/>
+  <meta name="author" content="The Prep Axiom Foundry"/>
+
+  <!-- ── OPEN GRAPH (WhatsApp, Discord, Facebook previews) ── -->
+  <meta property="og:title" content="The Prep Axiom Foundry"/>
+  <meta property="og:description" content="A peer-led global academic community for students serious about olympiad mathematics and physics. Built by students, for students."/>
+  <meta property="og:image" content="https://prepaxiomfoundry.in/logo.png"/>
+  <meta property="og:url" content="https://prepaxiomfoundry.in"/>
+  <meta property="og:type" content="website"/>
+  <meta property="og:site_name" content="The Prep Axiom Foundry"/>
+
+  <!-- ── TWITTER CARD ── -->
+  <meta name="twitter:card" content="summary_large_image"/>
+  <meta name="twitter:title" content="The Prep Axiom Foundry"/>
+  <meta name="twitter:description" content="A peer-led global academic community for students serious about olympiad mathematics and physics."/>
+  <meta name="twitter:image" content="https://prepaxiomfoundry.in/logo.png"/>
+
   <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700;900&family=Rajdhani:wght@300;400;500;600&family=Share+Tech+Mono&display=swap" rel="stylesheet"/>
   <link rel="stylesheet" href="styles.css"/>
 </head>
@@ -16,6 +36,7 @@
     <div id="intro-title">THE PREP AXIOM FOUNDRY</div>
     <div id="intro-sub">// EST. 2026 · GLOBAL ACADEMIC GUILD</div>
   </div>
+  <!-- Skip button injected by script.js -->
 </div>
 
 <div id="particles"></div>
@@ -61,9 +82,10 @@
       <a href="#about" class="btn-secondary">Learn More</a>
     </div>
     <div class="hero-stats">
-      <div class="stat"><span class="stat-num" id="counter-members">0</span><span class="stat-label">Members</span></div>
-      <div class="stat"><span class="stat-num" id="counter-problems">0</span><span class="stat-label">Problems Solved</span></div>
-      <div class="stat"><span class="stat-num" id="counter-countries">0</span><span class="stat-label">Countries</span></div>
+      <!-- ★ To update counts: change data-target="X" only. Never touch script.js ★ -->
+      <div class="stat"><span class="stat-num" id="counter-members" data-target="20">0</span><span class="stat-label">Members</span></div>
+      <div class="stat"><span class="stat-num" id="counter-problems" data-target="10">0</span><span class="stat-label">Problems Solved</span></div>
+      <div class="stat"><span class="stat-num" id="counter-countries" data-target="5">0</span><span class="stat-label">Countries</span></div>
     </div>
   </section>
 
@@ -126,7 +148,7 @@
 
     <div class="hof-grid reveal">
 
-      <!-- PROBLEM #001 CARD -->
+      <!-- PROBLEM #001 -->
       <a href="problem-001.html" style="text-decoration:none;">
         <div class="hof-card">
           <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:14px;">
@@ -143,74 +165,64 @@
         </div>
       </a>
 
-      <!-- EMPTY SLOT -->
-      <div class="hof-empty">
-        <div style="font-size:48px">— · —</div>
-        <p>THE HALL AWAITS ITS NEXT SCHOLARS</p>
-        <p style="margin-top:8px; font-size:12px; opacity:0.5;">Solve a featured problem and claim your place here.</p>
-      </div>
+      <!-- PROBLEM #002 -->
+      <a href="problem-002.html" style="text-decoration:none;">
+        <div class="hof-card">
+          <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:14px;">
+            <div class="hof-badge">Problem #002</div>
+            <div style="font-family:'Share Tech Mono',monospace; font-size:10px; letter-spacing:2px; color:var(--grey); text-transform:uppercase;">Mathematics — Geometry</div>
+          </div>
+          <div class="hof-question">Find AC</div>
+          <p class="hof-summary">A circle geometry problem involving a diameter, collinear points, and a right triangle. Use circle theorems and the Pythagorean theorem to find the radius.</p>
+          <div style="font-family:'Share Tech Mono',monospace; font-size:10px; letter-spacing:1.5px; color:var(--grey); text-transform:uppercase; margin-bottom:16px;">Circle Theorems · Pythagoras · Similar Triangles</div>
+          <div class="hof-meta">
+            <span class="hof-solver">Open Problem →</span>
+            <span class="hof-trophy">📐</span>
+          </div>
+        </div>
+      </a>
 
       <!-- ══ INDUCTED SCHOLARS ══ -->
       <div style="grid-column:1/-1; margin-top:32px;">
-
-        <!-- Section label -->
         <div style="font-family:'Share Tech Mono',monospace; font-size:10px; letter-spacing:4px; color:var(--grey); text-transform:uppercase; margin-bottom:20px; display:flex; align-items:center; gap:16px;">
           // Inducted Scholars
           <span style="flex:1; height:1px; background:rgba(0,170,255,0.1); display:block;"></span>
         </div>
-
         <p style="font-size:13px; color:var(--grey); line-height:1.7; max-width:680px; margin-bottom:24px;">
           Effort matters. Students who attempt our featured problems — partially or in full — earn their place here permanently.
         </p>
 
-        <!-- SCHOLAR CARD: Zishan23 -->
+        <!-- SCHOLAR: Zishan23 -->
         <div class="hof-card" style="display:flex; align-items:center; gap:20px; margin-bottom:14px;">
-          <div style="width:56px; height:56px; border-radius:50%; border:2px solid rgba(0,170,255,0.35); background:rgba(0,170,255,0.08); display:flex; align-items:center; justify-content:center; font-family:'Orbitron',sans-serif; font-size:20px; font-weight:900; color:var(--blue); flex-shrink:0;">
-            Z
-          </div>
+          <div style="width:56px; height:56px; border-radius:50%; border:2px solid rgba(0,170,255,0.35); background:rgba(0,170,255,0.08); display:flex; align-items:center; justify-content:center; font-family:'Orbitron',sans-serif; font-size:20px; font-weight:900; color:var(--blue); flex-shrink:0;">Z</div>
           <div style="flex:1;">
             <div style="display:flex; align-items:center; gap:10px; margin-bottom:6px; flex-wrap:wrap;">
               <span style="font-family:'Orbitron',sans-serif; font-size:15px; letter-spacing:1.5px; text-transform:uppercase; color:var(--white);">Zishan23</span>
               <span style="padding:2px 8px; font-family:'Share Tech Mono',monospace; font-size:9px; letter-spacing:2px; text-transform:uppercase; border:1px solid rgba(255,209,102,0.4); background:rgba(255,209,102,0.08); color:#ffd166;">🟡 Partial Entry</span>
             </div>
             <div style="font-family:'Share Tech Mono',monospace; font-size:10px; letter-spacing:2px; color:var(--blue); text-transform:uppercase; margin-bottom:6px;">Problem #001</div>
-            <p style="font-size:13px; color:var(--grey); line-height:1.6;">The only student who attempted Problem #001 <strong>WITH A GOOD APPROACH</strong> . Did not complete the full solution, but the effort was recognised — better than not trying at all.</p>
+            <p style="font-size:13px; color:var(--grey); line-height:1.6;">The only student who attempted Problem #001 with a good approach. Did not complete the full solution, but the effort was recognised — better than not trying at all.</p>
           </div>
         </div>
 
         <!--
-          TO ADD A NEW SCHOLAR — copy the block below and fill in:
-          - Change "?" to first letter of their name
-          - Change the name
-          - Change the badge to "🟡 Partial Entry" or "✅ Full Entry"
-          - Change the badge colors (gold for partial, blue for full)
-          - Change Problem #00X to the correct problem
-          - Write their note
-
-        <div class="hof-card" style="display:flex; align-items:center; gap:20px; margin-bottom:14px;">
-          <div style="width:56px; height:56px; border-radius:50%; border:2px solid rgba(0,170,255,0.35); background:rgba(0,170,255,0.08); display:flex; align-items:center; justify-content:center; font-family:'Orbitron',sans-serif; font-size:20px; font-weight:900; color:var(--blue); flex-shrink:0;">
-            ?
-          </div>
-          <div style="flex:1;">
-            <div style="display:flex; align-items:center; gap:10px; margin-bottom:6px; flex-wrap:wrap;">
-              <span style="font-family:'Orbitron',sans-serif; font-size:15px; letter-spacing:1.5px; text-transform:uppercase; color:var(--white);">USERNAME</span>
-              FOR FULL ENTRY (blue badge):
-              <span style="padding:2px 8px; font-family:'Share Tech Mono',monospace; font-size:9px; letter-spacing:2px; text-transform:uppercase; border:1px solid rgba(0,170,255,0.4); background:rgba(0,170,255,0.1); color:var(--blue);">✅ Full Entry</span>
-              FOR PARTIAL ENTRY (gold badge):
-              <span style="padding:2px 8px; font-family:'Share Tech Mono',monospace; font-size:9px; letter-spacing:2px; text-transform:uppercase; border:1px solid rgba(255,209,102,0.4); background:rgba(255,209,102,0.08); color:#ffd166;">🟡 Partial Entry</span>
+          ADD NEW SCHOLAR: copy block, uncomment, fill in
+          <div class="hof-card" style="display:flex; align-items:center; gap:20px; margin-bottom:14px;">
+            <div style="width:56px; height:56px; border-radius:50%; border:2px solid rgba(0,170,255,0.35); background:rgba(0,170,255,0.08); display:flex; align-items:center; justify-content:center; font-family:'Orbitron',sans-serif; font-size:20px; font-weight:900; color:var(--blue); flex-shrink:0;">?</div>
+            <div style="flex:1;">
+              <div style="display:flex; align-items:center; gap:10px; margin-bottom:6px; flex-wrap:wrap;">
+                <span style="font-family:'Orbitron',sans-serif; font-size:15px; letter-spacing:1.5px; text-transform:uppercase; color:var(--white);">USERNAME</span>
+                FULL:    <span style="padding:2px 8px; font-family:'Share Tech Mono',monospace; font-size:9px; letter-spacing:2px; text-transform:uppercase; border:1px solid rgba(0,170,255,0.4); background:rgba(0,170,255,0.1); color:var(--blue);">✅ Full Entry</span>
+                PARTIAL: <span style="padding:2px 8px; font-family:'Share Tech Mono',monospace; font-size:9px; letter-spacing:2px; text-transform:uppercase; border:1px solid rgba(255,209,102,0.4); background:rgba(255,209,102,0.08); color:#ffd166;">🟡 Partial Entry</span>
+              </div>
+              <div style="font-family:'Share Tech Mono',monospace; font-size:10px; letter-spacing:2px; color:var(--blue); text-transform:uppercase; margin-bottom:6px;">Problem #00X</div>
+              <p style="font-size:13px; color:var(--grey); line-height:1.6;">Note here.</p>
             </div>
-            <div style="font-family:'Share Tech Mono',monospace; font-size:10px; letter-spacing:2px; color:var(--blue); text-transform:uppercase; margin-bottom:6px;">Problem #00X</div>
-            <p style="font-size:13px; color:var(--grey); line-height:1.6;">Write their note here.</p>
           </div>
-        </div>
         -->
-
       </div>
-      <!-- end scholars -->
 
     </div>
-    <!-- end hof-grid -->
-
   </section>
 
   <!-- ══ SYLLABUS ══ -->
@@ -223,10 +235,11 @@
     <p class="syllabus-note reveal">
       📌 Please note — our primary focus is <strong>Mathematics and Physics</strong>, but we also explore <strong>Biology</strong> and <strong>Chemistry</strong> as supplementary subjects.
     </p>
+    <!-- ★ data-tab replaces onclick — no inline JS ★ -->
     <div class="syllabus-tabs reveal">
-      <button class="tab-btn active" onclick="switchTab(event,'math')">Mathematics</button>
-      <button class="tab-btn" onclick="switchTab(event,'physics')">Physics</button>
-      <button class="tab-btn" onclick="switchTab(event,'biology')">Biology</button>
+      <button class="tab-btn active" data-tab="math">Mathematics</button>
+      <button class="tab-btn" data-tab="physics">Physics</button>
+      <button class="tab-btn" data-tab="biology">Biology</button>
     </div>
     <div id="tab-math" class="tab-content active reveal">
       <div class="syllabus-topic"><div class="topic-title">Number Theory</div><ul class="topic-list"><li>Divisibility</li><li>Prime Numbers</li><li>GCD & LCM</li><li>Modular Arithmetic</li><li>Fermat's Theorem</li><li>Chinese Remainder</li><li>Diophantine Equations</li></ul></div>
