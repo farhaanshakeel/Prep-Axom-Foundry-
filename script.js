@@ -197,3 +197,263 @@ document.querySelectorAll('a[href^="#"]').forEach(function(a) {
     if (sidebar) sidebar.classList.remove('open');
   });
 });
+
+// ── FIREBASE EXAM DEMO
+(function() {
+  var examContainer = document.getElementById('examContainer');
+  var examStatus = document.getElementById('examStatus');
+  var examResult = document.getElementById('examResult');
+  var authStatus = document.getElementById('authStatus');
+  var signInBtn = document.getElementById('signInBtn');
+  var startExamBtn = document.getElementById('startExamBtn');
+  var leaderboardList = document.getElementById('leaderboardList');
+  var currentUser = null;
+  var currentTimer = null;
+  var remainingSeconds = 300;
+  var selectedAnswers = {};
+  var examQuestions = [
+    {
+      id: 'q1',
+      text: 'A projectile is launched at 30° above the horizontal with speed 20 m/s. What is the approximate maximum height?',
+      options: [
+        '5.1 m',
+        '7.6 m',
+        '10.3 m',
+        '12.5 m'
+      ],
+      answer: 1
+    },
+    {
+      id: 'q2',
+      text: 'Which number is a prime factor of 221?',
+      options: [
+        '11',
+        '13',
+        '17',
+        '19'
+      ],
+      answer: 0
+    },
+    {
+      id: 'q3',
+      text: 'In a chemical equilibrium, increasing temperature shifts the balance to the side that is',
+      options: [
+        'less exothermic',
+        'more exothermic',
+        'lower pressure',
+        'higher concentration'
+      ],
+      answer: 0
+    }
+  ];
+
+  function isFirebaseConfigValid(config) {
+    return config && config.apiKey && !config.apiKey.includes('YOUR_');
+  }
+
+  function updateAuthUi() {
+    if (!authStatus) return;
+    if (currentUser) {
+      authStatus.textContent = 'Signed in as ' + currentUser.displayName;
+      signInBtn.textContent = 'Sign out';
+      startExamBtn.disabled = false;
+    } else {
+      authStatus.textContent = 'Sign in with Google to save your score.';
+      signInBtn.textContent = 'Sign in with Google';
+      startExamBtn.disabled = false;
+    }
+  }
+
+  function showMessage(message) {
+    if (examStatus) examStatus.textContent = message;
+  }
+
+  function renderExam() {
+    if (!examContainer) return;
+    examContainer.classList.remove('hidden');
+    examContainer.innerHTML = '';
+    var timerBar = document.createElement('div');
+    timerBar.id = 'examTimer';
+    timerBar.className = 'exam-status';
+    timerBar.textContent = formatTime(remainingSeconds);
+    examContainer.appendChild(timerBar);
+
+    examQuestions.forEach(function(question, index) {
+      var q = document.createElement('div');
+      q.className = 'exam-question';
+      q.innerHTML = '<h3>Question ' + (index + 1) + '</h3>' +
+        '<p>' + question.text + '</p>';
+
+      question.options.forEach(function(option, optIndex) {
+        var label = document.createElement('label');
+        label.className = 'exam-option';
+        label.innerHTML = '<input type="radio" name="' + question.id + '" value="' + optIndex + '"> ' + option;
+        label.addEventListener('click', function() {
+          selectedAnswers[question.id] = optIndex;
+        });
+        q.appendChild(label);
+      });
+      examContainer.appendChild(q);
+    });
+
+    var submitBtn = document.createElement('button');
+    submitBtn.className = 'btn-primary exam-submit';
+    submitBtn.textContent = 'Submit Exam';
+    submitBtn.addEventListener('click', submitExam);
+    examContainer.appendChild(submitBtn);
+    showMessage('Exam started. You have 5 minutes. Good luck!');
+  }
+
+  function formatTime(seconds) {
+    var min = Math.floor(seconds / 60);
+    var sec = seconds % 60;
+    return 'Time left: ' + String(min).padStart(2, '0') + ':' + String(sec).padStart(2, '0');
+  }
+
+  function startTimer() {
+    if (currentTimer) clearInterval(currentTimer);
+    currentTimer = setInterval(function() {
+      remainingSeconds--;
+      var timer = document.getElementById('examTimer');
+      if (timer) timer.textContent = formatTime(remainingSeconds);
+      if (remainingSeconds <= 0) {
+        clearInterval(currentTimer);
+        submitExam();
+      }
+    }, 1000);
+  }
+
+  function calculateScore() {
+    var score = 0;
+    examQuestions.forEach(function(question) {
+      if (selectedAnswers[question.id] === question.answer) score += 1;
+    });
+    return score;
+  }
+
+  function submitExam() {
+    if (currentTimer) {
+      clearInterval(currentTimer);
+      currentTimer = null;
+    }
+    var score = calculateScore();
+    var message = 'You scored ' + score + ' out of ' + examQuestions.length + '.';
+    if (examResult) {
+      examResult.classList.remove('hidden');
+      examResult.textContent = message;
+    }
+    showMessage('Exam complete. ' + (currentUser ? 'Saving score...' : 'Sign in to save your result.'));
+    if (currentUser && window.db) {
+      window.db.collection('examAttempts').add({
+        uid: currentUser.uid,
+        name: currentUser.displayName || 'Anonymous',
+        score: score,
+        timestamp: firebase.firestore.FieldValue.serverTimestamp()
+      }).then(function() {
+        showMessage('Score saved to Firebase. Check the leaderboard below.');
+        loadLeaderboard();
+      }).catch(function(err) {
+        console.error('Firestore save failed:', err);
+        showMessage('Exam complete. Failed to save score to Firebase.');
+      });
+    }
+  }
+
+  function loadLeaderboard() {
+    if (!leaderboardList) return;
+    if (!window.db) {
+      leaderboardList.textContent = 'Leaderboard unavailable until Firebase is configured.';
+      return;
+    }
+    window.db.collection('examAttempts')
+      .orderBy('score', 'desc')
+      .orderBy('timestamp', 'desc')
+      .limit(5)
+      .get()
+      .then(function(snapshot) {
+        if (snapshot.empty) {
+          leaderboardList.innerHTML = '<div class="leaderboard-item"><span>No attempts yet.</span></div>';
+          return;
+        }
+        leaderboardList.innerHTML = '';
+        snapshot.forEach(function(doc) {
+          var data = doc.data();
+          var item = document.createElement('div');
+          item.className = 'leaderboard-item';
+          item.innerHTML = '<strong>' + (data.name || 'Guest') + '</strong><span>' + (data.score || 0) + '/' + examQuestions.length + '</span>';
+          leaderboardList.appendChild(item);
+        });
+      }).catch(function(err) {
+        console.error('Leaderboard error:', err);
+        leaderboardList.textContent = 'Unable to load leaderboard right now.';
+      });
+  }
+
+  function initFirebaseExam() {
+    if (!signInBtn || !startExamBtn || !authStatus) return;
+
+    var firebaseConfig = {
+      apiKey: 'YOUR_API_KEY',
+      authDomain: 'YOUR_PROJECT_ID.firebaseapp.com',
+      projectId: 'YOUR_PROJECT_ID',
+      storageBucket: 'YOUR_PROJECT_ID.appspot.com',
+      messagingSenderId: 'YOUR_MESSAGING_SENDER_ID',
+      appId: 'YOUR_APP_ID'
+    };
+
+    if (!isFirebaseConfigValid(firebaseConfig)) {
+      authStatus.textContent = 'Firebase config required in script.js to enable auth and saving.';
+      leaderboardList.textContent = 'Configure Firebase in script.js and reload to show leaderboard.';
+      startExamBtn.disabled = false;
+      signInBtn.addEventListener('click', function() {
+        showMessage('Edit script.js and paste your Firebase config values, then reload the page.');
+      });
+      startExamBtn.addEventListener('click', function() {
+        remainingSeconds = 300;
+        selectedAnswers = {};
+        renderExam();
+        startTimer();
+      });
+      return;
+    }
+
+    firebase.initializeApp(firebaseConfig);
+    window.db = firebase.firestore();
+    var provider = new firebase.auth.GoogleAuthProvider();
+
+    signInBtn.addEventListener('click', function() {
+      if (currentUser) {
+        firebase.auth().signOut();
+      } else {
+        firebase.auth().signInWithPopup(provider).catch(function(err) {
+          console.error('Sign in failed:', err);
+          showMessage('Google sign-in failed. Please try again.');
+        });
+      }
+    });
+
+    startExamBtn.addEventListener('click', function() {
+      remainingSeconds = 300;
+      selectedAnswers = {};
+      renderExam();
+      startTimer();
+    });
+
+    firebase.auth().onAuthStateChanged(function(user) {
+      currentUser = user;
+      updateAuthUi();
+      if (user) {
+        loadLeaderboard();
+      }
+    });
+
+    loadLeaderboard();
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initFirebaseExam);
+  } else {
+    initFirebaseExam();
+  }
+})();
+

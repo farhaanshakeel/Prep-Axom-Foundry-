@@ -254,6 +254,26 @@ section { padding: 100px 80px; position: relative; display: flex; flex-direction
 .member-info { font-family: 'Share Tech Mono', monospace; font-size: 10px; color: var(--grey); }
 .open-spots { padding: 40px; border: 1px dashed rgba(0,170,255,0.12); text-align: center; color: var(--grey); font-family: 'Share Tech Mono', monospace; font-size: 11px; letter-spacing: 2px; margin-top: 40px; }
 .open-spots a { color: var(--blue); text-decoration: none; }
+.exam-card { background: rgba(3,13,26,0.9); border: 1px solid rgba(0,170,255,0.12); padding: 32px; margin-bottom: 34px; }
+.exam-header { display: flex; justify-content: space-between; align-items: flex-start; gap: 16px; margin-bottom: 20px; }
+.exam-auth-status { font-family: 'Share Tech Mono', monospace; font-size: 11px; color: var(--grey); letter-spacing: 1px; text-transform: uppercase; max-width: 240px; }
+.exam-controls { display: flex; gap: 16px; flex-wrap: wrap; margin-bottom: 20px; }
+.exam-btn { min-width: 170px; }
+.exam-status { font-family: 'Share Tech Mono', monospace; font-size: 12px; color: var(--grey); margin-bottom: 20px; }
+.exam-container { background: rgba(2,8,16,0.95); border: 1px solid rgba(0,170,255,0.1); padding: 24px; margin-top: 12px; display: grid; gap: 18px; }
+.exam-question { padding: 20px; background: rgba(0,170,255,0.03); border: 1px solid rgba(0,170,255,0.1); }
+.exam-question h3 { font-family: 'Orbitron', sans-serif; font-size: 16px; margin-bottom: 12px; color: var(--white); }
+.exam-option { display: block; margin-bottom: 12px; padding: 14px 16px; border: 1px solid rgba(0,170,255,0.12); border-radius: 8px; background: rgba(0,170,255,0.04); color: var(--grey); cursor: pointer; transition: all 0.2s; }
+.exam-option:hover { background: rgba(0,170,255,0.08); }
+.exam-option input { margin-right: 12px; accent-color: var(--blue); }
+.exam-submit { margin-top: 8px; align-self: flex-start; }
+.exam-result { padding: 24px; background: rgba(0,170,255,0.05); border: 1px solid rgba(0,170,255,0.15); color: var(--white); font-family: 'Share Tech Mono', monospace; font-size: 13px; }
+.exam-leaderboard { background: rgba(0,170,255,0.03); border: 1px solid rgba(0,170,255,0.1); padding: 22px; margin-top: 20px; }
+.leaderboard-header { font-family: 'Orbitron', sans-serif; font-size: 13px; color: var(--blue); margin-bottom: 12px; text-transform: uppercase; letter-spacing: 2px; }
+.leaderboard-list { display: grid; gap: 10px; }
+.leaderboard-item { display: flex; justify-content: space-between; gap: 12px; padding: 12px 16px; background: rgba(2,10,20,0.9); border: 1px solid rgba(0,170,255,0.08); border-radius: 10px; font-size: 13px; }
+.leaderboard-item span { color: var(--grey); }
+.hidden { display: none; }
 .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; margin-top: 8px; align-items: start; }
 .contact-info p { color: var(--grey); font-size: 15px; line-height: 1.8; margin-bottom: 24px; }
 .contact-info p strong { color: var(--white); }
