@@ -48,8 +48,14 @@
         <div id="authStatus" class="exam-auth-status">Sign in with Google to save your score.</div>
       </div>
       <p class="feature-desc">Try a live exam demo using Firebase Auth and Firestore. A static GitHub Pages site can still host the frontend while Firebase stores results.</p>
+      <div class="exam-login-form hidden" id="examLoginForm" style="background: rgba(2,8,16,0.95); border: 1px solid rgba(0,170,255,0.1); padding: 20px; margin-bottom: 20px;">
+        <input type="text" id="examLoginUsername" class="exam-input" placeholder="Discord Username" style="display:block; width:100%; padding:10px; margin-bottom:12px; background:rgba(0,170,255,0.05); border:1px solid rgba(0,170,255,0.2); color:var(--white); font-family:'Rajdhani',sans-serif; font-size:13px;"/>
+        <input type="password" id="examLoginPassword" class="exam-input" placeholder="Password" style="display:block; width:100%; padding:10px; margin-bottom:12px; background:rgba(0,170,255,0.05); border:1px solid rgba(0,170,255,0.2); color:var(--white); font-family:'Rajdhani',sans-serif; font-size:13px;"/>
+        <button class="btn-primary" id="examLoginBtn" style="width:100%; padding:10px;">Log In</button>
+        <div id="examLoginError" style="color:#ff6464; font-size:12px; margin-top:10px; text-align:center; display:none;"></div>
+      </div>
       <div class="exam-controls">
-        <button class="btn-primary exam-btn" id="signInBtn">Sign in with Google</button>
+        <button class="btn-primary exam-btn" id="signInBtn">Log In</button>
         <button class="btn-secondary exam-btn" id="startExamBtn" disabled>Start Exam</button>
       </div>
       <div id="examStatus" class="exam-status">Ready when you're ready.</div>

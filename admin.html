@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Admin Panel — The Prep Axiom Foundry</title>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700;900&family=Rajdhani:wght@300;400;500;600&family=Share+Tech+Mono&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="styles.css"/>
+  <style>
+    #admin-container { max-width: 600px; margin: 80px auto; padding: 40px; }
+    .admin-section { background: rgba(3,13,26,0.9); border: 1px solid rgba(0,170,255,0.12); padding: 30px; margin-bottom: 30px; }
+    .admin-input { background: rgba(2,8,16,0.95); border: 1px solid rgba(0,170,255,0.2); padding: 12px 16px; font-family: 'Rajdhani', sans-serif; color: var(--white); margin-bottom: 12px; width: 100%; font-size: 14px; }
+    .admin-input::placeholder { color: rgba(122,154,181,0.6); }
+    .admin-label { font-family: 'Share Tech Mono', monospace; font-size: 11px; color: var(--blue); letter-spacing: 2px; text-transform: uppercase; margin-bottom: 8px; display: block; }
+    .user-item { background: rgba(2,8,16,0.9); border: 1px solid rgba(0,170,255,0.1); padding: 16px; margin-bottom: 10px; display: flex; justify-content: space-between; align-items: center; }
+    .user-info { flex: 1; }
+    .user-email { font-family: 'Orbitron', sans-serif; font-size: 13px; color: var(--white); }
+    .user-name { font-family: 'Share Tech Mono', monospace; font-size: 11px; color: var(--grey); margin-top: 4px; }
+    .delete-btn { background: rgba(255,100,100,0.2); border: 1px solid rgba(255,100,100,0.4); color: #ff6464; padding: 6px 12px; font-size: 11px; cursor: pointer; font-family: 'Orbitron', sans-serif; }
+    .delete-btn:hover { background: rgba(255,100,100,0.3); }
+    .admin-msg { padding: 14px; background: rgba(0,170,255,0.08); border-left: 2px solid var(--blue); color: var(--grey); font-family: 'Share Tech Mono', monospace; font-size: 12px; margin-bottom: 16px; }
+  </style>
+</head>
+<body>
+<div id="particles"></div>
+
+<aside id="sidebar">
+  <div class="logo-wrap">
+    <div class="logo-text">PREP AXIOM<br>FOUNDRY</div>
+    <div class="logo-sub">// ADMIN</div>
+  </div>
+  <nav>
+    <a href="index.html"><span class="nav-icon">⬡</span>Home</a>
+    <a href="admin.html"><span class="nav-icon">⚙️</span>Admin</a>
+    <a href="exams.html"><span class="nav-icon">🧪</span>Exams</a>
+  </nav>
+  <div class="sidebar-footer">
+    <button id="adminLogoutBtn" style="width:100%; padding:12px; background:var(--blue); color:var(--black); border:none; font-family:'Orbitron',sans-serif; font-size:11px; font-weight:700; letter-spacing:2px; text-transform:uppercase; cursor:pointer;">Log Out</button>
+  </div>
+</aside>
+
+<button id="hamburger" aria-label="Menu"><span></span><span></span><span></span></button>
+
+<main id="main">
+  <div id="admin-login-screen" class="admin-section" style="text-align:center;">
+    <h2 style="font-family:'Orbitron',sans-serif; font-size:24px; color:var(--blue); margin-bottom:24px;">Admin Login</h2>
+    <label class="admin-label">Master Password</label>
+    <input type="password" id="adminPassword" class="admin-input" placeholder="Enter admin password"/>
+    <button class="btn-primary" id="adminLoginBtn" style="width:100%; margin-top:16px;">Sign In</button>
+    <div id="adminLoginMsg" class="admin-msg" style="display:none; margin-top:16px;"></div>
+  </div>
+
+  <div id="admin-panel" style="display:none;">
+    <div class="admin-section">
+      <h3 style="font-family:'Orbitron',sans-serif; font-size:16px; color:var(--blue); margin-bottom:20px;">Add New Exam User</h3>
+      <label class="admin-label">Discord Username</label>
+      <input type="text" id="newUserUsername" class="admin-input" placeholder="auvalen"/>
+      <label class="admin-label">Password</label>
+      <input type="password" id="newUserPassword" class="admin-input" placeholder="Password"/>
+      <label class="admin-label">Display Name</label>
+      <input type="text" id="newUserName" class="admin-input" placeholder="John Doe"/>
+      <button class="btn-primary" id="addUserBtn" style="width:100%; margin-top:16px;">Add User</button>
+      <div id="addUserMsg" class="admin-msg" style="display:none; margin-top:16px;"></div>
+    </div>
+
+    <div class="admin-section">
+      <h3 style="font-family:'Orbitron',sans-serif; font-size:16px; color:var(--blue); margin-bottom:20px;">Registered Users</h3>
+      <div id="usersList" style="max-height:400px; overflow-y:auto;"></div>
+    </div>
+  </div>
+</main>
+
+<script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-firestore-compat.js"></script>
+<script>
+// Initialize Firebase
+var firebaseConfig = {
+  apiKey: "AIzaSyBuculpQXW1j_2eaWSOhO5mer--XwcwkmE",
+  authDomain: "prepaxiomfoundry-d4a79.firebaseapp.com",
+  projectId: "prepaxiomfoundry-d4a79",
+  storageBucket: "prepaxiomfoundry-d4a79.firebasestorage.app",
+  messagingSenderId: "851208226756",
+  appId: "1:851208226756:web:5bdde19467ddf9e0eb4691"
+};
+firebase.initializeApp(firebaseConfig);
+var db = firebase.firestore();
+
+// Admin credentials (stored in sessionStorage after login)
+var ADMIN_PASSWORD = 'admin123'; // Change this to your master password
+var adminLoggedIn = sessionStorage.getItem('adminLoggedIn') === 'true';
+
+var loginScreen = document.getElementById('admin-login-screen');
+var adminPanel = document.getElementById('admin-panel');
+var adminLoginBtn = document.getElementById('adminLoginBtn');
+var adminLogoutBtn = document.getElementById('adminLogoutBtn');
+var adminPasswordInput = document.getElementById('adminPassword');
+var adminLoginMsg = document.getElementById('adminLoginMsg');
+var addUserBtn = document.getElementById('addUserBtn');
+var addUserMsg = document.getElementById('addUserMsg');
+var usersList = document.getElementById('usersList');
+
+// Show/hide admin panel based on login state
+function updateAdminUI() {
+  if (adminLoggedIn) {
+    loginScreen.style.display = 'none';
+    adminPanel.style.display = 'block';
+    loadUsers();
+  } else {
+    loginScreen.style.display = 'block';
+    adminPanel.style.display = 'none';
+  }
+}
+
+adminLoginBtn.addEventListener('click', function() {
+  if (adminPasswordInput.value === ADMIN_PASSWORD) {
+    sessionStorage.setItem('adminLoggedIn', 'true');
+    adminLoggedIn = true;
+    updateAdminUI();
+    adminLoginMsg.textContent = 'Logged in successfully.';
+    adminLoginMsg.style.display = 'block';
+  } else {
+    adminLoginMsg.textContent = 'Incorrect password.';
+    adminLoginMsg.style.display = 'block';
+    adminLoginMsg.style.borderColor = '#ff6464';
+    adminLoginMsg.style.color = '#ff6464';
+    adminLoginMsg.style.background = 'rgba(255,100,100,0.08)';
+  }
+});
+
+adminLogoutBtn.addEventListener('click', function() {
+  sessionStorage.removeItem('adminLoggedIn');
+  adminLoggedIn = false;
+  adminPasswordInput.value = '';
+  updateAdminUI();
+});
+
+addUserBtn.addEventListener('click', function() {
+  var username = document.getElementById('newUserUsername').value.trim();
+  var password = document.getElementById('newUserPassword').value.trim();
+  var name = document.getElementById('newUserName').value.trim();
+
+  if (!username || !password || !name) {
+    addUserMsg.textContent = 'Please fill in all fields.';
+    addUserMsg.style.display = 'block';
+    return;
+  }
+
+  db.collection('registeredUsers').add({
+    username: username,
+    password: password,
+    name: name,
+    createdAt: firebase.firestore.FieldValue.serverTimestamp()
+  }).then(function() {
+    addUserMsg.textContent = 'User added successfully!';
+    addUserMsg.style.display = 'block';
+    document.getElementById('newUserUsername').value = '';
+    document.getElementById('newUserPassword').value = '';
+    document.getElementById('newUserName').value = '';
+    loadUsers();
+  }).catch(function(err) {
+    addUserMsg.textContent = 'Error adding user: ' + err.message;
+    addUserMsg.style.display = 'block';
+  });
+});
+
+function loadUsers() {
+  db.collection('registeredUsers').get().then(function(snapshot) {
+    usersList.innerHTML = '';
+    if (snapshot.empty) {
+      usersList.innerHTML = '<div class="admin-msg">No users registered yet.</div>';
+      return;
+    }
+    snapshot.forEach(function(doc) {
+      var data = doc.data();
+      var item = document.createElement('div');
+      item.className = 'user-item';
+      item.innerHTML = '<div class="user-info"><div class="user-email">' + data.username + '</div><div class="user-name">' + data.name + '</div></div>';
+      var deleteBtn = document.createElement('button');
+      deleteBtn.className = 'delete-btn';
+      deleteBtn.textContent = 'Delete';
+      deleteBtn.addEventListener('click', function() {
+        db.collection('registeredUsers').doc(doc.id).delete().then(function() {
+          loadUsers();
+        });
+      });
+      item.appendChild(deleteBtn);
+      usersList.appendChild(item);
+    });
+  });
+}
+
+updateAdminUI();
+
+// Particles animation (reuse from main script)
+var container = document.getElementById('particles');
+if (container) {
+  for (var i = 0; i < 35; i++) {
+    var p = document.createElement('div');
+    p.className = 'particle';
+    var size = Math.random() * 3 + 1;
+    p.style.cssText = 'width:' + size + 'px;height:' + size + 'px;left:' + (Math.random()*100) + '%;animation-duration:' + (Math.random()*20+15) + 's;animation-delay:' + (Math.random()*20) + 's;';
+    container.appendChild(p);
+  }
+}
+
+// Hamburger menu
+var hamburger = document.getElementById('hamburger');
+var sidebar = document.getElementById('sidebar');
+if (hamburger && sidebar) {
+  hamburger.addEventListener('click', function() { sidebar.classList.toggle('open'); });
+  document.addEventListener('click', function(e) {
+    if (!sidebar.contains(e.target) && !hamburger.contains(e.target))
+      sidebar.classList.remove('open');
+  });
+}
+</script>
+</body>
+</html>

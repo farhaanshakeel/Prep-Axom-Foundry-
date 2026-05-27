@@ -253,14 +253,17 @@ document.querySelectorAll('a[href^="#"]').forEach(function(a) {
 
   function updateAuthUi() {
     if (!authStatus) return;
+    var loginForm = document.getElementById('examLoginForm');
     if (currentUser) {
-      authStatus.textContent = 'Signed in as ' + currentUser.displayName;
-      signInBtn.textContent = 'Sign out';
+      authStatus.textContent = 'Signed in as ' + currentUser.name;
+      signInBtn.textContent = 'Log Out';
       startExamBtn.disabled = false;
+      if (loginForm) loginForm.classList.add('hidden');
     } else {
-      authStatus.textContent = 'Sign in with Google to save your score.';
-      signInBtn.textContent = 'Sign in with Google';
-      startExamBtn.disabled = false;
+      authStatus.textContent = 'Log in with your credentials to take the exam.';
+      signInBtn.textContent = 'Log In';
+      startExamBtn.disabled = true;
+      if (loginForm) loginForm.classList.remove('hidden');
     }
   }
 
@@ -342,11 +345,12 @@ document.querySelectorAll('a[href^="#"]').forEach(function(a) {
       examResult.classList.remove('hidden');
       examResult.textContent = message;
     }
-    showMessage('Exam complete. ' + (currentUser ? 'Saving score...' : 'Sign in to save your result.'));
+    showMessage('Exam complete. ' + (currentUser ? 'Saving score...' : 'Log in to save your result.'));
     if (currentUser && window.db) {
       window.db.collection('examAttempts').add({
         uid: currentUser.uid,
-        name: currentUser.displayName || 'Anonymous',
+        name: currentUser.name,
+        username: currentUser.username,
         score: score,
         timestamp: firebase.firestore.FieldValue.serverTimestamp()
       }).then(function() {
@@ -420,18 +424,82 @@ document.querySelectorAll('a[href^="#"]').forEach(function(a) {
 
     firebase.initializeApp(firebaseConfig);
     window.db = firebase.firestore();
-    var provider = new firebase.auth.GoogleAuthProvider();
 
+    // Email/Password Login Handler
     signInBtn.addEventListener('click', function() {
       if (currentUser) {
-        firebase.auth().signOut();
+        // Log out
+        currentUser = null;
+        updateAuthUi();
+        showMessage('Logged out.');
       } else {
-        firebase.auth().signInWithPopup(provider).catch(function(err) {
-          console.error('Sign in failed:', err);
-          showMessage('Google sign-in failed. Please try again.');
-        });
+        // Toggle login form visibility
+        var loginForm = document.getElementById('examLoginForm');
+        if (loginForm.classList.contains('hidden')) {
+          loginForm.classList.remove('hidden');
+        } else {
+          loginForm.classList.add('hidden');
+        }
       }
     });
+
+    // Handle login form submission
+    var examLoginBtn = document.getElementById('examLoginBtn');
+    var examLoginUsername = document.getElementById('examLoginUsername');
+    var examLoginPassword = document.getElementById('examLoginPassword');
+    var examLoginError = document.getElementById('examLoginError');
+
+    if (examLoginBtn) {
+      examLoginBtn.addEventListener('click', function() {
+        var username = examLoginUsername.value.trim();
+        var password = examLoginPassword.value.trim();
+
+        if (!username || !password) {
+          examLoginError.textContent = 'Please enter username and password.';
+          examLoginError.style.display = 'block';
+          return;
+        }
+
+        // Query registeredUsers collection
+        window.db.collection('registeredUsers').where('username', '==', username).where('password', '==', password).get().then(function(snapshot) {
+          if (snapshot.empty) {
+            examLoginError.textContent = 'Invalid username or password.';
+            examLoginError.style.display = 'block';
+            return;
+          }
+
+          var userData = snapshot.docs[0].data();
+          currentUser = {
+            uid: snapshot.docs[0].id,
+            name: userData.name,
+            username: userData.username
+          };
+          sessionStorage.setItem('currentUser', JSON.stringify(currentUser));
+          updateAuthUi();
+          showMessage('Logged in successfully!');
+          examLoginError.style.display = 'none';
+          examLoginUsername.value = '';
+          examLoginPassword.value = '';
+          var loginForm = document.getElementById('examLoginForm');
+          if (loginForm) loginForm.classList.add('hidden');
+          loadLeaderboard();
+        }).catch(function(err) {
+          examLoginError.textContent = 'Error: ' + err.message;
+          examLoginError.style.display = 'block';
+        });
+      });
+    }
+
+    // Check if user is already logged in from sessionStorage
+    var storedUser = sessionStorage.getItem('currentUser');
+    if (storedUser) {
+      currentUser = JSON.parse(storedUser);
+      updateAuthUi();
+      loadLeaderboard();
+    } else {
+      updateAuthUi();
+      loadLeaderboard();
+    }
 
     startExamBtn.addEventListener('click', function() {
       remainingSeconds = 300;
@@ -439,16 +507,6 @@ document.querySelectorAll('a[href^="#"]').forEach(function(a) {
       renderExam();
       startTimer();
     });
-
-    firebase.auth().onAuthStateChanged(function(user) {
-      currentUser = user;
-      updateAuthUi();
-      if (user) {
-        loadLeaderboard();
-      }
-    });
-
-    loadLeaderboard();
   }
 
   if (document.readyState === 'loading') {
