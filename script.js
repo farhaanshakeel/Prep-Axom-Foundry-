@@ -211,6 +211,7 @@ document.querySelectorAll('a[href^="#"]').forEach(function(a) {
   var currentTimer = null;
   var remainingSeconds = 300;
   var selectedAnswers = {};
+  var currentQuestionIndex = 0;
   var examQuestions = [
     {
       id: 'q1',
@@ -255,15 +256,15 @@ document.querySelectorAll('a[href^="#"]').forEach(function(a) {
     if (!authStatus) return;
     var loginForm = document.getElementById('examLoginForm');
     if (currentUser) {
-      authStatus.textContent = 'Signed in as ' + currentUser.name;
+      authStatus.textContent = 'Logged in as ' + currentUser.name;
       signInBtn.textContent = 'Log Out';
       startExamBtn.disabled = false;
-      if (loginForm) loginForm.classList.add('hidden');
+      if (loginForm) loginForm.style.display = 'none';
     } else {
       authStatus.textContent = 'Log in with your credentials to take the exam.';
       signInBtn.textContent = 'Log In';
       startExamBtn.disabled = true;
-      if (loginForm) loginForm.classList.remove('hidden');
+      if (loginForm) loginForm.style.display = 'none';
     }
   }
 
@@ -281,30 +282,80 @@ document.querySelectorAll('a[href^="#"]').forEach(function(a) {
     timerBar.textContent = formatTime(remainingSeconds);
     examContainer.appendChild(timerBar);
 
-    examQuestions.forEach(function(question, index) {
-      var q = document.createElement('div');
-      q.className = 'exam-question';
-      q.innerHTML = '<h3>Question ' + (index + 1) + '</h3>' +
-        '<p>' + question.text + '</p>';
+    // Progress indicator
+    var progressBar = document.createElement('div');
+    progressBar.style.cssText = 'background:rgba(0,170,255,0.1); border:1px solid rgba(0,170,255,0.2); height:8px; margin:15px 0; border-radius:4px; overflow:hidden;';
+    var progressFill = document.createElement('div');
+    progressFill.style.cssText = 'background:#0af; height:100%; width:' + ((currentQuestionIndex + 1) / examQuestions.length * 100) + '%;';
+    progressBar.appendChild(progressFill);
+    examContainer.appendChild(progressBar);
+    
+    var progressText = document.createElement('div');
+    progressText.style.cssText = 'font-size:11px; color:rgba(122,154,181,0.7); margin-bottom:20px; text-align:center;';
+    progressText.textContent = 'Question ' + (currentQuestionIndex + 1) + ' of ' + examQuestions.length;
+    examContainer.appendChild(progressText);
 
-      question.options.forEach(function(option, optIndex) {
-        var label = document.createElement('label');
-        label.className = 'exam-option';
-        label.innerHTML = '<input type="radio" name="' + question.id + '" value="' + optIndex + '"> ' + option;
-        label.addEventListener('click', function() {
-          selectedAnswers[question.id] = optIndex;
-        });
-        q.appendChild(label);
+    // Display current question only
+    var question = examQuestions[currentQuestionIndex];
+    var q = document.createElement('div');
+    q.className = 'exam-question';
+    q.innerHTML = '<h3>Question ' + (currentQuestionIndex + 1) + '</h3>' +
+      '<p>' + question.text + '</p>';
+
+    question.options.forEach(function(option, optIndex) {
+      var label = document.createElement('label');
+      label.className = 'exam-option';
+      label.innerHTML = '<input type="radio" name="' + question.id + '" value="' + optIndex + '"> ' + option;
+      label.addEventListener('click', function() {
+        selectedAnswers[question.id] = optIndex;
+        // Auto-advance to next question
+        setTimeout(function() {
+          if (currentQuestionIndex < examQuestions.length - 1) {
+            currentQuestionIndex++;
+            renderExam();
+          }
+        }, 300);
       });
-      examContainer.appendChild(q);
+      q.appendChild(label);
     });
+    examContainer.appendChild(q);
 
-    var submitBtn = document.createElement('button');
-    submitBtn.className = 'btn-primary exam-submit';
-    submitBtn.textContent = 'Submit Exam';
-    submitBtn.addEventListener('click', submitExam);
-    examContainer.appendChild(submitBtn);
-    showMessage('Exam started. You have 5 minutes. Good luck!');
+    // Navigation buttons
+    var navDiv = document.createElement('div');
+    navDiv.style.cssText = 'display:flex; gap:10px; margin-top:20px; justify-content:space-between;';
+    
+    if (currentQuestionIndex > 0) {
+      var prevBtn = document.createElement('button');
+      prevBtn.className = 'btn-secondary exam-submit';
+      prevBtn.textContent = '← Previous';
+      prevBtn.addEventListener('click', function() {
+        if (currentQuestionIndex > 0) {
+          currentQuestionIndex--;
+          renderExam();
+        }
+      });
+      navDiv.appendChild(prevBtn);
+    }
+
+    if (currentQuestionIndex < examQuestions.length - 1) {
+      var nextBtn = document.createElement('button');
+      nextBtn.className = 'btn-secondary exam-submit';
+      nextBtn.textContent = 'Next →';
+      nextBtn.addEventListener('click', function() {
+        currentQuestionIndex++;
+        renderExam();
+      });
+      navDiv.appendChild(nextBtn);
+    } else {
+      var submitBtn = document.createElement('button');
+      submitBtn.className = 'btn-primary exam-submit';
+      submitBtn.textContent = 'Submit Exam';
+      submitBtn.addEventListener('click', submitExam);
+      navDiv.appendChild(submitBtn);
+    }
+    
+    examContainer.appendChild(navDiv);
+    showMessage('Question ' + (currentQuestionIndex + 1) + '. Answer and it will auto-advance. Good luck!');
   }
 
   function formatTime(seconds) {
@@ -345,6 +396,7 @@ document.querySelectorAll('a[href^="#"]').forEach(function(a) {
       examResult.classList.remove('hidden');
       examResult.textContent = message;
     }
+    examContainer.classList.add('hidden');
     showMessage('Exam complete. ' + (currentUser ? 'Saving score...' : 'Log in to save your result.'));
     if (currentUser && window.db) {
       window.db.collection('examAttempts').add({
@@ -361,6 +413,7 @@ document.querySelectorAll('a[href^="#"]').forEach(function(a) {
         showMessage('Exam complete. Failed to save score to Firebase.');
       });
     }
+    currentQuestionIndex = 0;
   }
 
   function loadLeaderboard() {
@@ -430,15 +483,16 @@ document.querySelectorAll('a[href^="#"]').forEach(function(a) {
       if (currentUser) {
         // Log out
         currentUser = null;
+        sessionStorage.removeItem('currentUser');
         updateAuthUi();
         showMessage('Logged out.');
       } else {
         // Toggle login form visibility
         var loginForm = document.getElementById('examLoginForm');
-        if (loginForm.classList.contains('hidden')) {
-          loginForm.classList.remove('hidden');
+        if (loginForm.style.display === 'none' || loginForm.style.display === '') {
+          loginForm.style.display = 'block';
         } else {
-          loginForm.classList.add('hidden');
+          loginForm.style.display = 'none';
         }
       }
     });
@@ -481,7 +535,7 @@ document.querySelectorAll('a[href^="#"]').forEach(function(a) {
           examLoginUsername.value = '';
           examLoginPassword.value = '';
           var loginForm = document.getElementById('examLoginForm');
-          if (loginForm) loginForm.classList.add('hidden');
+          if (loginForm) loginForm.style.display = 'none';
           loadLeaderboard();
         }).catch(function(err) {
           examLoginError.textContent = 'Error: ' + err.message;
@@ -504,6 +558,7 @@ document.querySelectorAll('a[href^="#"]').forEach(function(a) {
     startExamBtn.addEventListener('click', function() {
       remainingSeconds = 300;
       selectedAnswers = {};
+      currentQuestionIndex = 0;
       renderExam();
       startTimer();
     });
