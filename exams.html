@@ -23,6 +23,20 @@
     <a href="index.html#about"><span class="nav-icon">◈</span>About us</a>
   </nav>
   <div class="sidebar-footer">
+    <div id="globalLoginWidget" style="margin-bottom: 12px;">
+      <div id="globalLoginForm" style="display:none;">
+        <input type="text" id="globalLoginUsername" placeholder="Discord Username" style="display:block; width:100%; padding:8px; margin-bottom:8px; background:rgba(0,170,255,0.05); border:1px solid rgba(0,170,255,0.2); color:var(--white); font-family:'Rajdhani',sans-serif; font-size:12px; box-sizing:border-box;"/>
+        <input type="password" id="globalLoginPassword" placeholder="Password" style="display:block; width:100%; padding:8px; margin-bottom:8px; background:rgba(0,170,255,0.05); border:1px solid rgba(0,170,255,0.2); color:var(--white); font-family:'Rajdhani',sans-serif; font-size:12px; box-sizing:border-box;"/>
+        <button id="globalLoginBtn" style="width:100%; padding:8px; background:var(--blue); color:var(--black); border:none; font-family:'Orbitron',sans-serif; font-size:11px; font-weight:700; cursor:pointer; margin-bottom:6px;">Sign In</button>
+        <button id="globalLoginCancel" style="width:100%; padding:6px; background:transparent; color:var(--blue); border:1px solid var(--blue); font-family:'Rajdhani',sans-serif; font-size:11px; cursor:pointer;">Cancel</button>
+        <div id="globalLoginError" style="color:#ff6464; font-size:10px; margin-top:6px; text-align:center; display:none;"></div>
+      </div>
+      <div id="globalLoginStatus" style="display:none; text-align:center;">
+        <div style="font-family:'Rajdhani',sans-serif; font-size:11px; color:var(--grey); margin-bottom:8px;">Logged in as <strong id="globalUserDisplay"></strong></div>
+        <button id="globalLogoutBtn" style="width:100%; padding:8px; background:rgba(255,100,100,0.2); color:#ff6464; border:1px solid #ff6464; font-family:'Orbitron',sans-serif; font-size:11px; font-weight:700; cursor:pointer;">Log Out</button>
+      </div>
+      <button id="globalLoginToggle" style="width:100%; padding:8px; background:var(--blue); color:var(--black); border:none; font-family:'Orbitron',sans-serif; font-size:11px; font-weight:700; letter-spacing:1px; text-transform:uppercase; cursor:pointer; margin-bottom:12px;">Log In</button>
+    </div>
     <a href="https://discord.gg/U4dCDkdUHw" class="discord-btn" target="_blank">Join Discord →</a>
   </div>
 </aside>

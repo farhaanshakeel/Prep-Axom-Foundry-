@@ -39,6 +39,122 @@ window.addEventListener('load', function() {
   });
 });
 
+// ── GLOBAL LOGIN SYSTEM
+(function() {
+  var firebaseConfig = {
+    apiKey: "AIzaSyBuculpQXW1j_2eaWSOhO5mer--XwcwkmE",
+    authDomain: "prepaxiomfoundry-d4a79.firebaseapp.com",
+    projectId: "prepaxiomfoundry-d4a79",
+    storageBucket: "prepaxiomfoundry-d4a79.firebasestorage.app",
+    messagingSenderId: "851208226756",
+    appId: "1:851208226756:web:5bdde19467ddf9e0eb4691"
+  };
+
+  if (firebase && !firebase.apps.length) {
+    firebase.initializeApp(firebaseConfig);
+  }
+  window.db = firebase.firestore();
+  window.globalCurrentUser = null;
+
+  // Check if already logged in
+  var storedUser = sessionStorage.getItem('currentUser');
+  if (storedUser) {
+    window.globalCurrentUser = JSON.parse(storedUser);
+  }
+
+  function updateGlobalLoginUI() {
+    var loginWidget = document.getElementById('globalLoginWidget');
+    var loginForm = document.getElementById('globalLoginForm');
+    var loginToggle = document.getElementById('globalLoginToggle');
+    var loginStatus = document.getElementById('globalLoginStatus');
+    var userDisplay = document.getElementById('globalUserDisplay');
+
+    if (!loginWidget) return;
+
+    if (window.globalCurrentUser) {
+      loginToggle.style.display = 'none';
+      loginForm.style.display = 'none';
+      loginStatus.style.display = 'block';
+      userDisplay.textContent = window.globalCurrentUser.name;
+    } else {
+      loginToggle.style.display = 'block';
+      loginStatus.style.display = 'none';
+      loginForm.style.display = 'none';
+    }
+  }
+
+  // Toggle form visibility
+  document.addEventListener('DOMContentLoaded', function() {
+    var loginToggle = document.getElementById('globalLoginToggle');
+    var loginForm = document.getElementById('globalLoginForm');
+    var loginCancel = document.getElementById('globalLoginCancel');
+    var loginBtn = document.getElementById('globalLoginBtn');
+    var logoutBtn = document.getElementById('globalLogoutBtn');
+    var loginError = document.getElementById('globalLoginError');
+    var usernameInput = document.getElementById('globalLoginUsername');
+    var passwordInput = document.getElementById('globalLoginPassword');
+
+    if (loginToggle) {
+      loginToggle.addEventListener('click', function() {
+        loginForm.style.display = loginForm.style.display === 'none' ? 'block' : 'none';
+      });
+    }
+
+    if (loginCancel) {
+      loginCancel.addEventListener('click', function() {
+        loginForm.style.display = 'none';
+      });
+    }
+
+    if (loginBtn) {
+      loginBtn.addEventListener('click', function() {
+        var username = usernameInput.value.trim();
+        var password = passwordInput.value.trim();
+
+        if (!username || !password) {
+          loginError.textContent = 'Please enter username and password.';
+          loginError.style.display = 'block';
+          return;
+        }
+
+        window.db.collection('registeredUsers').where('username', '==', username).where('password', '==', password).get().then(function(snapshot) {
+          if (snapshot.empty) {
+            loginError.textContent = 'Invalid username or password.';
+            loginError.style.display = 'block';
+            return;
+          }
+
+          var userData = snapshot.docs[0].data();
+          window.globalCurrentUser = {
+            uid: snapshot.docs[0].id,
+            name: userData.name,
+            username: userData.username
+          };
+          sessionStorage.setItem('currentUser', JSON.stringify(window.globalCurrentUser));
+          loginError.style.display = 'none';
+          usernameInput.value = '';
+          passwordInput.value = '';
+          loginForm.style.display = 'none';
+          updateGlobalLoginUI();
+        }).catch(function(err) {
+          loginError.textContent = 'Error: ' + err.message;
+          loginError.style.display = 'block';
+        });
+      });
+    }
+
+    if (logoutBtn) {
+      logoutBtn.addEventListener('click', function() {
+        window.globalCurrentUser = null;
+        sessionStorage.removeItem('currentUser');
+        updateGlobalLoginUI();
+      });
+    }
+
+    updateGlobalLoginUI();
+  });
+})();
+
 // ── PARTICLES
 var container = document.getElementById('particles');
 if (container) {

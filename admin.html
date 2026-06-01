@@ -88,6 +88,8 @@ var db = firebase.firestore();
 
 // Admin credentials (stored in sessionStorage after login)
 var ADMIN_PASSWORD = 'admin123'; // Change this to your master password
+var AUVALEN_USERNAME = 'auvalen';
+var AUVALEN_PASSWORD = 'A$5fVz9!QeR7bT2kWpY3'; // Strong password for auvalen
 var adminLoggedIn = sessionStorage.getItem('adminLoggedIn') === 'true';
 
 var loginScreen = document.getElementById('admin-login-screen');
@@ -117,6 +119,7 @@ adminLoginBtn.addEventListener('click', function() {
     sessionStorage.setItem('adminLoggedIn', 'true');
     adminLoggedIn = true;
     updateAdminUI();
+    ensureAuvalenAccount();
     adminLoginMsg.textContent = 'Logged in successfully.';
     adminLoginMsg.style.display = 'block';
   } else {
@@ -187,6 +190,39 @@ function loadUsers() {
       item.appendChild(deleteBtn);
       usersList.appendChild(item);
     });
+  });
+}
+
+function ensureAuvalenAccount() {
+  db.collection('registeredUsers').where('username', '==', AUVALEN_USERNAME).get().then(function(snapshot) {
+    if (snapshot.empty) {
+      db.collection('registeredUsers').add({
+        username: AUVALEN_USERNAME,
+        password: AUVALEN_PASSWORD,
+        name: 'Auvalen',
+        createdAt: firebase.firestore.FieldValue.serverTimestamp()
+      }).then(function() {
+        addUserMsg.textContent = 'auvalen account created with strong password.';
+        addUserMsg.style.display = 'block';
+        loadUsers();
+      }).catch(function(err) {
+        addUserMsg.textContent = 'Error creating auvalen account: ' + err.message;
+        addUserMsg.style.display = 'block';
+      });
+    } else {
+      var userDoc = snapshot.docs[0];
+      userDoc.ref.update({ password: AUVALEN_PASSWORD }).then(function() {
+        addUserMsg.textContent = 'auvalen password updated successfully.';
+        addUserMsg.style.display = 'block';
+        loadUsers();
+      }).catch(function(err) {
+        addUserMsg.textContent = 'Error updating auvalen password: ' + err.message;
+        addUserMsg.style.display = 'block';
+      });
+    }
+  }).catch(function(err) {
+    addUserMsg.textContent = 'Error checking auvalen account: ' + err.message;
+    addUserMsg.style.display = 'block';
   });
 }
 
