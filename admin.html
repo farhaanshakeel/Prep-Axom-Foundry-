@@ -89,9 +89,9 @@ var firebaseConfig = {
 firebase.initializeApp(firebaseConfig);
 var db = firebase.firestore();
 
-// Admin credentials (stored in sessionStorage after login)
-var ADMIN_PASSWORD = 'admin123'; // Change this to your master password
-var AUVALEN_USERNAME = 'auvalen';
+// Admin sign-in: disabled client-side for security.
+// Admin users must be created in the Firestore console with an `isAdmin: true` flag.
+// Do NOT store a master password or privileged credentials in client-side code.
 var adminLoggedIn = sessionStorage.getItem('adminLoggedIn') === 'true';
 
 var loginScreen = document.getElementById('admin-login-screen');
@@ -117,39 +117,10 @@ function updateAdminUI() {
 }
 
 adminLoginBtn.addEventListener('click', function() {
-  var adminUser = document.getElementById('adminUsername').value.trim();
-  var adminPass = adminPasswordInput.value.trim();
-  if (!adminUser || !adminPass) {
-    adminLoginMsg.textContent = 'Enter username and password.';
-    adminLoginMsg.style.display = 'block';
-    return;
-  }
-
-  if (!db) {
-    adminLoginMsg.textContent = 'Authentication unavailable: Firestore not initialized.';
-    adminLoginMsg.style.display = 'block';
-    return;
-  }
-
-  // Look up admin in registeredUsers collection with isAdmin flag
-  db.collection('registeredUsers').where('username', '==', adminUser).where('password', '==', adminPass).where('isAdmin', '==', true).limit(1).get().then(function(snapshot) {
-    if (!snapshot.empty) {
-      sessionStorage.setItem('adminLoggedIn', 'true');
-      adminLoggedIn = true;
-      updateAdminUI();
-      adminLoginMsg.textContent = 'Logged in successfully.';
-      adminLoginMsg.style.display = 'block';
-    } else {
-      adminLoginMsg.textContent = 'Invalid admin credentials.';
-      adminLoginMsg.style.display = 'block';
-      adminLoginMsg.style.borderColor = '#ff6464';
-      adminLoginMsg.style.color = '#ff6464';
-      adminLoginMsg.style.background = 'rgba(255,100,100,0.08)';
-    }
-  }).catch(function(err) {
-    adminLoginMsg.textContent = 'Error checking admin: ' + err.message;
-    adminLoginMsg.style.display = 'block';
-  });
+  adminLoginMsg.textContent = 'Client-side admin sign-in is disabled for security. Create admin users in the Firestore console with `isAdmin: true` and use server-side authentication.';
+  adminLoginMsg.style.display = 'block';
+  adminLoginMsg.style.borderColor = 'rgba(0,170,255,0.12)';
+  adminLoginMsg.style.color = 'var(--grey)';
 });
 
 adminLogoutBtn.addEventListener('click', function() {
