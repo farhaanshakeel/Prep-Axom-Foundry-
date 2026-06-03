@@ -21,6 +21,26 @@ intents.message_content = True
 
 bot = commands.Bot(command_prefix="!", intents=intents)
 
+
+def admin_check():
+    async def predicate(ctx):
+        # Allow Discord server administrators
+        try:
+            if ctx.author.guild_permissions.administrator:
+                return True
+        except Exception:
+            pass
+
+        # Otherwise check Firestore for a registered user with isAdmin flag matching this discord ID
+        try:
+            docs = db.collection('registeredUsers').where('discordId', '==', str(ctx.author.id)).where('isAdmin', '==', True).limit(1).get()
+            if docs and len(docs) > 0:
+                return True
+        except Exception:
+            pass
+        return False
+    return commands.check(predicate)
+
 # Load cogs
 async def load_cogs():
     cogs_dir = pathlib.Path(__file__).parent / "cogs"
@@ -39,12 +59,46 @@ async def load_cogs():
 async def on_ready():
     print(f"PAF Bot online as {bot.user}")
     print(f"Serving guild ID: {os.getenv('DISCORD_GUILD_ID')}")
+    print(f"Bot ID: {bot.user.id}")
+    
+    # Ensure top-level hybrid commands are added to the bot's command tree.
+    for cmd in [verify_user, check_user, paf_stats, bot_commands]:
+        if not bot.tree.get_command(cmd.name):
+            bot.tree.add_command(cmd)
+            print(f"Added command to tree: {cmd.name}")
+    
+    # Register or sync application (slash) commands for the configured guild only.
     try:
-        bot.tree.clear_commands(guild=None) # Clears local memory
-        await bot.tree.sync()               # Wipes Discord's servers
-        print("💥 SUCCESS: All global slash commands have been wiped clean!")
+        guild_id = os.getenv('DISCORD_GUILD_ID')
+        if guild_id:
+            # Debug: list commands known to the bot before syncing
+            local_cmds = [c.name for c in bot.tree.walk_commands()]
+            print(f"Local command count before sync: {len(local_cmds)} -> {local_cmds}")
+            
+            try:
+                synced = await bot.tree.sync(guild=discord.Object(id=int(guild_id)))
+                print(f"✅ Synced {len(synced)} slash commands to guild {guild_id}: {[s.name for s in synced]}")
+                
+                # Check if sync returned 0 — if so, bot may not have applications.commands scope
+                if len(synced) == 0:
+                    print("\n⚠️  WARNING: No commands were registered! This usually means:")
+                    print("   1. Bot wasn't invited with 'applications.commands' scope")
+                    print("   2. Bot role doesn't have 'Use Application Commands' permission")
+                    print(f"\n📋 Re-invite the bot to {guild_id} with this URL:")
+                    print(f"   https://discord.com/api/oauth2/authorize?client_id={bot.user.id}&scope=bot%20applications.commands&permissions=268435456")
+                    
+            except discord.Forbidden as e:
+                print(f"❌ Permission denied during sync: {e}")
+                print(f"   Ensure the bot has 'Use Application Commands' permission in the guild")
+            except Exception as e:
+                print(f"❌ Error syncing slash commands: {type(e).__name__}: {e}")
+        else:
+            # Fallback: do a global sync (may take up to an hour to propagate)
+            print("No DISCORD_GUILD_ID set; attempting global sync...")
+            synced = await bot.tree.sync()
+            print(f"✅ Performed global slash command sync ({len(synced)} commands)")
     except Exception as e:
-        print(f"Error wiping commands: {e}")
+        print(f"❌ Unexpected error during command sync: {e}")
     
     # Load cogs on startup
     await load_cogs()
@@ -85,10 +139,10 @@ async def assign_paf_role(discord_user_id: str) -> dict:
         return {"success": False, "error": "Bot lacks permissions. Make sure bot role is above PAF Student role in server settings."}
 
 
-@bot.command(name="verify")
-@commands.has_permissions(administrator=True)
+@bot.hybrid_command(name="verify", with_app_command=True)
+@admin_check()
 async def verify_user(ctx, discord_id: str):
-    """Admin command: manually trigger role assignment. Usage: !verify 123456789"""
+    """Admin command: manually trigger role assignment. Usage: /verify 123456789"""
     result = await assign_paf_role(discord_id)
     if result["success"]:
         await ctx.send(f"✅ {result['message']}")
@@ -96,10 +150,10 @@ async def verify_user(ctx, discord_id: str):
         await ctx.send(f"❌ {result['error']}")
 
 
-@bot.command(name="checkuser")
-@commands.has_permissions(administrator=True)
+@bot.hybrid_command(name="checkuser", with_app_command=True)
+@admin_check()
 async def check_user(ctx, discord_id: str):
-    """Check if a Discord ID is verified in Firestore. Usage: !checkuser 123456789"""
+    """Check if a Discord ID is verified in Firestore. Usage: /checkuser 123456789"""
     docs = db.collection("registeredUsers") \
               .where("discordId", "==", discord_id) \
               .limit(1).stream()
@@ -112,14 +166,32 @@ async def check_user(ctx, discord_id: str):
         await ctx.send("No Firestore record found for that Discord ID.")
 
 
-@bot.command(name="pafstats")
-@commands.has_permissions(administrator=True)
+@bot.hybrid_command(name="pafstats", with_app_command=True)
+@admin_check()
 async def paf_stats(ctx):
     """Show count of verified PAF members."""
     verified = db.collection("registeredUsers") \
                  .where("discordVerified", "==", True).stream()
     count = sum(1 for _ in verified)
     await ctx.send(f"Total verified PAF members: **{count}**")
+
+
+@bot.hybrid_command(name="botcommands", with_app_command=True)
+async def bot_commands(ctx):
+    """Show available bot command usage."""
+    commands_list = [
+        "/verify <discord_id> - assign role to a user",
+        "/checkuser <discord_id> - check Firestore verification",
+        "/pafstats - show verified member count",
+        "/pomodo <minutes> <subject> - start a pomodoro",
+        "/pomodo_stop - stop your pomodoro",
+        "/pomodo_stats - view recent stats"
+    ]
+    message = "**PAF Bot Commands**\n" + "\n".join(commands_list)
+    if getattr(ctx, 'interaction', None) is not None:
+        await ctx.interaction.response.send_message(message, ephemeral=True)
+    else:
+        await ctx.send(message)
 
 
 def run_bot():

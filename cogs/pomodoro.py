@@ -15,10 +15,10 @@ class Pomodoro(commands.Cog):
         self.bot = bot
         self.sessions = {}  # {user_id: {"start": time, "duration": secs, "subject": str, "message": Message}}
     
-    @commands.command(name="pomodo")
+    @commands.hybrid_command(name="pomodo", with_app_command=True)
     async def pomodoro(self, ctx, duration: int = 25, subject: str = "General"):
-        """Start a Pomodoro study session. Usage: !pomodo [minutes] [subject]
-        Example: !pomodo 25 Mathematics
+        """Start a Pomodoro study session. Usage: /pomodo [minutes] [subject]
+        Example: /pomodo 25 Mathematics
         """
         user_id = str(ctx.author.id)
         
@@ -77,9 +77,9 @@ class Pomodoro(commands.Cog):
         except Exception as e:
             print(f"Pomodoro timer error: {e}")
     
-    @commands.command(name="pomodo_stop")
+    @commands.hybrid_command(name="pomodo_stop", with_app_command=True)
     async def stop_pomodoro(self, ctx):
-        """Stop your current Pomodoro session. Usage: !pomodo_stop"""
+        """Stop your current Pomodoro session. Usage: /pomodo_stop"""
         user_id = str(ctx.author.id)
         
         if user_id not in self.sessions:
@@ -100,9 +100,9 @@ class Pomodoro(commands.Cog):
         )
         await ctx.send(embed=embed)
     
-    @commands.command(name="pomodo_stats")
+    @commands.hybrid_command(name="pomodo_stats", with_app_command=True)
     async def pomodoro_stats(self, ctx):
-        """View your Pomodoro study statistics. Usage: !pomodo_stats"""
+        """View your Pomodoro study statistics. Usage: /pomodo_stats"""
         user_id = str(ctx.author.id)
         
         try:
