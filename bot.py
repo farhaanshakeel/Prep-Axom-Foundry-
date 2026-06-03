@@ -5,6 +5,7 @@ from firebase_admin import credentials, firestore
 import os
 from dotenv import load_dotenv
 import asyncio
+import pathlib
 
 load_dotenv()
 
@@ -20,6 +21,19 @@ intents.message_content = True
 
 bot = commands.Bot(command_prefix="!", intents=intents)
 
+# Load cogs
+async def load_cogs():
+    cogs_dir = pathlib.Path(__file__).parent / "cogs"
+    for cog_file in cogs_dir.glob("*.py"):
+        if cog_file.name.startswith("_"):
+            continue
+        cog_name = f"cogs.{cog_file.stem}"
+        try:
+            await bot.load_extension(cog_name)
+            print(f"✅ Loaded cog: {cog_name}")
+        except Exception as e:
+            print(f"❌ Failed to load {cog_name}: {e}")
+
 
 @bot.event
 async def on_ready():
@@ -31,6 +45,9 @@ async def on_ready():
         print("💥 SUCCESS: All global slash commands have been wiped clean!")
     except Exception as e:
         print(f"Error wiping commands: {e}")
+    
+    # Load cogs on startup
+    await load_cogs()
 
 
 async def assign_paf_role(discord_user_id: str) -> dict:
