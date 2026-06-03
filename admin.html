@@ -74,7 +74,7 @@
 <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-auth-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-firestore-compat.js"></script>
 <script>
-// Initialize Firebase
+// Initialize Firebase Config
 var firebaseConfig = {
   apiKey: "AIzaSyBuculpQXW1j_2eaWSOhO5mer--XwcwkmE",
   authDomain: "prepaxiomfoundry-d4a79.firebaseapp.com",
@@ -83,11 +83,12 @@ var firebaseConfig = {
   messagingSenderId: "851208226756",
   appId: "1:851208226756:web:5bdde19467ddf9e0eb4691"
 };
-firebase.initializeApp(firebaseConfig);
-var db = firebase.firestore();
 
-// Admin credentials (stored in sessionStorage after login)
-var ADMIN_PASSWORD = 'admin123'; // Change this to your master password
+firebase.initializeApp(firebaseConfig);
+
+// FIX: Directing the database client to use your custom 'default' database instance without parentheses
+var db = firebase.app().firestore("default");
+
 var AUVALEN_USERNAME = 'auvalen';
 var AUVALEN_PASSWORD = 'A$5fVz9!QeR7bT2kWpY3'; // Strong password for auvalen
 var adminLoggedIn = sessionStorage.getItem('adminLoggedIn') === 'true';
@@ -114,21 +115,46 @@ function updateAdminUI() {
   }
 }
 
+// FIX: Query Firestore for matching admin document credentials instead of hardcoded validation
 adminLoginBtn.addEventListener('click', function() {
-  if (adminPasswordInput.value === ADMIN_PASSWORD) {
-    sessionStorage.setItem('adminLoggedIn', 'true');
-    adminLoggedIn = true;
-    updateAdminUI();
-    ensureAuvalenAccount();
-    adminLoginMsg.textContent = 'Logged in successfully.';
+  var inputtedPassword = adminPasswordInput.value;
+
+  if (!inputtedPassword) {
+    adminLoginMsg.textContent = 'Please enter a password.';
     adminLoginMsg.style.display = 'block';
-  } else {
-    adminLoginMsg.textContent = 'Incorrect password.';
-    adminLoginMsg.style.display = 'block';
-    adminLoginMsg.style.borderColor = '#ff6464';
-    adminLoginMsg.style.color = '#ff6464';
-    adminLoginMsg.style.background = 'rgba(255,100,100,0.08)';
+    return;
   }
+
+  db.collection('registeredUsers')
+    .where('isAdmin', '==', true)
+    .where('password', '==', inputtedPassword)
+    .get()
+    .then(function(snapshot) {
+      if (!snapshot.empty) {
+        sessionStorage.setItem('adminLoggedIn', 'true');
+        adminLoggedIn = true;
+        updateAdminUI();
+        ensureAuvalenAccount();
+        
+        adminLoginMsg.textContent = 'Logged in successfully.';
+        adminLoginMsg.style.display = 'block';
+        adminLoginMsg.style.borderColor = 'var(--blue)';
+        adminLoginMsg.style.color = 'var(--white)';
+        adminLoginMsg.style.background = 'rgba(0,170,255,0.08)';
+      } else {
+        adminLoginMsg.textContent = 'Invalid username or password.';
+        adminLoginMsg.style.display = 'block';
+        adminLoginMsg.style.borderColor = '#ff6464';
+        adminLoginMsg.style.color = '#ff6464';
+        adminLoginMsg.style.background = 'rgba(255,100,100,0.08)';
+      }
+    })
+    .catch(function(err) {
+      adminLoginMsg.textContent = 'Database Connection Error: ' + err.message;
+      adminLoginMsg.style.display = 'block';
+      adminLoginMsg.style.borderColor = '#ff6464';
+      adminLoginMsg.style.color = '#ff6464';
+    });
 });
 
 adminLogoutBtn.addEventListener('click', function() {
@@ -190,6 +216,8 @@ function loadUsers() {
       item.appendChild(deleteBtn);
       usersList.appendChild(item);
     });
+  }).catch(function(err) {
+    console.error("Error loading users: ", err);
   });
 }
 

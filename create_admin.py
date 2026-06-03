@@ -37,7 +37,9 @@ def main():
     except ValueError:
         # already initialized in this env; ok
         pass
-    db = firestore.client()
+        
+    # FIX: Explicitly passing your database name 'default' to match your Firebase Console setup
+    db = firestore.client(database_id='default')
 
     doc = {
         'username': args.username,
@@ -68,3 +70,4 @@ def main():
 
 if __name__ == '__main__':
     main()
+    
