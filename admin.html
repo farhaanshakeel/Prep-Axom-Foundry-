@@ -44,13 +44,10 @@
 <main id="main">
   <div id="admin-login-screen" class="admin-section" style="text-align:center;">
     <h2 style="font-family:'Orbitron',sans-serif; font-size:24px; color:var(--blue); margin-bottom:24px;">Admin Login</h2>
-    <label class="admin-label">Admin Username</label>
-    <input type="text" id="adminUsername" class="admin-input" placeholder="admin" style="margin-bottom:12px;"/>
-    <label class="admin-label">Password</label>
+    <label class="admin-label">Master Password</label>
     <input type="password" id="adminPassword" class="admin-input" placeholder="Enter admin password"/>
     <button class="btn-primary" id="adminLoginBtn" style="width:100%; margin-top:16px;">Sign In</button>
     <div id="adminLoginMsg" class="admin-msg" style="display:none; margin-top:16px;"></div>
-    <div class="admin-msg" style="margin-top:10px; font-size:11px;">Admins may sign in with a local admin account (does not require Discord). Create admin users in Firestore with an `isAdmin: true` flag.</div>
   </div>
 
   <div id="admin-panel" style="display:none;">
@@ -77,7 +74,6 @@
 <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-auth-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-firestore-compat.js"></script>
 <script>
-// Initialize Firebase
 var firebaseConfig = {
   apiKey: "AIzaSyBuculpQXW1j_2eaWSOhO5mer--XwcwkmE",
   authDomain: "prepaxiomfoundry-d4a79.firebaseapp.com",
@@ -86,12 +82,18 @@ var firebaseConfig = {
   messagingSenderId: "851208226756",
   appId: "1:851208226756:web:5bdde19467ddf9e0eb4691"
 };
-firebase.initializeApp(firebaseConfig);
-var db = firebase.firestore();
 
-// Admin sign-in: disabled client-side for security.
-// Admin users must be created in the Firestore console with an `isAdmin: true` flag.
-// Do NOT store a master password or privileged credentials in client-side code.
+var app;
+if (!firebase.apps.length) {
+  app = firebase.initializeApp(firebaseConfig);
+} else {
+  app = firebase.app();
+}
+
+var db = app.firestore("default");
+
+var AUVALEN_USERNAME = 'auvalen';
+var AUVALEN_PASSWORD = 'A$5fVz9!QeR7bT2kWpY3';
 var adminLoggedIn = sessionStorage.getItem('adminLoggedIn') === 'true';
 
 var loginScreen = document.getElementById('admin-login-screen');
@@ -104,7 +106,6 @@ var addUserBtn = document.getElementById('addUserBtn');
 var addUserMsg = document.getElementById('addUserMsg');
 var usersList = document.getElementById('usersList');
 
-// Show/hide admin panel based on login state
 function updateAdminUI() {
   if (adminLoggedIn) {
     loginScreen.style.display = 'none';
@@ -117,10 +118,32 @@ function updateAdminUI() {
 }
 
 adminLoginBtn.addEventListener('click', function() {
-  adminLoginMsg.textContent = 'Client-side admin sign-in is disabled for security. Create admin users in the Firestore console with `isAdmin: true` and use server-side authentication.';
-  adminLoginMsg.style.display = 'block';
-  adminLoginMsg.style.borderColor = 'rgba(0,170,255,0.12)';
-  adminLoginMsg.style.color = 'var(--grey)';
+  var inputtedPassword = adminPasswordInput.value;
+  if (!inputtedPassword) {
+    adminLoginMsg.textContent = 'Please enter a password.';
+    adminLoginMsg.style.display = 'block';
+    return;
+  }
+
+  db.collection('registeredUsers')
+    .where('isAdmin', '==', true)
+    .where('password', '==', inputtedPassword)
+    .get()
+    .then(function(snapshot) {
+      if (!snapshot.empty) {
+        sessionStorage.setItem('adminLoggedIn', 'true');
+        adminLoggedIn = true;
+        updateAdminUI();
+        ensureAuvalenAccount();
+      } else {
+        adminLoginMsg.textContent = 'Invalid password configuration.';
+        adminLoginMsg.style.display = 'block';
+      }
+    })
+    .catch(function(err) {
+      adminLoginMsg.textContent = 'Database Error: ' + err.message;
+      adminLoginMsg.style.display = 'block';
+    });
 });
 
 adminLogoutBtn.addEventListener('click', function() {
@@ -182,19 +205,26 @@ function loadUsers() {
       item.appendChild(deleteBtn);
       usersList.appendChild(item);
     });
+  }).catch(function(err) {
+    console.error("Error loading users: ", err);
   });
 }
 
 function ensureAuvalenAccount() {
-  // For safety, do NOT auto-create or overwrite privileged accounts from client-side code.
-  // Please create or update the 'auvalen' account manually in the Firestore console.
-  addUserMsg.textContent = "NOTE: Privileged account setup must be done in Firestore console.";
-  addUserMsg.style.display = 'block';
+  db.collection('registeredUsers').where('username', '==', AUVALEN_USERNAME).get().then(function(snapshot) {
+    if (snapshot.empty) {
+      db.collection('registeredUsers').add({
+        username: AUVALEN_USERNAME,
+        password: AUVALEN_PASSWORD,
+        name: 'Auvalen',
+        createdAt: firebase.firestore.FieldValue.serverTimestamp()
+      }).then(function() { loadUsers(); });
+    }
+  });
 }
 
 updateAdminUI();
 
-// Particles animation (reuse from main script)
 var container = document.getElementById('particles');
 if (container) {
   for (var i = 0; i < 35; i++) {
@@ -206,15 +236,10 @@ if (container) {
   }
 }
 
-// Hamburger menu
 var hamburger = document.getElementById('hamburger');
 var sidebar = document.getElementById('sidebar');
 if (hamburger && sidebar) {
   hamburger.addEventListener('click', function() { sidebar.classList.toggle('open'); });
-  document.addEventListener('click', function(e) {
-    if (!sidebar.contains(e.target) && !hamburger.contains(e.target))
-      sidebar.classList.remove('open');
-  });
 }
 </script>
 </body>
