@@ -319,18 +319,32 @@ function initializeAdminDynamicControlDeck() {
   globalConfigRef.get().then(function(doc) {
     if (doc.exists) {
       var data = doc.data();
-      document.getElementById("sys-maintenance").checked = data.maintenanceMode || false;
-      document.getElementById("sys-banner-text").value = data.bannerNotice?.text || "";
-      document.getElementById("sys-banner-visible").checked = data.bannerNotice?.visible || false;
-      document.getElementById("sys-hero-title").value = data.heroSection?.title || "";
-      document.getElementById("sys-hero-subtitle").value = data.heroSection?.subtitle || "";
+      var mMode = document.getElementById("sys-maintenance");
+      var bText = document.getElementById("sys-banner-text");
+      var bVis = document.getElementById("sys-banner-visible");
+      var hTitle = document.getElementById("sys-hero-title");
+      var hSub = document.getElementById("sys-hero-subtitle");
+
+      if (mMode) mMode.checked = data.maintenanceMode || false;
+      if (bText) bText.value = data.bannerNotice?.text || "";
+      if (bVis) bVis.checked = data.bannerNotice?.visible || false;
+      if (hTitle) hTitle.value = data.heroSection?.title || "";
+      if (hSub) hSub.value = data.heroSection?.subtitle || "";
     }
   }).catch(function(err) { 
     console.error("Link Failure to configuration nodes: ", err); 
   });
+}
 
-  document.getElementById("btn-save-global").onclick = function() {
-    globalSettingsMsg.style.display = "none";
+// FIXED: Global body event listener capturing to ensure elements register actions smoothly
+document.body.addEventListener('click', function(event) {
+  var globalConfigRef = db.collection("siteConfiguration").doc("globalSettings");
+
+  // CASE A: Clicked Commit Settings
+  if (event.target && event.target.id === 'btn-save-global') {
+    event.preventDefault();
+    if (globalSettingsMsg) globalSettingsMsg.style.display = "none";
+    
     var payload = {
       maintenanceMode: document.getElementById("sys-maintenance").checked,
       bannerNotice: {
@@ -345,17 +359,24 @@ function initializeAdminDynamicControlDeck() {
 
     globalConfigRef.set(payload, { merge: true })
       .then(function() {
-        globalSettingsMsg.textContent = "SUCCESS: Global environment records updated.";
-        globalSettingsMsg.style.display = "block";
+        if (globalSettingsMsg) {
+          globalSettingsMsg.textContent = "SUCCESS: Global environment records updated.";
+          globalSettingsMsg.style.display = "block";
+        }
       })
       .catch(function(err) {
-        globalSettingsMsg.textContent = "Error committing changes: " + err.message;
-        globalSettingsMsg.style.display = "block";
+        if (globalSettingsMsg) {
+          globalSettingsMsg.textContent = "Error committing changes: " + err.message;
+          globalSettingsMsg.style.display = "block";
+        }
       });
-  };
+  }
 
-  document.getElementById("btn-deploy-exam").onclick = function() {
-    examDeployMsg.style.display = "none";
+  // CASE B: Clicked Inject Exam Node
+  if (event.target && event.target.id === 'btn-deploy-exam') {
+    event.preventDefault();
+    if (examDeployMsg) examDeployMsg.style.display = "none";
+
     var slug = document.getElementById("exam-slug").value.trim().replace(/\s+/g, '-').toLowerCase();
     var title = document.getElementById("exam-title").value.trim();
     var duration = parseInt(document.getElementById("exam-duration").value) || 0;
@@ -363,8 +384,10 @@ function initializeAdminDynamicControlDeck() {
     var isLive = document.getElementById("exam-live").checked;
 
     if (!slug || !title) {
-      examDeployMsg.textContent = "ABORTED: Slug identifier and Title are missing.";
-      examDeployMsg.style.display = "block";
+      if (examDeployMsg) {
+        examDeployMsg.textContent = "ABORTED: Slug identifier and Title are missing.";
+        examDeployMsg.style.display = "block";
+      }
       return;
     }
 
@@ -379,19 +402,23 @@ function initializeAdminDynamicControlDeck() {
 
     db.collection("examData").doc(slug).set(examPayload)
       .then(function() {
-        examDeployMsg.textContent = "SUCCESS: Exam node [" + title + "] synced onto active layout.";
-        examDeployMsg.style.display = "block";
+        if (examDeployMsg) {
+          examDeployMsg.textContent = "SUCCESS: Exam node [" + title + "] synced.";
+          examDeployMsg.style.display = "block";
+        }
         document.getElementById("exam-slug").value = "";
         document.getElementById("exam-title").value = "";
         document.getElementById("exam-duration").value = "";
         document.getElementById("exam-questions").value = "";
       })
       .catch(function(err) {
-        examDeployMsg.textContent = "Error injecting module: " + err.message;
-        examDeployMsg.style.display = "block";
+        if (examDeployMsg) {
+          examDeployMsg.textContent = "Error injecting module: " + err.message;
+          examDeployMsg.style.display = "block";
+        }
       });
-  };
-}
+  }
+});
 
 // INTERACTIVE WORKSPACE VISIBILITY TOGGLE OPERATOR
 (function() {
