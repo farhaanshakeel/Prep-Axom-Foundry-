@@ -90,6 +90,7 @@ if (!firebase.apps.length) {
   app = firebase.app();
 }
 
+// Binds the admin client to your explicit custom named database instance
 var db = app.firestore("default");
 
 var AUVALEN_USERNAME = 'auvalen';
@@ -141,7 +142,11 @@ adminLoginBtn.addEventListener('click', function() {
       }
     })
     .catch(function(err) {
-      adminLoginMsg.textContent = 'Database Error: ' + err.message;
+      if (err.message && err.message.indexOf('index') > -1) {
+        adminLoginMsg.innerHTML = 'Firestore composite index required. Open your browser console (F12) to click the automatically generated build link.';
+      } else {
+        adminLoginMsg.textContent = 'Database Error: ' + err.message;
+      }
       adminLoginMsg.style.display = 'block';
     });
 });
@@ -191,6 +196,8 @@ function loadUsers() {
     }
     snapshot.forEach(function(doc) {
       var data = doc.data();
+      if (data.isAdmin) return; // Filters out management nodes from client listing tables
+
       var item = document.createElement('div');
       item.className = 'user-item';
       item.innerHTML = '<div class="user-info"><div class="user-email">' + data.username + '</div><div class="user-name">' + data.name + '</div></div>';
