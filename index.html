@@ -5,12 +5,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Prep Axiom Foundry</title>
 
-  <!-- ── SEO META ── -->
   <meta name="description" content="Prep Axiom Foundry — a peer-led global academic community for students serious about olympiad mathematics and physics. Built by students, for students."/>
   <meta name="keywords" content="olympiad, mathematics, physics, study community, IOQM, RMO, IPhO, peer learning, PAF"/>
   <meta name="author" content="Prep Axiom Foundry"/>
 
-  <!-- ── OPEN GRAPH (WhatsApp, Discord, Facebook previews) ── -->
   <meta property="og:title" content="Prep Axiom Foundry"/>
   <meta property="og:description" content="A peer-led global academic community for students serious about olympiad mathematics and physics. Built by students, for students."/>
   <meta property="og:image" content="https://prepaxiomfoundry.in/logo.png"/>
@@ -18,7 +16,6 @@
   <meta property="og:type" content="website"/>
   <meta property="og:site_name" content="Prep Axiom Foundry"/>
 
-  <!-- ── TWITTER CARD ── -->
   <meta name="twitter:card" content="summary_large_image"/>
   <meta name="twitter:title" content="Prep Axiom Foundry"/>
   <meta name="twitter:description" content="A peer-led global academic community for students serious about olympiad mathematics and physics."/>
@@ -29,15 +26,13 @@
 </head>
 <body>
 
-<!-- ══ INTRO SCREEN ══ -->
 <div id="intro-screen">
   <div id="intro-logo">
     <img src="logo.png" alt="PAF Logo" id="intro-img"/>
     <div id="intro-title">Prep Axiom Foundry</div>
     <div id="intro-sub">// EST. 2026 · GLOBAL ACADEMIC GUILD</div>
   </div>
-  <!-- Skip button injected by script.js -->
-</div>
+  </div>
 
 <div id="particles"></div>
 
@@ -113,7 +108,7 @@
       <div class="about-copy">
         <p><strong>Prep Axiom Foundry</strong> is a peer-led academic guild for students preparing for olympiad mathematics, physics, and advanced science. It is built by students, for students.</p>
         <p>Members learn in focused study groups, solve exceptional problems, and take moderated tests while staying supported by mentors and an advocate.</p>
-        <p>We value deep reasoning more than speed, consistency more than flash, and wellbeing more than burnout.</p>
+        <p> We value deep reasoning more than speed, consistency more than flash, and wellbeing more than burnout.</p>
         <div class="about-quote">
           “This is not a tutoring platform. It is a place where serious students shape their own understanding together.”
           <cite>— Auvalen, Founder</cite>
@@ -253,6 +248,29 @@
 <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-auth-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-firestore-compat.js"></script>
+
+<script>
+  var firebaseConfig = {
+    apiKey: "AIzaSyBuculpQXW1j_2eaWSOhO5mer--XwcwkmE",
+    authDomain: "prepaxiomfoundry-d4a79.firebaseapp.com",
+    projectId: "prepaxiomfoundry-d4a79",
+    storageBucket: "prepaxiomfoundry-d4a79.firebasestorage.app",
+    messagingSenderId: "851208226756",
+    appId: "1:851208226756:web:5bdde19467ddf9e0eb4691"
+  };
+
+  // Safe initializing engine wrapper
+  var app;
+  if (!firebase.apps.length) {
+    app = firebase.initializeApp(firebaseConfig);
+  } else {
+    app = firebase.app();
+  }
+  
+  // Explicitly binds the database routing pointer to your database name context
+  window.db = app.firestore("default"); 
+</script>
+
 <script src="script.js"></script>
 </body>
 </html>
