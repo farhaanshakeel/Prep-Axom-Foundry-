@@ -50,10 +50,16 @@ window.addEventListener('load', function() {
     appId: "1:851208226756:web:5bdde19467ddf9e0eb4691"
   };
 
-  if (firebase && !firebase.apps.length) {
+  if (typeof firebase !== 'undefined' && firebase && !firebase.apps.length) {
     firebase.initializeApp(firebaseConfig);
   }
-  window.db = firebase.firestore();
+  // Only expose `db` when Firestore is available. This avoids runtime errors
+  // on pages that don't include the Firebase SDK (e.g., index.html if SDK not added).
+  if (typeof firebase !== 'undefined' && firebase && firebase.firestore) {
+    window.db = firebase.firestore();
+  } else {
+    window.db = null;
+  }
   window.globalCurrentUser = null;
 
   // Check if already logged in
@@ -110,6 +116,12 @@ window.addEventListener('load', function() {
       loginBtn.addEventListener('click', function() {
         var username = usernameInput.value.trim();
         var password = passwordInput.value.trim();
+
+        if (!window.db) {
+          loginError.textContent = 'Authentication unavailable: Firebase not initialized.';
+          loginError.style.display = 'block';
+          return;
+        }
 
         if (!username || !password) {
           loginError.textContent = 'Please enter username and password.';
@@ -397,6 +409,36 @@ document.querySelectorAll('a[href^="#"]').forEach(function(a) {
     timerBar.className = 'exam-status';
     timerBar.textContent = formatTime(remainingSeconds);
     examContainer.appendChild(timerBar);
+
+  // Rounded card glow interaction (click / keyboard)
+  document.addEventListener('DOMContentLoaded', function() {
+    var selectors = '.hof-card, .feature-card, .team-card, .member-card, .hero-card, .grid-card';
+    var cards = document.querySelectorAll(selectors);
+    if (!cards || cards.length === 0) return;
+
+    function triggerGlow(el) {
+      if (!el) return;
+      el.classList.add('glow');
+      if (el._glowTimeout) clearTimeout(el._glowTimeout);
+      el._glowTimeout = setTimeout(function() { el.classList.remove('glow'); }, 800);
+    }
+
+    cards.forEach(function(card) {
+      // make keyboard-focusable if not already
+      if (!card.hasAttribute('tabindex')) card.setAttribute('tabindex', '0');
+
+      card.addEventListener('click', function(e) {
+        triggerGlow(card);
+      });
+
+      card.addEventListener('keydown', function(e) {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          triggerGlow(card);
+        }
+      });
+    });
+  });
 
     // Progress indicator
     var progressBar = document.createElement('div');

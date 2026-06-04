@@ -3,55 +3,50 @@
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>PREP AXIOM FOUNDRY</title>
+  <title>Prep Axiom Foundry</title>
 
-  <!-- ── SEO META ── -->
-  <meta name="description" content="PREP AXIOM FOUNDRY — a peer-led global academic community for students serious about olympiad mathematics and physics. Built by students, for students."/>
+  <meta name="description" content="Prep Axiom Foundry — a peer-led global academic community for students serious about olympiad mathematics and physics. Built by students, for students."/>
   <meta name="keywords" content="olympiad, mathematics, physics, study community, IOQM, RMO, IPhO, peer learning, PAF"/>
-  <meta name="author" content="PREP AXIOM FOUNDRY"/>
+  <meta name="author" content="Prep Axiom Foundry"/>
 
-  <!-- ── OPEN GRAPH (WhatsApp, Discord, Facebook previews) ── -->
-  <meta property="og:title" content="PREP AXIOM FOUNDRY"/>
+  <meta property="og:title" content="Prep Axiom Foundry"/>
   <meta property="og:description" content="A peer-led global academic community for students serious about olympiad mathematics and physics. Built by students, for students."/>
   <meta property="og:image" content="https://prepaxiomfoundry.in/logo.png"/>
   <meta property="og:url" content="https://prepaxiomfoundry.in"/>
   <meta property="og:type" content="website"/>
-  <meta property="og:site_name" content="PREP AXIOM FOUNDRY"/>
+  <meta property="og:site_name" content="Prep Axiom Foundry"/>
 
-  <!-- ── TWITTER CARD ── -->
   <meta name="twitter:card" content="summary_large_image"/>
-  <meta name="twitter:title" content="PREP AXIOM FOUNDRY"/>
+  <meta name="twitter:title" content="Prep Axiom Foundry"/>
   <meta name="twitter:description" content="A peer-led global academic community for students serious about olympiad mathematics and physics."/>
   <meta name="twitter:image" content="https://prepaxiomfoundry.in/logo.png"/>
 
-  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700;900&family=Rajdhani:wght@300;400;500;600&family=Share+Tech+Mono&display=swap" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Mono:wght@300;400;500&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet"/>
   <link rel="stylesheet" href="styles.css"/>
 </head>
 <body>
 
-<!-- ══ INTRO SCREEN ══ -->
 <div id="intro-screen">
   <div id="intro-logo">
     <img src="logo.png" alt="PAF Logo" id="intro-img"/>
-    <div id="intro-title">PREP AXIOM FOUNDRY</div>
+    <div id="intro-title">Prep Axiom Foundry</div>
     <div id="intro-sub">// EST. 2026 · GLOBAL ACADEMIC GUILD</div>
   </div>
-  <!-- Skip button injected by script.js -->
-</div>
+  </div>
 
 <div id="particles"></div>
 
 <aside id="sidebar">
   <div class="logo-wrap">
-    <div class="logo-text">PREP AXIOM<br>FOUNDRY</div>
+    <div class="logo-text">Prep Axiom<br>Foundry</div>
     <div class="logo-sub">// PAF — EST. 2026</div>
   </div>
   <nav>
-    <a href="index.html"><span class="nav-icon">⬡</span>Home</a>
-    <a href="hall-of-fame.html"><span class="nav-icon">🏆</span>Hall of Fame</a>
-    <a href="members.html"><span class="nav-icon">🌟</span>Members</a>
-    <a href="exams.html"><span class="nav-icon">🧪</span>Exams</a>
-    <a href="index.html#about"><span class="nav-icon">◈</span>About us</a>
+    <a href="index.html"><span class="nav-icon">—</span>Home</a>
+    <a href="hall-of-fame.html"><span class="nav-icon">—</span>Hall of Fame</a>
+    <a href="members.html"><span class="nav-icon">—</span>Members</a>
+    <a href="exams.html"><span class="nav-icon">—</span>Exams</a>
+    <a href="index.html#about"><span class="nav-icon">—</span>About us</a>
   </nav>
   <div class="sidebar-footer">
     <div id="globalLoginWidget" style="margin-bottom: 12px;">
@@ -75,199 +70,169 @@
 <button id="hamburger" aria-label="Menu"><span></span><span></span><span></span></button>
 
 <main id="main">
-
-  <!-- ══ HERO ══ -->
   <section id="hero">
-    <div class="hero-grid"></div>
-    <div class="hero-glow"></div>
-    <div class="hero-eyebrow">// Global Academic Guild — Est. 2026</div>
-    <h1 class="hero-title">
-      <div class="line1">THE PREP</div>
-      <div class="line2">AXIOM</div>
-      <div class="line3">FOUNDRY</div>
-    </h1>
-    <p class="hero-tagline"><span>Built By Students.</span> For Students.</p>
-    <div class="hero-cta">
-      <a href="https://discord.gg/U4dCDkdUHw" class="btn-primary" target="_blank">Join The Guild</a>
-      <a href="#about" class="btn-secondary">Learn More</a>
+    <div class="hero-copy">
+      <span class="hero-eyebrow">// ACADEMIC GUILD FOR MATHEMATICS & PHYSICS</span>
+      <h1 class="hero-title">Prepare with <span>Precision</span><br/>Practice with <span>Purpose</span></h1>
+      <p class="hero-text">A student-led community for disciplined olympiad learners. Mentor-guided study groups, solved-problem archives, and a live exam demo built on Firebase.</p>
+      <div class="hero-actions">
+        <a href="https://discord.gg/U4dCDkdUHw" class="btn-primary" target="_blank">Join Discord</a>
+        <a href="#about" class="btn-secondary">Explore PAF</a>
+      </div>
     </div>
-    <div class="hero-stats">
-      <div class="stat"><span class="stat-num" id="counter-problems" data-target="10">0</span><span class="stat-label">Problems Solved</span></div>
+    <div class="hero-details">
+      <article class="hero-card">
+        <span class="hero-card-label">Problems Logged</span>
+        <span class="hero-card-value" id="counter-problems" data-target="4">0</span>
+        <p class="hero-card-copy">A permanent hall of fame for solved problems and partial entries.</p>
+      </article>
+      <article class="hero-card">
+        <span class="hero-card-label">Early Member Spots</span>
+        <span class="hero-card-value">50</span>
+        <p class="hero-card-copy">The first cohort earns a permanent early member badge.</p>
+      </article>
+      <article class="hero-card">
+        <span class="hero-card-label">Exam Demo</span>
+        <span class="hero-card-value">Firebase Live</span>
+        <p class="hero-card-copy">A functioning exam workflow is ready for sign-in and testing.</p>
+      </article>
     </div>
   </section>
 
-  <!-- ══ ABOUT ══ -->
-  <section id="about">
-    <div class="reveal">
-      <div class="section-label">// 01 — About</div>
-      <h2 class="section-title">What Is <span class="accent">PAF?</span></h2>
-      <div class="section-divider"></div>
+  <section id="about" class="section-surface">
+    <div class="section-head">
+      <span class="section-label">// 01 — About</span>
+      <h2 class="section-title">What is <span class="accent">PAF</span>?</h2>
     </div>
     <div class="about-grid">
-      <div class="about-text reveal">
-        <p><strong>The Prep Axiom Foundry</strong> is a peer-led global academic community built for students serious about olympiad and other competitive exams, especially mathematics and physics, including biology and chemistry. <strong>A community of students.</strong></p>
-        <p>Here, students form study groups, teach each other, take moderated tests, and compete in weekly challenges — all while being supported by mentors who have walked the same path.</p>
-        <p>We also believe that academic excellence and mental wellbeing go hand in hand. Our <strong>Student Advocate</strong> is always available — because no student should burn out preparing alone.</p>
+      <div class="about-copy">
+        <p><strong>Prep Axiom Foundry</strong> is a peer-led academic guild for students preparing for olympiad mathematics, physics, and advanced science. It is built by students, for students.</p>
+        <p>Members learn in focused study groups, solve exceptional problems, and take moderated tests while staying supported by mentors and an advocate.</p>
+        <p> We value deep reasoning more than speed, consistency more than flash, and wellbeing more than burnout.</p>
         <div class="about-quote">
-          "PAF was founded by two students — who are aiming higher and are great enthusiasts of science and mathematics. Both wanted a community where students grow together despite having personal family pressures or problems. Now there is."
+          “This is not a tutoring platform. It is a place where serious students shape their own understanding together.”
           <cite>— Auvalen, Founder</cite>
-          <cite>— Nuven, Co-Founder</cite>
         </div>
       </div>
-      <div class="about-visual reveal">
-        <div class="axiom-ring">
-          <div class="orbit-dot"></div><div class="orbit-dot"></div>
-          <div class="orbit-dot"></div><div class="orbit-dot"></div>
-          <div class="axiom-center">PAF</div>
+      <div class="about-stats">
+        <div class="about-stat">
+          <span class="about-stat-number">4</span>
+          <span class="about-stat-label">Featured problems</span>
+        </div>
+        <div class="about-stat">
+          <span class="about-stat-number">1</span>
+          <span class="about-stat-label">Live exam demo</span>
+        </div>
+        <div class="about-stat">
+          <span class="about-stat-number">50</span>
+          <span class="about-stat-label">Early member spots</span>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- ══ FEATURES ══ -->
   <section id="features">
-    <div class="reveal">
-      <div class="section-label">// 02 — Features</div>
-      <h2 class="section-title">What We <span class="accent">Offer</span></h2>
-      <div class="section-divider"></div>
+    <div class="section-head">
+      <span class="section-label">// 02 — Features</span>
+      <h2 class="section-title">What we <span class="accent">offer</span></h2>
     </div>
     <div class="features-grid">
-      <div class="feature-card reveal"><span class="feature-num">01</span><span class="feature-icon">👥</span><div class="feature-title">Peer Study Groups</div><p class="feature-desc">Form groups, decide topics together, teach each other in turns, then take a moderated test. Real learning through real collaboration.</p></div>
-      <div class="feature-card reveal"><span class="feature-num">02</span><span class="feature-icon">🏆</span><div class="feature-title">Solved Problems</div><p class="feature-desc">Solve an exceptionally hard problem? It gets documented publicly — on Discord and this website — forever.</p></div>
-      <div class="feature-card reveal"><span class="feature-num">03</span><span class="feature-icon">🎓</span><div class="feature-title">Mentor Access</div><p class="feature-desc">Learn directly from mentors who have mastered the material. Discuss problems, get feedback on proofs, understand concepts deeply.</p></div>
-      <div class="feature-card reveal"><span class="feature-num">04</span><span class="feature-icon">✨</span><div class="feature-title">More Features</div><p class="feature-desc">Join our Discord server for further information on upcoming features and community events.</p></div>
+      <article class="feature-card">
+        <div class="feature-icon">// 01</div>
+        <h3>Peer Study Groups</h3>
+        <p>Collaborate in focused study sessions, peer review proofs, and develop academic confidence together.</p>
+      </article>
+      <article class="feature-card">
+        <div class="feature-icon">// 02</div>
+        <h3>Hall of Fame</h3>
+        <p>Record your best work publicly so effort and achievement remain visible and respected.</p>
+      </article>
+      <article class="feature-card">
+        <div class="feature-icon">// 03</div>
+        <h3>Mentor Access</h3>
+        <p>Get guidance from experienced mentors who help you understand ideas, not just memorize answers.</p>
+      </article>
+      <article class="feature-card">
+        <div class="feature-icon">// 04</div>
+        <h3>Structured Growth</h3>
+        <p>Build long-term progress with disciplined practice, regular review, and community accountability.</p>
+      </article>
     </div>
   </section>
 
-  <!-- ══ HALL OF FAME ══ -->
-  <section id="halloffame">
-    <div class="reveal">
-      <div class="section-label">// 03 — Hall of Fame</div>
-      <h2 class="section-title">Solved <span class="accent">Problems</span></h2>
-      <div class="section-divider"></div>
+  <section id="halloffame" class="section-surface">
+    <div class="section-head">
+      <span class="section-label">// 03 — Hall of Fame</span>
+      <h2 class="section-title">Featured <span class="accent">Problems</span></h2>
     </div>
-
-    <div class="hof-grid reveal">
-
-      <!-- PROBLEM #001 -->
-      <a href="problem-001.html" style="text-decoration:none;">
-        <div class="hof-card">
-          <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:14px;">
-            <div class="hof-badge">Problem #001</div>
-            <div style="font-family:'Share Tech Mono',monospace; font-size:10px; letter-spacing:2px; color:var(--grey); text-transform:uppercase;">Physics — Mechanics</div>
-          </div>
-          <div class="hof-question">Air Resistance Optimization</div>
-          <p class="hof-summary">A vertical-throw problem with velocity-dependent drag. Free body diagrams, kinematics, differential equations, and height loss optimization.</p>
-          <div style="font-family:'Share Tech Mono',monospace; font-size:10px; letter-spacing:1.5px; color:var(--grey); text-transform:uppercase; margin-bottom:16px;">FBD · Kinematics · ODEs · Optimization</div>
-          <div class="hof-meta">
-            <span class="hof-solver">Open Problem →</span>
-            <span class="hof-trophy">📖</span>
-          </div>
+    <div class="hof-grid">
+      <article class="hof-card">
+        <div class="hof-top">
+          <span class="hof-badge">Problem #001</span>
+          <span class="hof-tag">Physics · Mechanics</span>
         </div>
-      </a>
-
-      <!-- PROBLEM #002 -->
-      <a href="problem-002.html" style="text-decoration:none;">
-        <div class="hof-card">
-          <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:14px;">
-            <div class="hof-badge">Problem #002</div>
-            <div style="font-family:'Share Tech Mono',monospace; font-size:10px; letter-spacing:2px; color:var(--grey); text-transform:uppercase;">Mathematics — Geometry</div>
-          </div>
-          <div class="hof-question">Find AC</div>
-          <p class="hof-summary">A circle geometry problem involving a diameter, collinear points, and a right triangle. Use circle theorems and the Pythagorean theorem to find the radius.</p>
-          <div style="font-family:'Share Tech Mono',monospace; font-size:10px; letter-spacing:1.5px; color:var(--grey); text-transform:uppercase; margin-bottom:16px;">Circle Theorems · Pythagoras · Similar Triangles</div>
-          <div class="hof-meta">
-            <span class="hof-solver">Open Problem →</span>
-            <span class="hof-trophy">📐</span>
-          </div>
+        <h3>Air Resistance Optimization</h3>
+        <p>Velocity-dependent drag and vertical motion combine into a high-level challenge: optimise height and energy loss.</p>
+        <div class="hof-footer">
+          <span>FBD · Kinematics · ODEs</span>
+          <span>Open problem</span>
         </div>
-      </a>
-
-      <!-- ══ INDUCTED SCHOLARS ══ -->
-      <div style="grid-column:1/-1; margin-top:32px;">
-        <div style="font-family:'Share Tech Mono',monospace; font-size:10px; letter-spacing:4px; color:var(--grey); text-transform:uppercase; margin-bottom:20px; display:flex; align-items:center; gap:16px;">
-          // Inducted Scholars
-          <span style="flex:1; height:1px; background:rgba(0,170,255,0.1); display:block;"></span>
+      </article>
+      <article class="hof-card">
+        <div class="hof-top">
+          <span class="hof-badge">Problem #002</span>
+          <span class="hof-tag">Mathematics · Geometry</span>
         </div>
-        <p style="font-size:13px; color:var(--grey); line-height:1.7; max-width:680px; margin-bottom:24px;">
-          Effort matters. Students who attempt our featured problems — partially or in full — earn their place here permanently.
-        </p>
-
-        <!-- SCHOLAR: Zishan23 -->
-        <div class="hof-card" style="display:flex; align-items:center; gap:20px; margin-bottom:14px;">
-          <div style="width:56px; height:56px; border-radius:50%; border:2px solid rgba(0,170,255,0.35); background:rgba(0,170,255,0.08); display:flex; align-items:center; justify-content:center; font-family:'Orbitron',sans-serif; font-size:20px; font-weight:900; color:var(--blue); flex-shrink:0;">Z</div>
-          <div style="flex:1;">
-            <div style="display:flex; align-items:center; gap:10px; margin-bottom:6px; flex-wrap:wrap;">
-              <span style="font-family:'Orbitron',sans-serif; font-size:15px; letter-spacing:1.5px; text-transform:uppercase; color:var(--white);">Zishan23</span>
-              <span style="padding:2px 8px; font-family:'Share Tech Mono',monospace; font-size:9px; letter-spacing:2px; text-transform:uppercase; border:1px solid rgba(255,209,102,0.4); background:rgba(255,209,102,0.08); color:#ffd166;">🟡 Partial Entry</span>
-            </div>
-            <div style="font-family:'Share Tech Mono',monospace; font-size:10px; letter-spacing:2px; color:var(--blue); text-transform:uppercase; margin-bottom:6px;">Problem #001</div>
-            <p style="font-size:13px; color:var(--grey); line-height:1.6;">The only student who attempted Problem #001 with a good approach. Did not complete the full solution, but the effort was recognised — better than not trying at all.</p>
-          </div>
+        <h3>Find AC</h3>
+        <p>A circle geometry problem with a diameter, collinear points, and a right triangle. Solve it with the right mix of theorems.</p>
+        <div class="hof-footer">
+          <span>Circle Theorems · Pythagoras</span>
+          <span>Open problem</span>
         </div>
-
-        <!--
-          ADD NEW SCHOLAR: copy block, uncomment, fill in
-          <div class="hof-card" style="display:flex; align-items:center; gap:20px; margin-bottom:14px;">
-            <div style="width:56px; height:56px; border-radius:50%; border:2px solid rgba(0,170,255,0.35); background:rgba(0,170,255,0.08); display:flex; align-items:center; justify-content:center; font-family:'Orbitron',sans-serif; font-size:20px; font-weight:900; color:var(--blue); flex-shrink:0;">?</div>
-            <div style="flex:1;">
-              <div style="display:flex; align-items:center; gap:10px; margin-bottom:6px; flex-wrap:wrap;">
-                <span style="font-family:'Orbitron',sans-serif; font-size:15px; letter-spacing:1.5px; text-transform:uppercase; color:var(--white);">USERNAME</span>
-                FULL:    <span style="padding:2px 8px; font-family:'Share Tech Mono',monospace; font-size:9px; letter-spacing:2px; text-transform:uppercase; border:1px solid rgba(0,170,255,0.4); background:rgba(0,170,255,0.1); color:var(--blue);">✅ Full Entry</span>
-                PARTIAL: <span style="padding:2px 8px; font-family:'Share Tech Mono',monospace; font-size:9px; letter-spacing:2px; text-transform:uppercase; border:1px solid rgba(255,209,102,0.4); background:rgba(255,209,102,0.08); color:#ffd166;">🟡 Partial Entry</span>
-              </div>
-              <div style="font-family:'Share Tech Mono',monospace; font-size:10px; letter-spacing:2px; color:var(--blue); text-transform:uppercase; margin-bottom:6px;">Problem #00X</div>
-              <p style="font-size:13px; color:var(--grey); line-height:1.6;">Note here.</p>
-            </div>
-          </div>
-        -->
-      </div>
-
+      </article>
     </div>
   </section>
 
-
-  <!-- ══ TEAM ══ -->
   <section id="team">
-    <div class="reveal">
-      <div class="section-label">// 05 — Team</div>
-      <h2 class="section-title">The <span class="accent">Team</span></h2>
-      <div class="section-divider"></div>
+    <div class="section-head">
+      <span class="section-label">// 04 — Team</span>
+      <h2 class="section-title">Who is behind <span class="accent">PAF</span>?</h2>
     </div>
     <div class="team-grid">
-      <div class="team-card reveal"><div class="team-avatar">A</div><div class="team-name">Auvalen</div><div class="team-role">👑 Founder</div><p class="team-bio">A mathematics and physics enthusiast — a student and writer who is ambitious for his higher goals and ready to grow his mates.</p></div>
-      <div class="team-card reveal"><div class="team-avatar">N</div><div class="team-name">Nuven</div><div class="team-role">👑 Co-Founder</div><p class="team-bio">Co-founder of PAF and fellow science enthusiast, building this community alongside Auvalen with shared ambition and purpose.</p></div>
-      <div class="team-card reveal"><div class="team-avatar">F</div><div class="team-name">Faizan Shakeel</div><div class="team-role">⚡ Supporter & Shadow Mentor</div><p class="team-bio">An undergraduate student doing engineering at IIT Bombay. A quiet but powerful presence guiding PAF from behind the scenes.</p></div>
-      <div class="team-card reveal"><div class="team-avatar">B</div><div class="team-name">Blake</div><div class="team-role">🎓 Lead Mentor</div><p class="team-bio">Experienced mathematics mentor and educator who believes in peer-led learning. Guiding PAF members through the hardest problems with patience and depth.</p></div>
-      <div class="team-card reveal"><div class="team-avatar">F</div><div class="team-name">Fam</div><div class="team-role">💛 Student Advocate</div><p class="team-bio">A trustworthy advocate who will become your friend and help you get through anything stressful that affects your academics.</p></div>
-      <div class="team-card reveal"><div class="team-avatar">?</div><div class="team-name">You?</div><div class="team-role">💙 Advocate or Admin?</div><p class="team-bio">We're looking for a compassionate person to support members' wellbeing or moderate the community. Think that's you? Join us.</p></div>
+      <article class="team-card">
+        <div class="team-avatar">A</div>
+        <h3>Auvalen</h3>
+        <p>Founder with a driving passion for mathematics and physics.</p>
+      </article>
+      <article class="team-card">
+        <div class="team-avatar">N</div>
+        <h3>Nuven</h3>
+        <p>Co-founder and community collaborator building the platform.</p>
+      </article>
+      <article class="team-card">
+        <div class="team-avatar">F</div>
+        <h3>Fam</h3>
+        <p>Student advocate supporting members' wellbeing and consistency.</p>
+      </article>
     </div>
   </section>
 
-  <!-- ══ JOIN ══ -->
-  <section id="join">
-    <div class="reveal">
-      <div class="section-label">// 06 — Join Us</div>
-      <h2 class="section-title">Ready To <span class="accent">Forge</span> Your Mind?</h2>
-      <div class="section-divider"></div>
+  <section id="join" class="section-surface">
+    <div class="section-head">
+      <span class="section-label">// 05 — Join Us</span>
+      <h2 class="section-title">Ready to <span class="accent">forge</span> your mind?</h2>
     </div>
-    <p class="join-desc reveal">The first <strong>50 members</strong> receive a permanent <strong>Early Member</strong> badge. You will never be able to earn this again. The hall is open.</p>
-    <div class="join-steps reveal">
-      <div class="join-step"><div class="step-num">01</div><div class="step-text">Click Join The Guild</div><span class="join-arrow">›</span></div>
-      <div class="join-step"><div class="step-num">02</div><div class="step-text">Read Rules & Get Role</div><span class="join-arrow">›</span></div>
-      <div class="join-step"><div class="step-num">03</div><div class="step-text">Introduce Yourself</div><span class="join-arrow">›</span></div>
-      <div class="join-step"><div class="step-num">04</div><div class="step-text">Start Learning</div></div>
-    </div>
-    <div class="reveal">
-      <a href="https://discord.gg/U4dCDkdUHw" class="btn-primary" target="_blank" style="font-size:13px;padding:20px 52px;">Join The Foundry →</a>
+    <p class="join-copy">The first 50 members receive a permanent early member badge. Join our Discord, read the rules, and start your first study cycle today.</p>
+    <div class="join-actions">
+      <a href="https://discord.gg/U4dCDkdUHw" class="btn-primary" target="_blank">Join Discord</a>
+      <a href="exams.html" class="btn-secondary">Try the exam demo</a>
     </div>
   </section>
-
 </main>
 
 <footer id="footer">
   <div class="footer-inner">
-    <div class="footer-logo">THE PREP AXIOM FOUNDRY</div>
+    <div class="footer-logo">Prep Axiom Foundry</div>
     <div class="footer-links">
       <a href="index.html">Home</a>
       <a href="hall-of-fame.html">Hall of Fame</a>
@@ -275,9 +240,7 @@
       <a href="exams.html">Exams</a>
     </div>
     <div class="footer-copy">
-      Sponsored by <a href="https://poweriq.agency/" target="_blank" style="color:var(--blue); text-decoration:none;">Power IQ</a> — A competitive intelligence community where knowledge is measured, classes are assigned, and the most disciplined minds rise to the top.
-      <br>
-      © 2026 The Prep Axiom Foundry. All rights reserved.
+      Sponsored by <a href="https://poweriq.agency/" target="_blank" style="color:var(--blue); text-decoration:none;">Power IQ</a>. © 2026 Prep Axiom Foundry.
     </div>
   </div>
 </footer>
@@ -285,6 +248,29 @@
 <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-auth-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-firestore-compat.js"></script>
+
+<script>
+  var firebaseConfig = {
+    apiKey: "AIzaSyBuculpQXW1j_2eaWSOhO5mer--XwcwkmE",
+    authDomain: "prepaxiomfoundry-d4a79.firebaseapp.com",
+    projectId: "prepaxiomfoundry-d4a79",
+    storageBucket: "prepaxiomfoundry-d4a79.firebasestorage.app",
+    messagingSenderId: "851208226756",
+    appId: "1:851208226756:web:5bdde19467ddf9e0eb4691"
+  };
+
+  // Safe initializing engine wrapper
+  var app;
+  if (!firebase.apps.length) {
+    app = firebase.initializeApp(firebaseConfig);
+  } else {
+    app = firebase.app();
+  }
+  
+  // Explicitly binds the database routing pointer to your database name context
+  window.db = app.firestore("default"); 
+</script>
+
 <script src="script.js"></script>
 </body>
 </html>
