@@ -8,7 +8,7 @@
   <link rel="stylesheet" href="styles.css"/>
   <style>
     #admin-container { max-width: 600px; margin: 80px auto; padding: 40px; }
-    .admin-section { background: rgba(3,13,26,0.9); border: 1px solid rgba(0,170,255,0.12); padding: 30px; margin-bottom: 30px; }
+    .admin-section { background: rgba(3,13,26,0.9); border: 1px solid rgba(0,170,255,0.12); padding: 30px; margin-bottom: 30px; position: relative; }
     .admin-input { background: rgba(2,8,16,0.95); border: 1px solid rgba(0,170,255,0.2); padding: 12px 16px; font-family: 'Rajdhani', sans-serif; color: var(--white); margin-bottom: 12px; width: 100%; font-size: 14px; box-sizing: border-box; }
     .admin-input::placeholder { color: rgba(122,154,181,0.6); }
     .admin-label { font-family: 'Share Tech Mono', monospace; font-size: 11px; color: var(--blue); letter-spacing: 2px; text-transform: uppercase; margin-bottom: 8px; display: block; }
@@ -20,7 +20,6 @@
     .delete-btn:hover { background: rgba(255,100,100,0.3); }
     .admin-msg { padding: 14px; background: rgba(0,170,255,0.08); border-left: 2px solid var(--blue); color: var(--grey); font-family: 'Share Tech Mono', monospace; font-size: 12px; margin-bottom: 16px; }
     
-    /* Layout styling matching your flex structures */
     .control-row { display: flex; gap: 20px; flex-wrap: wrap; margin-bottom: 30px; }
     .control-col { flex: 1; min-width: 300px; }
     .checkbox-container { display: flex; align-items: center; gap: 10px; margin-top: 5px; margin-bottom: 15px; cursor: pointer; }
@@ -38,19 +37,22 @@
   </div>
   <nav>
     <a href="index.html"><span class="nav-icon">⬡</span>Home</a>
-    <a href="admin.html"><span class="nav-icon">⚙️</span>Admin</a>
+    <a href="admin.html" class="active"><span class="nav-icon">⚙️</span>Admin</a>
     <a href="exams.html"><span class="nav-icon">🧪</span>Exams</a>
   </nav>
   <div class="sidebar-footer">
+    <button class="sidebar-hide-trigger" id="collapseSidebarBtn">← Hide Sidebar</button>
     <button id="adminLogoutBtn" style="width:100%; padding:12px; background:var(--blue); color:var(--black); border:none; font-family:'Orbitron',sans-serif; font-size:11px; font-weight:700; letter-spacing:2px; text-transform:uppercase; cursor:pointer;">Log Out</button>
   </div>
 </aside>
 
+<div id="sidebar-uncollapse-control" title="Show Navigation Menu">→</div>
+
 <button id="hamburger" aria-label="Menu"><span></span><span></span><span></span></button>
 
-<main id="main" style="padding: 40px 20px; max-width: 1200px; margin: 0 auto;">
+<main id="main" style="padding: 112px 40px 40px 40px; box-sizing: border-box; max-width: 1400px;">
   
-  <div id="admin-login-screen" class="admin-section" style="text-align:center; max-width: 500px; margin: 80px auto;">
+  <div id="admin-login-screen" class="admin-section" style="text-align:center; max-width: 500px; margin: 40px auto;">
     <h2 style="font-family:'Orbitron',sans-serif; font-size:24px; color:var(--blue); margin-bottom:24px;">Admin Login</h2>
     <label class="admin-label">Master Password</label>
     <input type="password" id="adminPassword" class="admin-input" placeholder="Enter admin password"/>
@@ -61,7 +63,6 @@
   <div id="admin-panel" style="display:none;">
     
     <div class="control-row">
-      
       <div class="control-col admin-section">
         <h3 style="font-family:'Orbitron',sans-serif; font-size:16px; color:var(--blue); margin-bottom:20px;">// Global Site Configuration</h3>
         
@@ -118,11 +119,9 @@
         <button class="btn-primary" id="btn-deploy-exam" style="width:100%; margin-top:16px;">Inject Exam Node</button>
         <div id="examDeployMsg" class="admin-msg" style="display:none; margin-top:16px;"></div>
       </div>
-
     </div>
 
     <div class="control-row">
-      
       <div class="control-col admin-section">
         <h3 style="font-family:'Orbitron',sans-serif; font-size:16px; color:var(--blue); margin-bottom:20px;">Add New Exam User</h3>
         <label class="admin-label">Discord Username</label>
@@ -139,7 +138,6 @@
         <h3 style="font-family:'Orbitron',sans-serif; font-size:16px; color:var(--blue); margin-bottom:20px;">Registered Users</h3>
         <div id="usersList" style="max-height:430px; overflow-y:auto;"></div>
       </div>
-
     </div>
 
   </div>
@@ -174,7 +172,6 @@ var addUserBtn = document.getElementById('addUserBtn');
 var addUserMsg = document.getElementById('addUserMsg');
 var usersList = document.getElementById('usersList');
 
-// System Elements Wire references
 var globalSettingsMsg = document.getElementById('globalSettingsMsg');
 var examDeployMsg = document.getElementById('examDeployMsg');
 
@@ -184,7 +181,7 @@ function updateAdminUI() {
     adminPanel.style.display = 'block';
     try { 
       loadUsers(); 
-      initializeAdminDynamicControlDeck(); // Fire dynamic loaders upon verified screen state
+      initializeAdminDynamicControlDeck(); 
     } catch(e) { console.error(e); }
   } else {
     loginScreen.style.display = 'block';
@@ -316,11 +313,9 @@ function ensureAuvalenAccount() {
   });
 }
 
-// REMOTE SYSTEM CONTROL AND MANAGEMENT LOGIC BLOCK
 function initializeAdminDynamicControlDeck() {
   var globalConfigRef = db.collection("siteConfiguration").doc("globalSettings");
 
-  // Fetch current database data values to sync input UI boxes
   globalConfigRef.get().then(function(doc) {
     if (doc.exists) {
       var data = doc.data();
@@ -334,10 +329,8 @@ function initializeAdminDynamicControlDeck() {
     console.error("Link Failure to configuration nodes: ", err); 
   });
 
-  // Action Button Event - Process Global Configurations Writes
   document.getElementById("btn-save-global").onclick = function() {
     globalSettingsMsg.style.display = "none";
-    
     var payload = {
       maintenanceMode: document.getElementById("sys-maintenance").checked,
       bannerNotice: {
@@ -361,10 +354,8 @@ function initializeAdminDynamicControlDeck() {
       });
   };
 
-  // Action Button Event - Process Exam Array Injector
   document.getElementById("btn-deploy-exam").onclick = function() {
     examDeployMsg.style.display = "none";
-
     var slug = document.getElementById("exam-slug").value.trim().replace(/\s+/g, '-').toLowerCase();
     var title = document.getElementById("exam-title").value.trim();
     var duration = parseInt(document.getElementById("exam-duration").value) || 0;
@@ -390,8 +381,6 @@ function initializeAdminDynamicControlDeck() {
       .then(function() {
         examDeployMsg.textContent = "SUCCESS: Exam node [" + title + "] synced onto active layout.";
         examDeployMsg.style.display = "block";
-        
-        // Reset local form values
         document.getElementById("exam-slug").value = "";
         document.getElementById("exam-title").value = "";
         document.getElementById("exam-duration").value = "";
@@ -403,6 +392,32 @@ function initializeAdminDynamicControlDeck() {
       });
   };
 }
+
+// INTERACTIVE WORKSPACE VISIBILITY TOGGLE OPERATOR
+(function() {
+  var sidebarNode = document.getElementById("sidebar");
+  var mainNode = document.getElementById("main");
+  var collapseTrigger = document.getElementById("collapseSidebarBtn");
+  var restoreTrigger = document.getElementById("sidebar-uncollapse-control");
+
+  if (!sidebarNode || !mainNode) return;
+
+  if (collapseTrigger) {
+    collapseTrigger.onclick = function() {
+      sidebarNode.classList.add("collapsed");
+      mainNode.classList.add("sidebar-hidden");
+      if (restoreTrigger) restoreTrigger.style.display = "flex";
+    };
+  }
+
+  if (restoreTrigger) {
+    restoreTrigger.onclick = function() {
+      sidebarNode.classList.remove("collapsed");
+      mainNode.classList.remove("sidebar-hidden");
+      restoreTrigger.style.display = "none";
+    };
+  }
+})();
 
 updateAdminUI();
 
