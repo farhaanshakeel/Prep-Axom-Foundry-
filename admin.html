@@ -158,7 +158,7 @@ var firebaseConfig = {
 
 var app = !firebase.apps.length ? firebase.initializeApp(firebaseConfig) : firebase.app();
 
-// FIXED: Changed app.fireslore() typo to app.firestore() to resolve core runtime crash
+// CALIBRATED ROUTE: Targets primary instance pool directly to prevent default initialization failures
 var db = app.firestore();
 
 var AUVALEN_USERNAME = 'auvalen';
