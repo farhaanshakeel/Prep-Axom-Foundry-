@@ -1,9 +1,42 @@
+/* ═══════════════════════════════════════════════════════
+   PREP AXIOM FOUNDRY — CORE LOGIC ARCHITECTURE
+   Unified State Engine · Real-time Matrix Systems
+   ═══════════════════════════════════════════════════════ */
+
+// ── GLOBAL ARCHITECTURE & STATE CONFIGURATION
+(function() {
+  var firebaseConfig = {
+    apiKey: "AIzaSyBuculpQXW1j_2eaWSOhO5mer--XwcwkmE",
+    authDomain: "prepaxiomfoundry-d4a79.firebaseapp.com",
+    projectId: "prepaxiomfoundry-d4a79",
+    storageBucket: "prepaxiomfoundry-d4a79.firebasestorage.app",
+    messagingSenderId: "851208226756",
+    appId: "1:851208226756:web:5bdde19467ddf9e0eb4691",
+    measurementId: "G-R3GQ6M07ZJ"
+  };
+
+  // Safe Single-Instance Initialization Engine
+  if (typeof firebase !== 'undefined') {
+    if (!firebase.apps.length) {
+      firebase.initializeApp(firebaseConfig);
+    }
+    window.db = firebase.firestore();
+  } else {
+    window.db = null;
+  }
+
+  window.globalCurrentUser = null;
+  var storedUser = sessionStorage.getItem('currentUser');
+  if (storedUser) {
+    window.globalCurrentUser = JSON.parse(storedUser);
+  }
+})();
+
 // ── INTRO SCREEN + SKIP BUTTON
 window.addEventListener('load', function() {
   var intro = document.getElementById('intro-screen');
   if (!intro) return;
 
-  // Create skip button
   var skipBtn = document.createElement('button');
   skipBtn.textContent = 'Skip';
   skipBtn.style.cssText = [
@@ -14,6 +47,7 @@ window.addEventListener('load', function() {
     'padding:8px 20px', 'cursor:pointer', 'transition:all 0.2s',
     'z-index:10000'
   ].join(';');
+
   skipBtn.addEventListener('mouseenter', function() {
     skipBtn.style.background = 'rgba(0,170,255,0.12)';
     skipBtn.style.borderColor = '#0af';
@@ -29,107 +63,78 @@ window.addEventListener('load', function() {
     setTimeout(function() { intro.style.display = 'none'; }, 700);
   }
 
-  // Auto-hide after 3.2s
   var autoTimer = setTimeout(hideIntro, 3200);
 
-  // Skip button hides immediately
   skipBtn.addEventListener('click', function() {
     clearTimeout(autoTimer);
     hideIntro();
   });
 });
 
-// ── GLOBAL LOGIN SYSTEM
-(function() {
-  var firebaseConfig = {
-    apiKey: "AIzaSyBuculpQXW1j_2eaWSOhO5mer--XwcwkmE",
-    authDomain: "prepaxiomfoundry-d4a79.firebaseapp.com",
-    projectId: "prepaxiomfoundry-d4a79",
-    storageBucket: "prepaxiomfoundry-d4a79.firebasestorage.app",
-    messagingSenderId: "851208226756",
-    appId: "1:851208226756:web:5bdde19467ddf9e0eb4691"
-  };
-
-  if (typeof firebase !== 'undefined' && firebase && !firebase.apps.length) {
-    firebase.initializeApp(firebaseConfig);
-  }
-  // Only expose `db` when Firestore is available. This avoids runtime errors
-  // on pages that don't include the Firebase SDK (e.g., index.html if SDK not added).
-  if (typeof firebase !== 'undefined' && firebase && firebase.firestore) {
-    window.db = firebase.firestore();
-  } else {
-    window.db = null;
-  }
-  window.globalCurrentUser = null;
-
-  // Check if already logged in
-  var storedUser = sessionStorage.getItem('currentUser');
-  if (storedUser) {
-    window.globalCurrentUser = JSON.parse(storedUser);
-  }
+// ── GLOBAL LOGIN INTERACTION MANAGEMENT
+document.addEventListener('DOMContentLoaded', function() {
+  var loginToggle = document.getElementById('globalLoginToggle');
+  var loginForm = document.getElementById('globalLoginForm');
+  var loginCancel = document.getElementById('globalLoginCancel');
+  var loginBtn = document.getElementById('globalLoginBtn');
+  var logoutBtn = document.getElementById('globalLogoutBtn');
+  var loginError = document.getElementById('globalLoginError');
+  var usernameInput = document.getElementById('globalLoginUsername');
+  var passwordInput = document.getElementById('globalLoginPassword');
 
   function updateGlobalLoginUI() {
     var loginWidget = document.getElementById('globalLoginWidget');
-    var loginForm = document.getElementById('globalLoginForm');
-    var loginToggle = document.getElementById('globalLoginToggle');
-    var loginStatus = document.getElementById('globalLoginStatus');
     var userDisplay = document.getElementById('globalUserDisplay');
+    var statusBlock = document.getElementById('globalLoginStatus');
 
     if (!loginWidget) return;
 
     if (window.globalCurrentUser) {
-      loginToggle.style.display = 'none';
-      loginForm.style.display = 'none';
-      loginStatus.style.display = 'block';
-      userDisplay.textContent = window.globalCurrentUser.name;
+      if (loginToggle) loginToggle.style.display = 'none';
+      if (loginForm) loginForm.style.display = 'none';
+      if (statusBlock) statusBlock.style.display = 'block';
+      if (userDisplay) userDisplay.textContent = window.globalCurrentUser.name;
     } else {
-      loginToggle.style.display = 'block';
-      loginStatus.style.display = 'none';
-      loginForm.style.display = 'none';
+      if (loginToggle) loginToggle.style.display = 'block';
+      if (statusBlock) statusBlock.style.display = 'none';
+      if (loginForm) loginForm.style.display = 'none';
     }
   }
 
-  // Toggle form visibility
-  document.addEventListener('DOMContentLoaded', function() {
-    var loginToggle = document.getElementById('globalLoginToggle');
-    var loginForm = document.getElementById('globalLoginForm');
-    var loginCancel = document.getElementById('globalLoginCancel');
-    var loginBtn = document.getElementById('globalLoginBtn');
-    var logoutBtn = document.getElementById('globalLogoutBtn');
-    var loginError = document.getElementById('globalLoginError');
-    var usernameInput = document.getElementById('globalLoginUsername');
-    var passwordInput = document.getElementById('globalLoginPassword');
+  if (loginToggle && loginForm) {
+    loginToggle.addEventListener('click', function() {
+      loginForm.style.display = loginForm.style.display === 'none' ? 'block' : 'none';
+    });
+  }
 
-    if (loginToggle) {
-      loginToggle.addEventListener('click', function() {
-        loginForm.style.display = loginForm.style.display === 'none' ? 'block' : 'none';
-      });
-    }
+  if (loginCancel && loginForm) {
+    loginCancel.addEventListener('click', function() {
+      loginForm.style.display = 'none';
+    });
+  }
 
-    if (loginCancel) {
-      loginCancel.addEventListener('click', function() {
-        loginForm.style.display = 'none';
-      });
-    }
+  if (loginBtn) {
+    loginBtn.addEventListener('click', function() {
+      var username = usernameInput.value.trim();
+      var password = passwordInput.value.trim();
 
-    if (loginBtn) {
-      loginBtn.addEventListener('click', function() {
-        var username = usernameInput.value.trim();
-        var password = passwordInput.value.trim();
+      if (!window.db) {
+        loginError.textContent = 'Authentication unavailable: Database disconnected.';
+        loginError.style.display = 'block';
+        return;
+      }
 
-        if (!window.db) {
-          loginError.textContent = 'Authentication unavailable: Firebase not initialized.';
-          loginError.style.display = 'block';
-          return;
-        }
+      if (!username || !password) {
+        loginError.textContent = 'Please enter username and password.';
+        loginError.style.display = 'block';
+        return;
+      }
 
-        if (!username || !password) {
-          loginError.textContent = 'Please enter username and password.';
-          loginError.style.display = 'block';
-          return;
-        }
-
-        window.db.collection('registeredUsers').where('username', '==', username).where('password', '==', password).get().then(function(snapshot) {
+      window.db.collection('registeredUsers')
+        .where('username', '==', username)
+        .where('password', '==', password)
+        .get()
+        .then(function(snapshot) {
           if (snapshot.empty) {
             loginError.textContent = 'Invalid username or password.';
             loginError.style.display = 'block';
@@ -148,28 +153,37 @@ window.addEventListener('load', function() {
           passwordInput.value = '';
           loginForm.style.display = 'none';
           updateGlobalLoginUI();
-        }).catch(function(err) {
+          
+          // Sync changes instantly down to the exam component if present
+          if (typeof window.syncExamAuthSession === 'function') {
+            window.syncExamAuthSession();
+          }
+        })
+        .catch(function(err) {
           loginError.textContent = 'Error: ' + err.message;
           loginError.style.display = 'block';
         });
-      });
-    }
+    });
+  }
 
-    if (logoutBtn) {
-      logoutBtn.addEventListener('click', function() {
-        window.globalCurrentUser = null;
-        sessionStorage.removeItem('currentUser');
-        updateGlobalLoginUI();
-      });
-    }
+  if (logoutBtn) {
+    logoutBtn.addEventListener('click', function() {
+      window.globalCurrentUser = null;
+      sessionStorage.removeItem('currentUser');
+      updateGlobalLoginUI();
+      if (typeof window.syncExamAuthSession === 'function') {
+        window.syncExamAuthSession();
+      }
+    });
+  }
 
-    updateGlobalLoginUI();
-  });
-})();
+  updateGlobalLoginUI();
+});
 
-// ── PARTICLES
-var container = document.getElementById('particles');
-if (container) {
+// ── PARTICLES GENERATION ENGINE
+(function() {
+  var container = document.getElementById('particles');
+  if (!container) return;
   for (var i = 0; i < 35; i++) {
     var p = document.createElement('div');
     p.className = 'particle';
@@ -177,50 +191,55 @@ if (container) {
     p.style.cssText = 'width:' + size + 'px;height:' + size + 'px;left:' + (Math.random()*100) + '%;animation-duration:' + (Math.random()*20+15) + 's;animation-delay:' + (Math.random()*20) + 's;';
     container.appendChild(p);
   }
-}
+})();
 
-// ── HAMBURGER
-var hamburger = document.getElementById('hamburger');
-var sidebar = document.getElementById('sidebar');
-if (hamburger && sidebar) {
-  hamburger.addEventListener('click', function() { sidebar.classList.toggle('open'); });
-  document.addEventListener('click', function(e) {
-    if (!sidebar.contains(e.target) && !hamburger.contains(e.target))
-      sidebar.classList.remove('open');
-  });
-}
+// ── HAMBURGER NAVIGATION SYSTEMS
+(function() {
+  var hamburger = document.getElementById('hamburger');
+  var sidebar = document.getElementById('sidebar');
+  if (hamburger && sidebar) {
+    hamburger.addEventListener('click', function() { sidebar.classList.toggle('open'); });
+    document.addEventListener('click', function(e) {
+      if (!sidebar.contains(e.target) && !hamburger.contains(e.target))
+        sidebar.classList.remove('open');
+    });
+  }
+})();
 
-// ── ACTIVE NAV ON SCROLL
-var sections = document.querySelectorAll('section');
-var navLinks = document.querySelectorAll('#sidebar nav a');
-if (sections.length > 0) {
-  var observer = new IntersectionObserver(function(entries) {
+// ── SCROLL-BOUND NAVIGATION TRACKING
+(function() {
+  var sections = document.querySelectorAll('section');
+  var navLinks = document.querySelectorAll('#sidebar nav a');
+  if (sections.length > 0 && typeof IntersectionObserver !== 'undefined') {
+    var observer = new IntersectionObserver(function(entries) {
+      entries.forEach(function(entry) {
+        if (entry.isIntersecting) {
+          navLinks.forEach(function(a) { a.classList.remove('active'); });
+          var id = entry.target.id;
+          var active = document.querySelector('#sidebar nav a[href="#' + id + '"]');
+          if (active) active.classList.add('active');
+        }
+      });
+    }, { threshold: 0.4 });
+    sections.forEach(function(s) { observer.observe(s); });
+  }
+})();
+
+// ── SCROLL REVEAL UTILITY
+(function() {
+  if (typeof IntersectionObserver === 'undefined') return;
+  var revealObserver = new IntersectionObserver(function(entries) {
     entries.forEach(function(entry) {
       if (entry.isIntersecting) {
-        navLinks.forEach(function(a) { a.classList.remove('active'); });
-        var id = entry.target.id;
-        var active = document.querySelector('#sidebar nav a[href="#' + id + '"]');
-        if (active) active.classList.add('active');
+        entry.target.classList.add('visible');
+        revealObserver.unobserve(entry.target);
       }
     });
-  }, { threshold: 0.4 });
-  sections.forEach(function(s) { observer.observe(s); });
-}
+  }, { threshold: 0.1, rootMargin: '0px 0px -60px 0px' });
+  document.querySelectorAll('.reveal').forEach(function(el) { revealObserver.observe(el); });
+})();
 
-// ── SCROLL REVEAL
-var revealObserver = new IntersectionObserver(function(entries) {
-  entries.forEach(function(entry) {
-    if (entry.isIntersecting) {
-      entry.target.classList.add('visible');
-      revealObserver.unobserve(entry.target);
-    }
-  });
-}, { threshold: 0.1, rootMargin: '0px 0px -60px 0px' });
-document.querySelectorAll('.reveal').forEach(function(el) { revealObserver.observe(el); });
-
-// ── COUNTERS
-// Reads target values from data-target attributes on the counter elements
-// To update counts: change data-target="X" in index.html, no JS changes needed
+// ── DYNAMIC COUNTERS ANIMATION ENGINE
 function animateCounter(el, target) {
   if (!el) return;
   var start = 0;
@@ -241,13 +260,37 @@ setTimeout(function() {
   ];
   els.forEach(function(el) {
     if (!el) return;
-    // Read from data-target attribute — update the number in HTML, not here
     var target = parseInt(el.getAttribute('data-target'), 10);
     if (!isNaN(target)) animateCounter(el, target);
   });
 }, 3400);
 
-// ── SYLLABUS TABS — event listeners, no inline onclick needed
+// ── CARD GLOW INTERACTIONS
+document.addEventListener('DOMContentLoaded', function() {
+  var selectors = '.hof-card, .feature-card, .team-card, .member-card, .hero-card, .grid-card';
+  var cards = document.querySelectorAll(selectors);
+  if (!cards || cards.length === 0) return;
+
+  function triggerGlow(el) {
+    if (!el) return;
+    el.classList.add('glow');
+    if (el._glowTimeout) clearTimeout(el._glowTimeout);
+    el._glowTimeout = setTimeout(function() { el.classList.remove('glow'); }, 800);
+  }
+
+  cards.forEach(function(card) {
+    if (!card.hasAttribute('tabindex')) card.setAttribute('tabindex', '0');
+    card.addEventListener('click', function() { triggerGlow(card); });
+    card.addEventListener('keydown', function(e) {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        triggerGlow(card);
+      }
+    });
+  });
+});
+
+// ── ACADEMIC SYLLABUS INTERACTIVE TABS
 document.addEventListener('DOMContentLoaded', function() {
   var tabBtns = document.querySelectorAll('.tab-btn');
   tabBtns.forEach(function(btn) {
@@ -263,7 +306,7 @@ document.addEventListener('DOMContentLoaded', function() {
   });
 });
 
-// ── CONTACT FORM — tied to actual Formspree response
+// ── OUTBOUND FORM UTILITY MANAGEMENT (FORMSPREE)
 document.addEventListener('DOMContentLoaded', function() {
   var form = document.getElementById('contactForm');
   var banner = document.getElementById('successBanner');
@@ -274,15 +317,12 @@ document.addEventListener('DOMContentLoaded', function() {
 
   form.addEventListener('submit', function(e) {
     e.preventDefault();
-
-    // Show loading state
     if (submitBtn) {
       submitBtn.textContent = 'Sending...';
       submitBtn.disabled = true;
     }
 
     var data = new FormData(form);
-
     fetch(form.action, {
       method: 'POST',
       body: data,
@@ -290,19 +330,16 @@ document.addEventListener('DOMContentLoaded', function() {
     })
     .then(function(response) {
       if (response.ok) {
-        // SUCCESS
         if (banner) banner.style.display = 'block';
         if (errorBanner) errorBanner.style.display = 'none';
         form.reset();
       } else {
-        // SERVER ERROR
         return response.json().then(function(data) {
           throw new Error(data.errors ? data.errors.map(function(e){ return e.message; }).join(', ') : 'Server error');
         });
       }
     })
     .catch(function(err) {
-      // NETWORK / FORMSPREE ERROR
       if (errorBanner) errorBanner.style.display = 'block';
       if (banner) banner.style.display = 'none';
       console.error('Form error:', err);
@@ -316,17 +353,18 @@ document.addEventListener('DOMContentLoaded', function() {
   });
 });
 
-// ── SMOOTH SCROLL
+// ── INTER-PAGE SMOOTH SCROLL ROUTERS
 document.querySelectorAll('a[href^="#"]').forEach(function(a) {
   a.addEventListener('click', function(e) {
     e.preventDefault();
     var target = document.querySelector(a.getAttribute('href'));
     if (target) target.scrollIntoView({ behavior: 'smooth' });
+    var sidebar = document.getElementById('sidebar');
     if (sidebar) sidebar.classList.remove('open');
   });
 });
 
-// ── FIREBASE EXAM DEMO
+// ── INTEGRATED LIVE EVALUATION SYSTEMS (EXAMS)
 (function() {
   var examContainer = document.getElementById('examContainer');
   var examStatus = document.getElementById('examStatus');
@@ -335,112 +373,124 @@ document.querySelectorAll('a[href^="#"]').forEach(function(a) {
   var signInBtn = document.getElementById('signInBtn');
   var startExamBtn = document.getElementById('startExamBtn');
   var leaderboardList = document.getElementById('leaderboardList');
-  var currentUser = null;
+  
   var currentTimer = null;
   var remainingSeconds = 300;
   var selectedAnswers = {};
   var currentQuestionIndex = 0;
+  
   var examQuestions = [
     {
       id: 'q1',
       text: 'A projectile is launched at 30° above the horizontal with speed 20 m/s. What is the approximate maximum height?',
-      options: [
-        '5.1 m',
-        '7.6 m',
-        '10.3 m',
-        '12.5 m'
-      ],
+      options: ['5.1 m', '7.6 m', '10.3 m', '12.5 m'],
       answer: 1
     },
     {
       id: 'q2',
       text: 'Which number is a prime factor of 221?',
-      options: [
-        '11',
-        '13',
-        '17',
-        '19'
-      ],
-      answer: 0
+      options: ['11', '13', '17', '19'],
+      answer: 1
     },
     {
       id: 'q3',
       text: 'In a chemical equilibrium, increasing temperature shifts the balance to the side that is',
-      options: [
-        'less exothermic',
-        'more exothermic',
-        'lower pressure',
-        'higher concentration'
-      ],
+      options: ['less exothermic', 'more exothermic', 'lower pressure', 'higher concentration'],
       answer: 0
     }
   ];
 
-  function isFirebaseConfigValid(config) {
-    return config && config.apiKey && !config.apiKey.includes('YOUR_');
-  }
-
-  function updateAuthUi() {
+  window.syncExamAuthSession = function() {
+    var sessionData = sessionStorage.getItem('currentUser');
+    window.globalCurrentUser = sessionData ? JSON.parse(sessionData) : null;
+    
     if (!authStatus) return;
     var loginForm = document.getElementById('examLoginForm');
-    if (currentUser) {
-      authStatus.textContent = 'Logged in as ' + currentUser.name;
-      signInBtn.textContent = 'Log Out';
-      startExamBtn.disabled = false;
+    
+    if (window.globalCurrentUser) {
+      authStatus.textContent = 'Logged in as ' + window.globalCurrentUser.name;
+      if (signInBtn) signInBtn.textContent = 'Log Out';
+      if (startExamBtn) startExamBtn.disabled = false;
       if (loginForm) loginForm.style.display = 'none';
     } else {
       authStatus.textContent = 'Log in with your credentials to take the exam.';
-      signInBtn.textContent = 'Log In';
-      startExamBtn.disabled = true;
+      if (signInBtn) signInBtn.textContent = 'Log In';
+      if (startExamBtn) startExamBtn.disabled = true;
       if (loginForm) loginForm.style.display = 'none';
     }
-  }
+  };
 
   function showMessage(message) {
     if (examStatus) examStatus.textContent = message;
+  }
+
+  function formatTime(seconds) {
+    var min = Math.floor(seconds / 60);
+    var sec = seconds % 60;
+    return 'Time left: ' + String(min).padStart(2, '0') + ':' + String(sec).padStart(2, '0');
+  }
+
+  function startTimer() {
+    if (currentTimer) clearInterval(currentTimer);
+    currentTimer = setInterval(function() {
+      remainingSeconds--;
+      var timer = document.getElementById('examTimer');
+      if (timer) timer.textContent = formatTime(remainingSeconds);
+      if (remainingSeconds <= 0) {
+        clearInterval(currentTimer);
+        submitExam();
+      }
+    }, 1000);
+  }
+
+  function submitExam() {
+    if (currentTimer) {
+      clearInterval(currentTimer);
+      currentTimer = null;
+    }
+    
+    var score = 0;
+    examQuestions.forEach(function(question) {
+      if (selectedAnswers[question.id] === question.answer) score += 1;
+    });
+
+    var message = 'You scored ' + score + ' out of ' + examQuestions.length + '.';
+    if (examResult) {
+      examResult.classList.remove('hidden');
+      examResult.textContent = message;
+    }
+    if (examContainer) examContainer.classList.add('hidden');
+    showMessage('Exam complete. ' + (window.globalCurrentUser ? 'Saving score...' : 'Log in to save your result.'));
+    
+    if (window.globalCurrentUser && window.db) {
+      window.db.collection('examAttempts').add({
+        uid: window.globalCurrentUser.uid,
+        name: window.globalCurrentUser.name,
+        username: window.globalCurrentUser.username,
+        score: score,
+        timestamp: firebase.firestore.FieldValue.serverTimestamp()
+      }).then(function() {
+        showMessage('Score saved to Firebase. Check the leaderboard below.');
+        loadLeaderboard();
+      }).catch(function(err) {
+        console.error('Firestore save failed:', err);
+        showMessage('Exam complete. Failed to save score.');
+      });
+    }
+    currentQuestionIndex = 0;
   }
 
   function renderExam() {
     if (!examContainer) return;
     examContainer.classList.remove('hidden');
     examContainer.innerHTML = '';
+    
     var timerBar = document.createElement('div');
     timerBar.id = 'examTimer';
     timerBar.className = 'exam-status';
     timerBar.textContent = formatTime(remainingSeconds);
     examContainer.appendChild(timerBar);
 
-  // Rounded card glow interaction (click / keyboard)
-  document.addEventListener('DOMContentLoaded', function() {
-    var selectors = '.hof-card, .feature-card, .team-card, .member-card, .hero-card, .grid-card';
-    var cards = document.querySelectorAll(selectors);
-    if (!cards || cards.length === 0) return;
-
-    function triggerGlow(el) {
-      if (!el) return;
-      el.classList.add('glow');
-      if (el._glowTimeout) clearTimeout(el._glowTimeout);
-      el._glowTimeout = setTimeout(function() { el.classList.remove('glow'); }, 800);
-    }
-
-    cards.forEach(function(card) {
-      // make keyboard-focusable if not already
-      if (!card.hasAttribute('tabindex')) card.setAttribute('tabindex', '0');
-
-      card.addEventListener('click', function(e) {
-        triggerGlow(card);
-      });
-
-      card.addEventListener('keydown', function(e) {
-        if (e.key === 'Enter' || e.key === ' ') {
-          e.preventDefault();
-          triggerGlow(card);
-        }
-      });
-    });
-  });
-
-    // Progress indicator
     var progressBar = document.createElement('div');
     progressBar.style.cssText = 'background:rgba(0,170,255,0.1); border:1px solid rgba(0,170,255,0.2); height:8px; margin:15px 0; border-radius:4px; overflow:hidden;';
     var progressFill = document.createElement('div');
@@ -453,20 +503,24 @@ document.querySelectorAll('a[href^="#"]').forEach(function(a) {
     progressText.textContent = 'Question ' + (currentQuestionIndex + 1) + ' of ' + examQuestions.length;
     examContainer.appendChild(progressText);
 
-    // Display current question only
     var question = examQuestions[currentQuestionIndex];
     var q = document.createElement('div');
     q.className = 'exam-question';
-    q.innerHTML = '<h3>Question ' + (currentQuestionIndex + 1) + '</h3>' +
-      '<p>' + question.text + '</p>';
+    q.innerHTML = '<h3>Question ' + (currentQuestionIndex + 1) + '</h3><p>' + question.text + '</p>';
 
     question.options.forEach(function(option, optIndex) {
       var label = document.createElement('label');
       label.className = 'exam-option';
       label.innerHTML = '<input type="radio" name="' + question.id + '" value="' + optIndex + '"> ' + option;
-      label.addEventListener('click', function() {
+      
+      // Fixed crosshair focus activation
+      var radioInput = label.querySelector('input');
+      if(selectedAnswers[question.id] === optIndex) {
+        radioInput.checked = true;
+      }
+
+      radioInput.addEventListener('change', function() {
         selectedAnswers[question.id] = optIndex;
-        // Auto-advance to next question
         setTimeout(function() {
           if (currentQuestionIndex < examQuestions.length - 1) {
             currentQuestionIndex++;
@@ -478,7 +532,6 @@ document.querySelectorAll('a[href^="#"]').forEach(function(a) {
     });
     examContainer.appendChild(q);
 
-    // Navigation buttons
     var navDiv = document.createElement('div');
     navDiv.style.cssText = 'display:flex; gap:10px; margin-top:20px; justify-content:space-between;';
     
@@ -487,10 +540,8 @@ document.querySelectorAll('a[href^="#"]').forEach(function(a) {
       prevBtn.className = 'btn-secondary exam-submit';
       prevBtn.textContent = '← Previous';
       prevBtn.addEventListener('click', function() {
-        if (currentQuestionIndex > 0) {
-          currentQuestionIndex--;
-          renderExam();
-        }
+        currentQuestionIndex--;
+        renderExam();
       });
       navDiv.appendChild(prevBtn);
     }
@@ -513,71 +564,13 @@ document.querySelectorAll('a[href^="#"]').forEach(function(a) {
     }
     
     examContainer.appendChild(navDiv);
-    showMessage('Question ' + (currentQuestionIndex + 1) + '. Answer and it will auto-advance. Good luck!');
-  }
-
-  function formatTime(seconds) {
-    var min = Math.floor(seconds / 60);
-    var sec = seconds % 60;
-    return 'Time left: ' + String(min).padStart(2, '0') + ':' + String(sec).padStart(2, '0');
-  }
-
-  function startTimer() {
-    if (currentTimer) clearInterval(currentTimer);
-    currentTimer = setInterval(function() {
-      remainingSeconds--;
-      var timer = document.getElementById('examTimer');
-      if (timer) timer.textContent = formatTime(remainingSeconds);
-      if (remainingSeconds <= 0) {
-        clearInterval(currentTimer);
-        submitExam();
-      }
-    }, 1000);
-  }
-
-  function calculateScore() {
-    var score = 0;
-    examQuestions.forEach(function(question) {
-      if (selectedAnswers[question.id] === question.answer) score += 1;
-    });
-    return score;
-  }
-
-  function submitExam() {
-    if (currentTimer) {
-      clearInterval(currentTimer);
-      currentTimer = null;
-    }
-    var score = calculateScore();
-    var message = 'You scored ' + score + ' out of ' + examQuestions.length + '.';
-    if (examResult) {
-      examResult.classList.remove('hidden');
-      examResult.textContent = message;
-    }
-    examContainer.classList.add('hidden');
-    showMessage('Exam complete. ' + (currentUser ? 'Saving score...' : 'Log in to save your result.'));
-    if (currentUser && window.db) {
-      window.db.collection('examAttempts').add({
-        uid: currentUser.uid,
-        name: currentUser.name,
-        username: currentUser.username,
-        score: score,
-        timestamp: firebase.firestore.FieldValue.serverTimestamp()
-      }).then(function() {
-        showMessage('Score saved to Firebase. Check the leaderboard below.');
-        loadLeaderboard();
-      }).catch(function(err) {
-        console.error('Firestore save failed:', err);
-        showMessage('Exam complete. Failed to save score to Firebase.');
-      });
-    }
-    currentQuestionIndex = 0;
+    showMessage('Question ' + (currentQuestionIndex + 1) + '. Answer and it will auto-advance.');
   }
 
   function loadLeaderboard() {
     if (!leaderboardList) return;
     if (!window.db) {
-      leaderboardList.textContent = 'Leaderboard unavailable until Firebase is configured.';
+      leaderboardList.textContent = 'Leaderboard unavailable until database syncs.';
       return;
     }
     window.db.collection('examAttempts')
@@ -600,62 +593,27 @@ document.querySelectorAll('a[href^="#"]').forEach(function(a) {
         });
       }).catch(function(err) {
         console.error('Leaderboard error:', err);
-        leaderboardList.textContent = 'Unable to load leaderboard right now.';
+        leaderboardList.textContent = 'Unable to load leaderboard.';
       });
   }
 
   function initFirebaseExam() {
     if (!signInBtn || !startExamBtn || !authStatus) return;
 
-    var firebaseConfig = {
-      apiKey: "AIzaSyBuculpQXW1j_2eaWSOhO5mer--XwcwkmE",
-      authDomain: "prepaxiomfoundry-d4a79.firebaseapp.com",
-      projectId: "prepaxiomfoundry-d4a79",
-      storageBucket: "prepaxiomfoundry-d4a79.firebasestorage.app",
-      messagingSenderId: "851208226756",
-      appId: "1:851208226756:web:5bdde19467ddf9e0eb4691",
-      measurementId: "G-R3GQ6M07ZJ"
-    };
-
-    if (!isFirebaseConfigValid(firebaseConfig)) {
-      authStatus.textContent = 'Firebase config required in script.js to enable auth and saving.';
-      leaderboardList.textContent = 'Configure Firebase in script.js and reload to show leaderboard.';
-      startExamBtn.disabled = false;
-      signInBtn.addEventListener('click', function() {
-        showMessage('Edit script.js and paste your Firebase config values, then reload the page.');
-      });
-      startExamBtn.addEventListener('click', function() {
-        remainingSeconds = 300;
-        selectedAnswers = {};
-        renderExam();
-        startTimer();
-      });
-      return;
-    }
-
-    firebase.initializeApp(firebaseConfig);
-    window.db = firebase.firestore();
-
-    // Email/Password Login Handler
     signInBtn.addEventListener('click', function() {
-      if (currentUser) {
-        // Log out
-        currentUser = null;
+      if (window.globalCurrentUser) {
+        window.globalCurrentUser = null;
         sessionStorage.removeItem('currentUser');
-        updateAuthUi();
+        window.syncExamAuthSession();
         showMessage('Logged out.');
       } else {
-        // Toggle login form visibility
         var loginForm = document.getElementById('examLoginForm');
-        if (loginForm.style.display === 'none' || loginForm.style.display === '') {
-          loginForm.style.display = 'block';
-        } else {
-          loginForm.style.display = 'none';
+        if (loginForm) {
+          loginForm.style.display = (loginForm.style.display === 'none' || loginForm.style.display === '') ? 'block' : 'none';
         }
       }
     });
 
-    // Handle login form submission
     var examLoginBtn = document.getElementById('examLoginBtn');
     var examLoginUsername = document.getElementById('examLoginUsername');
     var examLoginPassword = document.getElementById('examLoginPassword');
@@ -672,46 +630,45 @@ document.querySelectorAll('a[href^="#"]').forEach(function(a) {
           return;
         }
 
-        // Query registeredUsers collection
-        window.db.collection('registeredUsers').where('username', '==', username).where('password', '==', password).get().then(function(snapshot) {
-          if (snapshot.empty) {
-            examLoginError.textContent = 'Invalid username or password.';
-            examLoginError.style.display = 'block';
-            return;
-          }
-
-          var userData = snapshot.docs[0].data();
-          currentUser = {
-            uid: snapshot.docs[0].id,
-            name: userData.name,
-            username: userData.username
-          };
-          sessionStorage.setItem('currentUser', JSON.stringify(currentUser));
-          updateAuthUi();
-          showMessage('Logged in successfully!');
-          examLoginError.style.display = 'none';
-          examLoginUsername.value = '';
-          examLoginPassword.value = '';
-          var loginForm = document.getElementById('examLoginForm');
-          if (loginForm) loginForm.style.display = 'none';
-          loadLeaderboard();
-        }).catch(function(err) {
-          examLoginError.textContent = 'Error: ' + err.message;
+        if (!window.db) {
+          examLoginError.textContent = 'Database offline.';
           examLoginError.style.display = 'block';
-        });
+          return;
+        }
+
+        window.db.collection('registeredUsers')
+          .where('username', '==', username)
+          .where('password', '==', password)
+          .get()
+          .then(function(snapshot) {
+            if (snapshot.empty) {
+              examLoginError.textContent = 'Invalid username or password.';
+              examLoginError.style.display = 'block';
+              return;
+            }
+
+            var userData = snapshot.docs[0].data();
+            window.globalCurrentUser = {
+              uid: snapshot.docs[0].id,
+              name: userData.name,
+              username: userData.username
+            };
+            sessionStorage.setItem('currentUser', JSON.stringify(window.globalCurrentUser));
+            window.syncExamAuthSession();
+            showMessage('Logged in successfully!');
+            examLoginError.style.display = 'none';
+            examLoginUsername.value = '';
+            examLoginPassword.value = '';
+          })
+          .catch(function(err) {
+            examLoginError.textContent = 'Error: ' + err.message;
+            examLoginError.style.display = 'block';
+          });
       });
     }
 
-    // Check if user is already logged in from sessionStorage
-    var storedUser = sessionStorage.getItem('currentUser');
-    if (storedUser) {
-      currentUser = JSON.parse(storedUser);
-      updateAuthUi();
-      loadLeaderboard();
-    } else {
-      updateAuthUi();
-      loadLeaderboard();
-    }
+    window.syncExamAuthSession();
+    loadLeaderboard();
 
     startExamBtn.addEventListener('click', function() {
       remainingSeconds = 300;
@@ -728,4 +685,3 @@ document.querySelectorAll('a[href^="#"]').forEach(function(a) {
     initFirebaseExam();
   }
 })();
-
