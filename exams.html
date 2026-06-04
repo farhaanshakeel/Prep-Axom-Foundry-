@@ -4,38 +4,176 @@
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Exams — Prep Axiom Foundry</title>
-  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700;900&family=Rajdhani:wght@300;400;500;600&family=Share+Tech+Mono&display=swap" rel="stylesheet"/>
+
+  <meta name="description" content="PAF Exams — Coming Soon."/>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Mono:wght@300;400;500&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet"/>
   <link rel="stylesheet" href="styles.css"/>
+
+  <style>
+    /* ── EXAM PAGE — COMING SOON ── */
+    #exam-main {
+      margin-left: var(--sidebar-w);
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* Crosshair grid — mirrors the hero background */
+    #exam-main::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(0,168,255,0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0,168,255,0.03) 1px, transparent 1px);
+      background-size: 48px 48px;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* Corner bracket — top-left, mirrors hero */
+    #exam-main::after {
+      content: '';
+      position: absolute;
+      top: 40px; left: 40px;
+      width: 40px; height: 40px;
+      border-top: 1px solid var(--blue);
+      border-left: 1px solid var(--blue);
+      pointer-events: none;
+    }
+
+    /* Corner bracket — bottom-right */
+    .corner-br {
+      position: absolute;
+      bottom: 40px; right: 40px;
+      width: 40px; height: 40px;
+      border-bottom: 1px solid var(--blue);
+      border-right: 1px solid var(--blue);
+      pointer-events: none;
+    }
+
+    /* ── COMING SOON TEXT ── */
+    .coming-soon-wrap {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 28px;
+      text-align: center;
+      padding: 40px;
+    }
+
+    .coming-soon-label {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      letter-spacing: 0.35em;
+      text-transform: uppercase;
+      color: var(--blue);
+    }
+
+    .coming-soon-text {
+      font-family: var(--font-display);
+      font-size: clamp(52px, 9vw, 110px);
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      line-height: 1;
+      color: var(--text-head);
+
+      /* layered glow */
+      text-shadow:
+        0 0 20px rgba(0, 168, 255, 0.55),
+        0 0 60px rgba(0, 168, 255, 0.30),
+        0 0 120px rgba(0, 168, 255, 0.15);
+
+      animation: pulse-glow 3.2s ease-in-out infinite;
+    }
+
+    .coming-soon-text span {
+      color: var(--blue);
+      text-shadow:
+        0 0 24px rgba(0, 168, 255, 0.85),
+        0 0 70px rgba(0, 168, 255, 0.50),
+        0 0 140px rgba(0, 168, 255, 0.25);
+    }
+
+    @keyframes pulse-glow {
+      0%, 100% {
+        text-shadow:
+          0 0 20px rgba(0, 168, 255, 0.55),
+          0 0 60px rgba(0, 168, 255, 0.30),
+          0 0 120px rgba(0, 168, 255, 0.15);
+      }
+      50% {
+        text-shadow:
+          0 0 30px rgba(0, 168, 255, 0.80),
+          0 0 90px rgba(0, 168, 255, 0.50),
+          0 0 180px rgba(0, 168, 255, 0.25);
+      }
+    }
+
+    .coming-soon-sub {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      letter-spacing: 0.22em;
+      color: var(--text-dim);
+      text-transform: uppercase;
+    }
+
+    /* Responsive */
+    @media (max-width: 1080px) {
+      #exam-main { margin-left: 0; }
+    }
+    @media (max-width: 760px) {
+      #exam-main { padding-top: 72px; }
+      .coming-soon-text { font-size: clamp(40px, 14vw, 72px); }
+    }
+  </style>
 </head>
 <body>
+
+<!-- ══ INTRO SCREEN ══ -->
+<div id="intro-screen">
+  <div id="intro-logo">
+    <img src="logo.png" alt="PAF Logo" id="intro-img"/>
+    <div id="intro-title">Prep Axiom Foundry</div>
+    <div id="intro-sub">// EST. 2026 · GLOBAL ACADEMIC GUILD</div>
+  </div>
+</div>
+
 <div id="particles"></div>
 
 <aside id="sidebar">
   <div class="logo-wrap">
-    <div class="logo-text">PREP AXIOM<br>FOUNDRY</div>
+    <div class="logo-text">Prep Axiom<br>Foundry</div>
     <div class="logo-sub">// PAF — EST. 2026</div>
   </div>
   <nav>
-    <a href="index.html"><span class="nav-icon">⬡</span>Home</a>
-    <a href="hall-of-fame.html"><span class="nav-icon">🏆</span>Hall of Fame</a>
-    <a href="members.html"><span class="nav-icon">🌟</span>Members</a>
-    <a href="exams.html"><span class="nav-icon">🧪</span>Exams</a>
-    <a href="index.html#about"><span class="nav-icon">◈</span>About us</a>
+    <a href="index.html"><span class="nav-icon">—</span>Home</a>
+    <a href="hall-of-fame.html"><span class="nav-icon">—</span>Hall of Fame</a>
+    <a href="members.html"><span class="nav-icon">—</span>Members</a>
+    <a href="exams.html" class="active"><span class="nav-icon">—</span>Exams</a>
+    <a href="index.html#about"><span class="nav-icon">—</span>About us</a>
   </nav>
   <div class="sidebar-footer">
     <div id="globalLoginWidget" style="margin-bottom: 12px;">
       <div id="globalLoginForm" style="display:none;">
-        <input type="text" id="globalLoginUsername" placeholder="Discord Username" style="display:block; width:100%; padding:8px; margin-bottom:8px; background:rgba(0,170,255,0.05); border:1px solid rgba(0,170,255,0.2); color:var(--white); font-family:'Rajdhani',sans-serif; font-size:12px; box-sizing:border-box;"/>
-        <input type="password" id="globalLoginPassword" placeholder="Password" style="display:block; width:100%; padding:8px; margin-bottom:8px; background:rgba(0,170,255,0.05); border:1px solid rgba(0,170,255,0.2); color:var(--white); font-family:'Rajdhani',sans-serif; font-size:12px; box-sizing:border-box;"/>
-        <button id="globalLoginBtn" style="width:100%; padding:8px; background:var(--blue); color:var(--black); border:none; font-family:'Orbitron',sans-serif; font-size:11px; font-weight:700; cursor:pointer; margin-bottom:6px;">Sign In</button>
-        <button id="globalLoginCancel" style="width:100%; padding:6px; background:transparent; color:var(--blue); border:1px solid var(--blue); font-family:'Rajdhani',sans-serif; font-size:11px; cursor:pointer;">Cancel</button>
-        <div id="globalLoginError" style="color:#ff6464; font-size:10px; margin-top:6px; text-align:center; display:none;"></div>
+        <input type="text" id="globalLoginUsername" placeholder="Discord Username"/>
+        <input type="password" id="globalLoginPassword" placeholder="Password"/>
+        <button id="globalLoginBtn">Sign In</button>
+        <button id="globalLoginCancel">Cancel</button>
+        <div id="globalLoginError" style="display:none;"></div>
       </div>
       <div id="globalLoginStatus" style="display:none; text-align:center;">
-        <div style="font-family:'Rajdhani',sans-serif; font-size:11px; color:var(--grey); margin-bottom:8px;">Logged in as <strong id="globalUserDisplay"></strong></div>
-        <button id="globalLogoutBtn" style="width:100%; padding:8px; background:rgba(255,100,100,0.2); color:#ff6464; border:1px solid #ff6464; font-family:'Orbitron',sans-serif; font-size:11px; font-weight:700; cursor:pointer;">Log Out</button>
+        <div style="font-family:'DM Mono',monospace; font-size:11px; color:var(--grey); margin-bottom:8px;">
+          Logged in as <strong id="globalUserDisplay"></strong>
+        </div>
+        <button id="globalLogoutBtn">Log Out</button>
       </div>
-      <button id="globalLoginToggle" style="width:100%; padding:8px; background:var(--blue); color:var(--black); border:none; font-family:'Orbitron',sans-serif; font-size:11px; font-weight:700; letter-spacing:1px; text-transform:uppercase; cursor:pointer; margin-bottom:12px;">Log In</button>
+      <button id="globalLoginToggle">Log In</button>
     </div>
     <a href="https://discord.gg/U4dCDkdUHw" class="discord-btn" target="_blank">Join Discord →</a>
   </div>
@@ -43,66 +181,19 @@
 
 <button id="hamburger" aria-label="Menu"><span></span><span></span><span></span></button>
 
-<main id="main">
-  <div class="page-wrap">
-    <div class="reveal">
-      <div class="section-label">// Exams</div>
-      <h2 class="section-title">Moderated <span class="accent">Tests</span></h2>
-      <div class="section-divider"></div>
-    </div>
-    <p class="join-desc reveal">PAF helps you prepare for olympiad stages and competitive exams with peer-led study, mentor guidance, and future moderated tests. Our community is designed around long-term improvement.</p>
+<main id="exam-main">
+  <div class="corner-br"></div>
 
-    <div class="members-section-label reveal">// Exam Platform</div>
-    <div class="exam-card reveal" style="text-align: center; padding: 60px 40px; background: linear-gradient(135deg, rgba(0, 170, 255, 0.05) 0%, rgba(255, 100, 200, 0.05) 100%);">
-      <div style="font-size: 64px; margin-bottom: 24px;">🚀</div>
-      <h3 style="font-family: 'Orbitron', sans-serif; font-size: 28px; color: var(--white); margin-bottom: 12px; letter-spacing: 2px;">COMING SOON</h3>
-      <p style="font-family: 'Rajdhani', sans-serif; color: rgba(255, 255, 255, 0.7); font-size: 14px; line-height: 1.6; max-width: 500px; margin: 0 auto 24px;">
-        The PAF Exam Platform is under construction. We're building a world-class testing environment with advanced features, real-time scoring, and leaderboards. Stay tuned!
-      </p>
-      <div style="display: flex; gap: 16px; justify-content: center; flex-wrap: wrap;">
-        <a href="https://discord.gg/U4dCDkdUHw" class="btn-primary" target="_blank" style="font-size:13px; padding:12px 28px;">Join Discord for Updates</a>
-        <button onclick="document.getElementById('notify-form').scrollIntoView({behavior: 'smooth'})" class="btn-secondary" style="font-size:13px; padding:12px 28px;">Get Notified</button>
-      </div>
-    </div>
-
-    <div class="members-section-label reveal">// Exam Focus</div>
-    <div class="features-grid reveal" style="grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));">
-      <div class="feature-card"><span class="feature-icon">�</span><div class="feature-title">Multi-Subject Exams</div><p class="feature-desc" style="color:#ff9800;">Coming Soon</p></div>
-      <div class="feature-card"><span class="feature-icon">🚀</span><div class="feature-title">Timed Challenges</div><p class="feature-desc" style="color:#ff9800;">Coming Soon</p></div>
-      <div class="feature-card"><span class="feature-icon">📊</span><div class="feature-title">Olympiad Rounds</div><p class="feature-desc" style="color:#ff9800;">Coming Soon</p></div>
-      <div class="feature-card"><span class="feature-icon">🎯</span><div class="feature-title">Custom Exams</div><p class="feature-desc" style="color:#ff9800;">Coming Soon</p></div>
-    </div>
-
-    <div class="open-spots reveal">
-      The exam platform is now live in demo form. Sign in and start your first exam attempt, then compare scores on the leaderboard.
-    </div>
-
-    <div class="reveal" style="text-align:center; margin-top:32px;">
-      <a href="https://discord.gg/U4dCDkdUHw" class="btn-primary" target="_blank" style="font-size:13px;padding:20px 52px;">Join the Exam Launch List</a>
-    </div>
+  <div class="coming-soon-wrap">
+    <span class="coming-soon-label">// Exams — PAF</span>
+    <div class="coming-soon-text">Coming <span>Soon</span></div>
+    <span class="coming-soon-sub">// Stay tuned · Discord for updates</span>
   </div>
 </main>
 
-<footer id="footer">
-  <div class="footer-inner">
-    <div class="footer-logo">Prep Axiom Foundry</div>
-    <div class="footer-links">
-      <a href="index.html">Home</a>
-      <a href="hall-of-fame.html">Hall of Fame</a>
-      <a href="members.html">Members</a>
-      <a href="exams.html">Exams</a>
-    </div>
-    <div class="footer-copy">
-      Sponsored by <a href="https://poweriq.agency/" target="_blank" style="color:var(--blue); text-decoration:none;">Power IQ</a> — A competitive intelligence community where knowledge is measured, classes are assigned, and the most disciplined minds rise to the top.
-      <br>
-      © 2026 Prep Axiom Foundry. All rights reserved.
-    </div>
-  </div>
-</footer>
-
-  <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-app-compat.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-auth-compat.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-firestore-compat.js"></script>
-  <script src="script.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-firestore-compat.js"></script>
+<script src="script.js"></script>
 </body>
 </html>
