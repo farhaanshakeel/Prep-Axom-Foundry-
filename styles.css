@@ -240,15 +240,21 @@ button { font: inherit; cursor: pointer; }
   background: var(--text-head);
 }
 
-/* ── LAYOUT ──────────────────────────────────────────── */
+/* ── LAYOUT (ENFORCED BOUNDARIES FIX) ────────────────── */
 #main {
   margin-left: var(--sidebar-w);
   position: relative;
   z-index: 1;
+  min-width: 0;
+  width: calc(100% - var(--sidebar-w));
+  box-sizing: border-box;
+  transition: margin-left 0.3s ease, width 0.3s ease;
 }
 
 section {
   padding: 112px 88px;
+  width: 100%;
+  box-sizing: border-box;
 }
 
 /* ── HERO ────────────────────────────────────────────── */
@@ -262,6 +268,8 @@ section {
   padding-bottom: 96px;
   position: relative;
   border-bottom: 1px solid var(--border-hard);
+  width: 100%;
+  box-sizing: border-box;
 }
 
 /* Crosshair grid background */
@@ -803,6 +811,8 @@ input:focus, select:focus, textarea:focus {
   background: var(--surface);
   border-top: 1px solid var(--border-hard);
   padding: 56px 88px 40px;
+  width: calc(100% - var(--sidebar-w));
+  box-sizing: border-box;
 }
 .footer-inner {
   display: flex;
@@ -863,11 +873,6 @@ input:focus, select:focus, textarea:focus {
   position: relative;
   overflow: hidden;
 }
-.grid-card::after,
-.hof-card::after,
-.feature-card::after,
-.team-card::after,
-.member-card::after { /* hero-card uses its own ::after */ }
 
 /* Glow class — keep JS compat, but subtle */
 .grid-card.glow,
@@ -886,11 +891,11 @@ input:focus, select:focus, textarea:focus {
   background: rgba(0,168,255,0.25);
 }
 
-/* ── RESPONSIVE ──────────────────────────────────────── */
+/* ── RESPONSIVE (BOX BOUNDS FORCED) ──────────────────── */
 @media (max-width: 1080px) {
   #hero { grid-template-columns: 1fr; }
-  #main { margin-left: 0; }
-  #footer { margin-left: 0; padding: 40px 28px 32px; }
+  #main { margin-left: 0; width: 100%; }
+  #footer { margin-left: 0; width: 100%; padding: 40px 28px 32px; }
   section { padding: 80px 28px; }
   .about-grid,
   .features-grid,
@@ -913,7 +918,7 @@ input:focus, select:focus, textarea:focus {
   }
   #sidebar.open { transform: translateY(0); }
   #hamburger { display: flex; }
-  #main { margin-left: 0; padding-top: 72px; }
+  #main { margin-left: 0; width: 100%; padding-top: 72px; }
   section { padding: 64px 20px; }
   .hero-actions, .join-actions { flex-direction: column; }
   .btn-primary, .btn-secondary { width: 100%; text-align: center; }
