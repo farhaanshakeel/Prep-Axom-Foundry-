@@ -90,8 +90,8 @@ if (!firebase.apps.length) {
   app = firebase.app();
 }
 
-// Binds the admin client to your explicit custom named database instance
-var db = app.firestore("default");
+// FIX: Initialized core standard root instance to fix connection status dropouts
+var db = app.firestore();
 
 var AUVALEN_USERNAME = 'auvalen';
 var AUVALEN_PASSWORD = 'A$5fVz9!QeR7bT2kWpY3';
