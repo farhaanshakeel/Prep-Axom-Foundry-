@@ -23,8 +23,31 @@
 
   <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Mono:wght@300;400;500&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet"/>
   <link rel="stylesheet" href="styles.css"/>
+  
+  <style>
+    /* Real-Time Broadcast Banner Strip */
+    #live-broadcast-banner {
+      display: none;
+      background: #00aaff;
+      color: #020810;
+      font-family: 'DM Mono', monospace;
+      font-size: 12px;
+      font-weight: 500;
+      text-align: center;
+      padding: 8px 20px;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      position: sticky;
+      top: 0;
+      z-index: 9999;
+      box-shadow: 0 2px 10px rgba(0, 170, 255, 0.3);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+    }
+  </style>
 </head>
 <body>
+
+<div id="live-broadcast-banner"></div>
 
 <div id="intro-screen">
   <div id="intro-logo">
@@ -32,7 +55,7 @@
     <div id="intro-title">Prep Axiom Foundry</div>
     <div id="intro-sub">// EST. 2026 · GLOBAL ACADEMIC GUILD</div>
   </div>
-  </div>
+</div>
 
 <div id="particles"></div>
 
@@ -69,166 +92,168 @@
 
 <button id="hamburger" aria-label="Menu"><span></span><span></span><span></span></button>
 
-<main id="main">
-  <section id="hero">
-    <div class="hero-copy">
-      <span class="hero-eyebrow">// ACADEMIC GUILD FOR MATHEMATICS & PHYSICS</span>
-      <h1 class="hero-title">Prepare with <span>Precision</span><br/>Practice with <span>Purpose</span></h1>
-      <p class="hero-text">A student-led community for disciplined olympiad learners. Mentor-guided study groups, solved-problem archives, and a live exam demo built on Firebase.</p>
-      <div class="hero-actions">
+<div id="page-content-wrapper">
+  <main id="main">
+    <section id="hero">
+      <div class="hero-copy">
+        <span class="hero-eyebrow">// ACADEMIC GUILD FOR MATHEMATICS & PHYSICS</span>
+        <h1 class="hero-title" id="hero-title">Prepare with <span>Precision</span><br/>Practice with <span>Purpose</span></h1>
+        <p class="hero-text" id="hero-subtitle">A student-led community for disciplined olympiad learners. Mentor-guided study groups, solved-problem archives, and a live exam demo built on Firebase.</p>
+        <div class="hero-actions">
+          <a href="https://discord.gg/U4dCDkdUHw" class="btn-primary" target="_blank">Join Discord</a>
+          <a href="#about" class="btn-secondary">Explore PAF</a>
+        </div>
+      </div>
+      <div class="hero-details">
+        <article class="hero-card">
+          <span class="hero-card-label">Problems Logged</span>
+          <span class="hero-card-value" id="counter-problems" data-target="4">0</span>
+          <p class="hero-card-copy">A permanent hall of fame for solved problems and partial entries.</p>
+        </article>
+        <article class="hero-card">
+          <span class="hero-card-label">Early Member Spots</span>
+          <span class="hero-card-value">50</span>
+          <p class="hero-card-copy">The first cohort earns a permanent early member badge.</p>
+        </article>
+        <article class="hero-card">
+          <span class="hero-card-label">Exam Demo</span>
+          <span class="hero-card-value">Firebase Live</span>
+          <p class="hero-card-copy">A functioning exam workflow is ready for sign-in and testing.</p>
+        </article>
+      </div>
+    </section>
+
+    <section id="about" class="section-surface">
+      <div class="section-head">
+        <span class="section-label">// 01 — About</span>
+        <h2 class="section-title">What is <span class="accent">PAF</span>?</h2>
+      </div>
+      <div class="about-grid">
+        <div class="about-copy">
+          <p><strong>Prep Axiom Foundry</strong> is a peer-led academic guild for students preparing for olympiad mathematics, physics, and advanced science. It is built by students, for students.</p>
+          <p>Members learn in focused study groups, solve exceptional problems, and take moderated tests while staying supported by mentors and an advocate.</p>
+          <p> We value deep reasoning more than speed, consistency more than flash, and wellbeing more than burnout.</p>
+          <div class="about-quote">
+            “This is not a tutoring platform. It is a place where serious students shape their own understanding together.”
+            <cite>— Auvalen, Founder</cite>
+          </div>
+        </div>
+        <div class="about-stats">
+          <div class="about-stat">
+            <span class="about-stat-number">4</span>
+            <span class="about-stat-label">Featured problems</span>
+          </div>
+          <div class="about-stat">
+            <span class="about-stat-number">1</span>
+            <span class="about-stat-label">Live exam demo</span>
+          </div>
+          <div class="about-stat">
+            <span class="about-stat-number">50</span>
+            <span class="about-stat-label">Early member spots</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="features">
+      <div class="section-head">
+        <span class="section-label">// 02 — Features</span>
+        <h2 class="section-title">What we <span class="accent">offer</span></h2>
+      </div>
+      <div class="features-grid">
+        <article class="feature-card">
+          <div class="feature-icon">// 01</div>
+          <h3>Peer Study Groups</h3>
+          <p>Collaborate in focused study sessions, peer review proofs, and develop academic confidence together.</p>
+        </article>
+        <article class="feature-card">
+          <div class="feature-icon">// 02</div>
+          <h3>Hall of Fame</h3>
+          <p>Record your best work publicly so effort and achievement remain visible and respected.</p>
+        </article>
+        <article class="feature-card">
+          <div class="feature-icon">// 03</div>
+          <h3>Mentor Access</h3>
+          <p>Get guidance from experienced mentors who help you understand ideas, not just memorize answers.</p>
+        </article>
+        <article class="feature-card">
+          <div class="feature-icon">// 04</div>
+          <h3>Structured Growth</h3>
+          <p>Build long-term progress with disciplined practice, regular review, and community accountability.</p>
+        </article>
+      </div>
+    </section>
+
+    <section id="halloffame" class="section-surface">
+      <div class="section-head">
+        <span class="section-label">// 03 — Hall of Fame</span>
+        <h2 class="section-title">Featured <span class="accent">Problems</span></h2>
+      </div>
+      <div class="hof-grid">
+        <article class="hof-card">
+          <div class="hof-top">
+            <span class="hof-badge">Problem #001</span>
+            <span class="hof-tag">Physics · Mechanics</span>
+          </div>
+          <h3>Air Resistance Optimization</h3>
+          <p>Velocity-dependent drag and vertical motion combine into a high-level challenge: optimise height and energy loss.</p>
+          <div class="hof-footer">
+            <span>FBD · Kinematics · ODEs</span>
+            <span>Open problem</span>
+          </div>
+        </article>
+        <article class="hof-card">
+          <div class="hof-top">
+            <span class="hof-badge">Problem #002</span>
+            <span class="hof-tag">Mathematics · Geometry</span>
+          </div>
+          <h3>Find AC</h3>
+          <p>A circle geometry problem with a diameter, collinear points, and a right triangle. Solve it with the right mix of theorems.</p>
+          <div class="hof-footer">
+            <span>Circle Theorems · Pythagoras</span>
+            <span>Open problem</span>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section id="team">
+      <div class="section-head">
+        <span class="section-label">// 04 — Team</span>
+        <h2 class="section-title">Who is behind <span class="accent">PAF</span>?</h2>
+      </div>
+      <div class="team-grid">
+        <article class="team-card">
+          <div class="team-avatar">A</div>
+          <h3>Auvalen</h3>
+          <p>Founder with a driving passion for mathematics and physics.</p>
+        </article>
+        <article class="team-card">
+          <div class="team-avatar">N</div>
+          <h3>Nuven</h3>
+          <p>Co-founder and community collaborator building the platform.</p>
+        </article>
+        <article class="team-card">
+          <div class="team-avatar">F</div>
+          <h3>Fam</h3>
+          <p>Student advocate supporting members' wellbeing and consistency.</p>
+        </article>
+      </div>
+    </section>
+
+    <section id="join" class="section-surface">
+      <div class="section-head">
+        <span class="section-label">// 05 — Join Us</span>
+        <h2 class="section-title">Ready to <span class="accent">forge</span> your mind?</h2>
+      </div>
+      <p class="join-copy">The first 50 members receive a permanent early member badge. Join our Discord, read the rules, and start your first study cycle today.</p>
+      <div class="join-actions">
         <a href="https://discord.gg/U4dCDkdUHw" class="btn-primary" target="_blank">Join Discord</a>
-        <a href="#about" class="btn-secondary">Explore PAF</a>
+        <a href="exams.html" class="btn-secondary">Try the exam demo</a>
       </div>
-    </div>
-    <div class="hero-details">
-      <article class="hero-card">
-        <span class="hero-card-label">Problems Logged</span>
-        <span class="hero-card-value" id="counter-problems" data-target="4">0</span>
-        <p class="hero-card-copy">A permanent hall of fame for solved problems and partial entries.</p>
-      </article>
-      <article class="hero-card">
-        <span class="hero-card-label">Early Member Spots</span>
-        <span class="hero-card-value">50</span>
-        <p class="hero-card-copy">The first cohort earns a permanent early member badge.</p>
-      </article>
-      <article class="hero-card">
-        <span class="hero-card-label">Exam Demo</span>
-        <span class="hero-card-value">Firebase Live</span>
-        <p class="hero-card-copy">A functioning exam workflow is ready for sign-in and testing.</p>
-      </article>
-    </div>
-  </section>
-
-  <section id="about" class="section-surface">
-    <div class="section-head">
-      <span class="section-label">// 01 — About</span>
-      <h2 class="section-title">What is <span class="accent">PAF</span>?</h2>
-    </div>
-    <div class="about-grid">
-      <div class="about-copy">
-        <p><strong>Prep Axiom Foundry</strong> is a peer-led academic guild for students preparing for olympiad mathematics, physics, and advanced science. It is built by students, for students.</p>
-        <p>Members learn in focused study groups, solve exceptional problems, and take moderated tests while staying supported by mentors and an advocate.</p>
-        <p> We value deep reasoning more than speed, consistency more than flash, and wellbeing more than burnout.</p>
-        <div class="about-quote">
-          “This is not a tutoring platform. It is a place where serious students shape their own understanding together.”
-          <cite>— Auvalen, Founder</cite>
-        </div>
-      </div>
-      <div class="about-stats">
-        <div class="about-stat">
-          <span class="about-stat-number">4</span>
-          <span class="about-stat-label">Featured problems</span>
-        </div>
-        <div class="about-stat">
-          <span class="about-stat-number">1</span>
-          <span class="about-stat-label">Live exam demo</span>
-        </div>
-        <div class="about-stat">
-          <span class="about-stat-number">50</span>
-          <span class="about-stat-label">Early member spots</span>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section id="features">
-    <div class="section-head">
-      <span class="section-label">// 02 — Features</span>
-      <h2 class="section-title">What we <span class="accent">offer</span></h2>
-    </div>
-    <div class="features-grid">
-      <article class="feature-card">
-        <div class="feature-icon">// 01</div>
-        <h3>Peer Study Groups</h3>
-        <p>Collaborate in focused study sessions, peer review proofs, and develop academic confidence together.</p>
-      </article>
-      <article class="feature-card">
-        <div class="feature-icon">// 02</div>
-        <h3>Hall of Fame</h3>
-        <p>Record your best work publicly so effort and achievement remain visible and respected.</p>
-      </article>
-      <article class="feature-card">
-        <div class="feature-icon">// 03</div>
-        <h3>Mentor Access</h3>
-        <p>Get guidance from experienced mentors who help you understand ideas, not just memorize answers.</p>
-      </article>
-      <article class="feature-card">
-        <div class="feature-icon">// 04</div>
-        <h3>Structured Growth</h3>
-        <p>Build long-term progress with disciplined practice, regular review, and community accountability.</p>
-      </article>
-    </div>
-  </section>
-
-  <section id="halloffame" class="section-surface">
-    <div class="section-head">
-      <span class="section-label">// 03 — Hall of Fame</span>
-      <h2 class="section-title">Featured <span class="accent">Problems</span></h2>
-    </div>
-    <div class="hof-grid">
-      <article class="hof-card">
-        <div class="hof-top">
-          <span class="hof-badge">Problem #001</span>
-          <span class="hof-tag">Physics · Mechanics</span>
-        </div>
-        <h3>Air Resistance Optimization</h3>
-        <p>Velocity-dependent drag and vertical motion combine into a high-level challenge: optimise height and energy loss.</p>
-        <div class="hof-footer">
-          <span>FBD · Kinematics · ODEs</span>
-          <span>Open problem</span>
-        </div>
-      </article>
-      <article class="hof-card">
-        <div class="hof-top">
-          <span class="hof-badge">Problem #002</span>
-          <span class="hof-tag">Mathematics · Geometry</span>
-        </div>
-        <h3>Find AC</h3>
-        <p>A circle geometry problem with a diameter, collinear points, and a right triangle. Solve it with the right mix of theorems.</p>
-        <div class="hof-footer">
-          <span>Circle Theorems · Pythagoras</span>
-          <span>Open problem</span>
-        </div>
-      </article>
-    </div>
-  </section>
-
-  <section id="team">
-    <div class="section-head">
-      <span class="section-label">// 04 — Team</span>
-      <h2 class="section-title">Who is behind <span class="accent">PAF</span>?</h2>
-    </div>
-    <div class="team-grid">
-      <article class="team-card">
-        <div class="team-avatar">A</div>
-        <h3>Auvalen</h3>
-        <p>Founder with a driving passion for mathematics and physics.</p>
-      </article>
-      <article class="team-card">
-        <div class="team-avatar">N</div>
-        <h3>Nuven</h3>
-        <p>Co-founder and community collaborator building the platform.</p>
-      </article>
-      <article class="team-card">
-        <div class="team-avatar">F</div>
-        <h3>Fam</h3>
-        <p>Student advocate supporting members' wellbeing and consistency.</p>
-      </article>
-    </div>
-  </section>
-
-  <section id="join" class="section-surface">
-    <div class="section-head">
-      <span class="section-label">// 05 — Join Us</span>
-      <h2 class="section-title">Ready to <span class="accent">forge</span> your mind?</h2>
-    </div>
-    <p class="join-copy">The first 50 members receive a permanent early member badge. Join our Discord, read the rules, and start your first study cycle today.</p>
-    <div class="join-actions">
-      <a href="https://discord.gg/U4dCDkdUHw" class="btn-primary" target="_blank">Join Discord</a>
-      <a href="exams.html" class="btn-secondary">Try the exam demo</a>
-    </div>
-  </section>
-</main>
+    </section>
+  </main>
+</div>
 
 <footer id="footer">
   <div class="footer-inner">
@@ -259,16 +284,57 @@
     appId: "1:851208226756:web:5bdde19467ddf9e0eb4691"
   };
 
-  // Safe initializing engine wrapper
-  var app;
-  if (!firebase.apps.length) {
-    app = firebase.initializeApp(firebaseConfig);
-  } else {
-    app = firebase.app();
-  }
-  
-  // Explicitly binds the database routing pointer to your database name context
-  window.db = app.firestore("default"); 
+  var app = !firebase.apps.length ? firebase.initializeApp(firebaseConfig) : firebase.app();
+  window.db = app.firestore(); 
+
+  // REAL-TIME OPERATIONS ENGINE FOR SITE SETTINGS
+  (function() {
+    var broadcastBanner = document.getElementById("live-broadcast-banner");
+    var heroTitle = document.getElementById("hero-title");
+    var heroSubtitle = document.getElementById("hero-subtitle");
+    var pageWrapper = document.getElementById("page-content-wrapper");
+
+    window.db.collection("siteConfiguration").doc("globalSettings")
+      .onSnapshot(function(doc) {
+        if (!doc.exists) return;
+        var data = doc.data();
+
+        // 1. LIVE MAINTENANCE RUNTIME EMERGENCY LOCKDOWN
+        if (data.maintenanceMode === true) {
+          if (broadcastBanner) broadcastBanner.style.display = "none";
+          if (pageWrapper) {
+            pageWrapper.innerHTML = `
+              <main id="main" style="min-height: 70vh; display: flex; flex-direction: column; justify-content: center; align-items: center; padding: 60px 20px; text-align: center; font-family: 'DM Mono', monospace;">
+                <h1 style="font-family: 'Syne', sans-serif; font-size: 32px; color: #ff6464; text-transform: uppercase; margin-bottom: 16px; letter-spacing: 2px;">[Grid Lockdown Imposed]</h1>
+                <p style="color: var(--grey); max-width: 500px; font-size: 14px; line-height: 1.6;">Prep Axiom Foundry configurations are currently undergoing remote administrative architecture optimizations. Access vectors will recover shortly.</p>
+              </main>
+            `;
+          }
+          return;
+        }
+
+        // 2. LIVE RUNTIME RE-RENDERING: TICKER STRIP STATUS
+        if (broadcastBanner && data.bannerNotice) {
+          if (data.bannerNotice.visible === true && data.bannerNotice.text) {
+            broadcastBanner.textContent = data.bannerNotice.text;
+            broadcastBanner.style.display = "block";
+          } else {
+            broadcastBanner.style.display = "none";
+          }
+        }
+
+        // 3. LIVE RUNTIME RE-RENDERING: HERO PROSE
+        if (heroTitle && data.heroSection?.title) {
+          heroTitle.innerHTML = data.heroSection.title.replace(/\n/g, '<br/>');
+        }
+        if (heroSubtitle && data.heroSection?.subtitle) {
+          heroSubtitle.textContent = data.heroSection.subtitle;
+        }
+
+      }, function(err) {
+        console.error("Configuration stream synchronization fault: ", err);
+      });
+  })();
 </script>
 
 <script src="script.js"></script>
