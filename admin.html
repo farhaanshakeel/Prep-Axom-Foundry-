@@ -157,6 +157,8 @@ var firebaseConfig = {
 };
 
 var app = !firebase.apps.length ? firebase.initializeApp(firebaseConfig) : firebase.app();
+
+// FIXED: Changed app.fireslore() typo to app.firestore() to resolve core runtime crash
 var db = app.firestore();
 
 var AUVALEN_USERNAME = 'auvalen';
@@ -333,13 +335,11 @@ function initializeAdminDynamicControlDeck() {
   });
 }
 
-// BULLETPROOF SYSTEM EVENT CAPTURING GRID
 document.body.addEventListener('click', function(event) {
   var globalConfigRef = db.collection("siteConfiguration").doc("globalSettings");
   var dynamicGlobalMsg = document.getElementById('globalSettingsMsg');
   var dynamicExamMsg = document.getElementById('examDeployMsg');
 
-  // CASE A: Clicked Commit Settings
   if (event.target && event.target.id === 'btn-save-global') {
     event.preventDefault();
     if (dynamicGlobalMsg) dynamicGlobalMsg.style.display = "none";
@@ -371,7 +371,6 @@ document.body.addEventListener('click', function(event) {
       });
   }
 
-  // CASE B: Clicked Inject Exam Node
   if (event.target && event.target.id === 'btn-deploy-exam') {
     event.preventDefault();
     if (dynamicExamMsg) dynamicExamMsg.style.display = "none";
@@ -419,7 +418,6 @@ document.body.addEventListener('click', function(event) {
   }
 });
 
-// INTERACTIVE SIDEBAR VISIBILITY MODULE
 (function() {
   var sidebarNode = document.getElementById("sidebar");
   var mainNode = document.getElementById("main");
