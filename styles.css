@@ -240,7 +240,7 @@ button { font: inherit; cursor: pointer; }
   background: var(--text-head);
 }
 
-/* ── LAYOUT (ENFORCED BOUNDARIES FIX) ────────────────── */
+/* ── LAYOUT (BOX BOUNDS ENFORCED) ────────────────────── */
 #main {
   margin-left: var(--sidebar-w);
   position: relative;
@@ -248,13 +248,72 @@ button { font: inherit; cursor: pointer; }
   min-width: 0;
   width: calc(100% - var(--sidebar-w));
   box-sizing: border-box;
-  transition: margin-left 0.3s ease, width 0.3s ease;
 }
 
 section {
   padding: 112px 88px;
   width: 100%;
   box-sizing: border-box;
+}
+
+/* ── SIDEBAR DESKTOP HIDING SYSTEM ── */
+#sidebar, #main, #footer {
+  transition: transform 0.3s cubic-bezier(0.25, 1, 0.5, 1), 
+              margin-left 0.3s cubic-bezier(0.25, 1, 0.5, 1), 
+              width 0.3s cubic-bezier(0.25, 1, 0.5, 1) !important;
+}
+
+#sidebar.collapsed {
+  transform: translateX(-100%);
+}
+
+#main.sidebar-hidden,
+#footer.sidebar-hidden {
+  margin-left: 0 !important;
+  width: 100% !important;
+}
+
+.sidebar-hide-trigger {
+  width: 100%;
+  padding: 10px;
+  background: transparent;
+  border: 1px solid var(--border-hard);
+  color: var(--text-dim);
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  margin-bottom: 16px;
+  border-radius: 0;
+  transition: color 0.2s, border-color 0.2s, background 0.2s;
+}
+.sidebar-hide-trigger:hover {
+  color: var(--text-head);
+  border-color: var(--border);
+  background: rgba(0, 168, 255, 0.04);
+}
+
+#sidebar-uncollapse-control {
+  position: fixed;
+  left: 24px;
+  bottom: 24px;
+  z-index: 9997;
+  background: var(--surface-raise);
+  border: 1px solid var(--border);
+  color: var(--blue);
+  width: 44px;
+  height: 44px;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  cursor: pointer;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.5);
+  transition: background 0.2s, color 0.2s;
+}
+#sidebar-uncollapse-control:hover {
+  background: var(--blue);
+  color: var(--black);
 }
 
 /* ── HERO ────────────────────────────────────────────── */
@@ -891,7 +950,7 @@ input:focus, select:focus, textarea:focus {
   background: rgba(0,168,255,0.25);
 }
 
-/* ── RESPONSIVE (BOX BOUNDS FORCED) ──────────────────── */
+/* ── RESPONSIVE ──────────────────────────────────────── */
 @media (max-width: 1080px) {
   #hero { grid-template-columns: 1fr; }
   #main { margin-left: 0; width: 100%; }
