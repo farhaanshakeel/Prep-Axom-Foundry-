@@ -172,9 +172,6 @@ var addUserBtn = document.getElementById('addUserBtn');
 var addUserMsg = document.getElementById('addUserMsg');
 var usersList = document.getElementById('usersList');
 
-var globalSettingsMsg = document.getElementById('globalSettingsMsg');
-var examDeployMsg = document.getElementById('examDeployMsg');
-
 function updateAdminUI() {
   if (adminLoggedIn) {
     loginScreen.style.display = 'none';
@@ -336,14 +333,16 @@ function initializeAdminDynamicControlDeck() {
   });
 }
 
-// FIXED: Global body event listener capturing to ensure elements register actions smoothly
+// BULLETPROOF SYSTEM EVENT CAPTURING GRID
 document.body.addEventListener('click', function(event) {
   var globalConfigRef = db.collection("siteConfiguration").doc("globalSettings");
+  var dynamicGlobalMsg = document.getElementById('globalSettingsMsg');
+  var dynamicExamMsg = document.getElementById('examDeployMsg');
 
   // CASE A: Clicked Commit Settings
   if (event.target && event.target.id === 'btn-save-global') {
     event.preventDefault();
-    if (globalSettingsMsg) globalSettingsMsg.style.display = "none";
+    if (dynamicGlobalMsg) dynamicGlobalMsg.style.display = "none";
     
     var payload = {
       maintenanceMode: document.getElementById("sys-maintenance").checked,
@@ -359,15 +358,15 @@ document.body.addEventListener('click', function(event) {
 
     globalConfigRef.set(payload, { merge: true })
       .then(function() {
-        if (globalSettingsMsg) {
-          globalSettingsMsg.textContent = "SUCCESS: Global environment records updated.";
-          globalSettingsMsg.style.display = "block";
+        if (dynamicGlobalMsg) {
+          dynamicGlobalMsg.textContent = "SUCCESS: Global environment records updated.";
+          dynamicGlobalMsg.style.display = "block";
         }
       })
       .catch(function(err) {
-        if (globalSettingsMsg) {
-          globalSettingsMsg.textContent = "Error committing changes: " + err.message;
-          globalSettingsMsg.style.display = "block";
+        if (dynamicGlobalMsg) {
+          dynamicGlobalMsg.textContent = "Error committing changes: " + err.message;
+          dynamicGlobalMsg.style.display = "block";
         }
       });
   }
@@ -375,7 +374,7 @@ document.body.addEventListener('click', function(event) {
   // CASE B: Clicked Inject Exam Node
   if (event.target && event.target.id === 'btn-deploy-exam') {
     event.preventDefault();
-    if (examDeployMsg) examDeployMsg.style.display = "none";
+    if (dynamicExamMsg) dynamicExamMsg.style.display = "none";
 
     var slug = document.getElementById("exam-slug").value.trim().replace(/\s+/g, '-').toLowerCase();
     var title = document.getElementById("exam-title").value.trim();
@@ -384,9 +383,9 @@ document.body.addEventListener('click', function(event) {
     var isLive = document.getElementById("exam-live").checked;
 
     if (!slug || !title) {
-      if (examDeployMsg) {
-        examDeployMsg.textContent = "ABORTED: Slug identifier and Title are missing.";
-        examDeployMsg.style.display = "block";
+      if (dynamicExamMsg) {
+        dynamicExamMsg.textContent = "ABORTED: Slug identifier and Title are missing.";
+        dynamicExamMsg.style.display = "block";
       }
       return;
     }
@@ -402,9 +401,9 @@ document.body.addEventListener('click', function(event) {
 
     db.collection("examData").doc(slug).set(examPayload)
       .then(function() {
-        if (examDeployMsg) {
-          examDeployMsg.textContent = "SUCCESS: Exam node [" + title + "] synced.";
-          examDeployMsg.style.display = "block";
+        if (dynamicExamMsg) {
+          dynamicExamMsg.textContent = "SUCCESS: Exam node [" + title + "] synced.";
+          dynamicExamMsg.style.display = "block";
         }
         document.getElementById("exam-slug").value = "";
         document.getElementById("exam-title").value = "";
@@ -412,15 +411,15 @@ document.body.addEventListener('click', function(event) {
         document.getElementById("exam-questions").value = "";
       })
       .catch(function(err) {
-        if (examDeployMsg) {
-          examDeployMsg.textContent = "Error injecting module: " + err.message;
-          examDeployMsg.style.display = "block";
+        if (dynamicExamMsg) {
+          dynamicExamMsg.textContent = "Error injecting module: " + err.message;
+          dynamicExamMsg.style.display = "block";
         }
       });
   }
 });
 
-// INTERACTIVE WORKSPACE VISIBILITY TOGGLE OPERATOR
+// INTERACTIVE SIDEBAR VISIBILITY MODULE
 (function() {
   var sidebarNode = document.getElementById("sidebar");
   var mainNode = document.getElementById("main");
