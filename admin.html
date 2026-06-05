@@ -146,6 +146,7 @@
 <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-auth-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-firestore-compat.js"></script>
+
 <script>
 var firebaseConfig = {
   apiKey: "AIzaSyBuculpQXW1j_2eaWSOhO5mer--XwcwkmE",
@@ -157,8 +158,6 @@ var firebaseConfig = {
 };
 
 var app = !firebase.apps.length ? firebase.initializeApp(firebaseConfig) : firebase.app();
-
-// CALIBRATED ROUTE: Targets primary instance pool directly to prevent default initialization failures
 var db = app.firestore();
 
 var AUVALEN_USERNAME = 'auvalen';
@@ -283,6 +282,7 @@ function loadUsers() {
       var item = document.createElement('div');
       item.className = 'user-item';
       item.innerHTML = '<div class="user-info"><div class="user-email">' + data.username + '</div><div class="user-name">' + data.name + '</div></div>';
+      
       var deleteBtn = document.createElement('button');
       deleteBtn.className = 'delete-btn';
       deleteBtn.textContent = 'Delete';
@@ -335,13 +335,12 @@ function initializeAdminDynamicControlDeck() {
   });
 }
 
-document.body.addEventListener('click', function(event) {
-  var globalConfigRef = db.collection("siteConfiguration").doc("globalSettings");
-  var dynamicGlobalMsg = document.getElementById('globalSettingsMsg');
-  var dynamicExamMsg = document.getElementById('examDeployMsg');
-
-  if (event.target && event.target.id === 'btn-save-global') {
-    event.preventDefault();
+// Fixed Action-Bound Target Event Listeners (Protects clicks from child target nodes)
+var globalSaveBtn = document.getElementById('btn-save-global');
+if (globalSaveBtn) {
+  globalSaveBtn.addEventListener('click', function(e) {
+    e.preventDefault();
+    var dynamicGlobalMsg = document.getElementById('globalSettingsMsg');
     if (dynamicGlobalMsg) dynamicGlobalMsg.style.display = "none";
     
     var payload = {
@@ -356,7 +355,7 @@ document.body.addEventListener('click', function(event) {
       }
     };
 
-    globalConfigRef.set(payload, { merge: true })
+    db.collection("siteConfiguration").doc("globalSettings").set(payload, { merge: true })
       .then(function() {
         if (dynamicGlobalMsg) {
           dynamicGlobalMsg.textContent = "SUCCESS: Global environment records updated.";
@@ -369,10 +368,14 @@ document.body.addEventListener('click', function(event) {
           dynamicGlobalMsg.style.display = "block";
         }
       });
-  }
+  });
+}
 
-  if (event.target && event.target.id === 'btn-deploy-exam') {
-    event.preventDefault();
+var deployExamBtn = document.getElementById('btn-deploy-exam');
+if (deployExamBtn) {
+  deployExamBtn.addEventListener('click', function(e) {
+    e.preventDefault();
+    var dynamicExamMsg = document.getElementById('examDeployMsg');
     if (dynamicExamMsg) dynamicExamMsg.style.display = "none";
 
     var slug = document.getElementById("exam-slug").value.trim().replace(/\s+/g, '-').toLowerCase();
@@ -415,9 +418,10 @@ document.body.addEventListener('click', function(event) {
           dynamicExamMsg.style.display = "block";
         }
       });
-  }
-});
+  });
+}
 
+// UI Sidebar Management Systems Block
 (function() {
   var sidebarNode = document.getElementById("sidebar");
   var mainNode = document.getElementById("main");
@@ -445,6 +449,7 @@ document.body.addEventListener('click', function(event) {
 
 updateAdminUI();
 
+// Background Decorative Matrix Particles
 var container = document.getElementById('particles');
 if (container) {
   for (var i = 0; i < 35; i++) {

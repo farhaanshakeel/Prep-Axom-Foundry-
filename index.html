@@ -275,17 +275,23 @@
 <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-firestore-compat.js"></script>
 
 <script>
-  var firebaseConfig = {
-    apiKey: "AIzaSyBuculpQXW1j_2eaWSOhO5mer--XwcwkmE",
-    authDomain: "prepaxiomfoundry-d4a79.firebaseapp.com",
-    projectId: "prepaxiomfoundry-d4a79",
-    storageBucket: "prepaxiomfoundry-d4a79.firebasestorage.app",
-    messagingSenderId: "851208226756",
-    appId: "1:851208226756:web:5bdde19467ddf9e0eb4691"
-  };
+  // Unified Initialization Wrapper to prevent duplicate instances
+  (function() {
+    var firebaseConfig = {
+      apiKey: "AIzaSyBuculpQXW1j_2eaWSOhO5mer--XwcwkmE",
+      authDomain: "prepaxiomfoundry-d4a79.firebaseapp.com",
+      projectId: "prepaxiomfoundry-d4a79",
+      storageBucket: "prepaxiomfoundry-d4a79.firebasestorage.app",
+      messagingSenderId: "851208226756",
+      appId: "1:851208226756:web:5bdde19467ddf9e0eb4691",
+      measurementId: "G-R3GQ6M07ZJ"
+    };
 
-  var app = !firebase.apps.length ? firebase.initializeApp(firebaseConfig) : firebase.app();
-  window.db = app.firestore(); 
+    if (!firebase.apps.length) {
+      firebase.initializeApp(firebaseConfig);
+    }
+    window.db = firebase.firestore(); 
+  })();
 
   // REAL-TIME OPERATIONS ENGINE FOR SITE SETTINGS
   (function() {
@@ -337,6 +343,6 @@
   })();
 </script>
 
-<script src="script.js"></script>
+<script src="script.js?v=2026.06.05"></script>
 </body>
 </html>

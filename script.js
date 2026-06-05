@@ -20,6 +20,7 @@
     if (!firebase.apps.length) {
       firebase.initializeApp(firebaseConfig);
     }
+    // Correct Native Root Assignment (no hardcoded string overrides)
     window.db = firebase.firestore();
   } else {
     window.db = null;
@@ -154,7 +155,6 @@ document.addEventListener('DOMContentLoaded', function() {
           loginForm.style.display = 'none';
           updateGlobalLoginUI();
           
-          // Sync changes instantly down to the exam component if present
           if (typeof window.syncExamAuthSession === 'function') {
             window.syncExamAuthSession();
           }
@@ -513,7 +513,6 @@ document.querySelectorAll('a[href^="#"]').forEach(function(a) {
       label.className = 'exam-option';
       label.innerHTML = '<input type="radio" name="' + question.id + '" value="' + optIndex + '"> ' + option;
       
-      // Fixed crosshair focus activation
       var radioInput = label.querySelector('input');
       if(selectedAnswers[question.id] === optIndex) {
         radioInput.checked = true;
