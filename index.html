@@ -25,7 +25,6 @@
   <link rel="stylesheet" href="styles.css"/>
   
   <style>
-    /* Real-Time Broadcast Banner Strip */
     #live-broadcast-banner {
       display: none;
       background: #00aaff;
@@ -275,7 +274,6 @@
 <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-firestore-compat.js"></script>
 
 <script>
-  // Unified Initialization Wrapper to prevent duplicate instances
   (function() {
     var firebaseConfig = {
       apiKey: "AIzaSyBuculpQXW1j_2eaWSOhO5mer--XwcwkmE",
@@ -290,7 +288,8 @@
     if (!firebase.apps.length) {
       firebase.initializeApp(firebaseConfig);
     }
-    window.db = firebase.firestore(); 
+    // Forcing custom default database map route globally inside the window interface frame
+    window.db = firebase.firestore.prototype.constructor(firebase.apps[0], "default"); 
   })();
 
   // REAL-TIME OPERATIONS ENGINE FOR SITE SETTINGS
@@ -305,7 +304,6 @@
         if (!doc.exists) return;
         var data = doc.data();
 
-        // 1. LIVE MAINTENANCE RUNTIME EMERGENCY LOCKDOWN
         if (data.maintenanceMode === true) {
           if (broadcastBanner) broadcastBanner.style.display = "none";
           if (pageWrapper) {
@@ -319,7 +317,6 @@
           return;
         }
 
-        // 2. LIVE RUNTIME RE-RENDERING: TICKER STRIP STATUS
         if (broadcastBanner && data.bannerNotice) {
           if (data.bannerNotice.visible === true && data.bannerNotice.text) {
             broadcastBanner.textContent = data.bannerNotice.text;
@@ -329,7 +326,6 @@
           }
         }
 
-        // 3. LIVE RUNTIME RE-RENDERING: HERO PROSE
         if (heroTitle && data.heroSection?.title) {
           heroTitle.innerHTML = data.heroSection.title.replace(/\n/g, '<br/>');
         }
@@ -343,6 +339,6 @@
   })();
 </script>
 
-<script src="script.js?v=2026.06.05"></script>
+<script src="script.js?v=2026.06.05.final"></script>
 </body>
 </html>

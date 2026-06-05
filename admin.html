@@ -158,7 +158,8 @@ var firebaseConfig = {
 };
 
 var app = !firebase.apps.length ? firebase.initializeApp(firebaseConfig) : firebase.app();
-var db = app.firestore();
+// Routing explicit collection targets to named custom container node instances
+var db = firebase.firestore.prototype.constructor(app, "default");
 
 var AUVALEN_USERNAME = 'auvalen';
 var AUVALEN_PASSWORD = 'A$5fVz9!QeR7bT2kWpY3';
@@ -335,7 +336,6 @@ function initializeAdminDynamicControlDeck() {
   });
 }
 
-// Fixed Action-Bound Target Event Listeners (Protects clicks from child target nodes)
 var globalSaveBtn = document.getElementById('btn-save-global');
 if (globalSaveBtn) {
   globalSaveBtn.addEventListener('click', function(e) {
@@ -421,7 +421,6 @@ if (deployExamBtn) {
   });
 }
 
-// UI Sidebar Management Systems Block
 (function() {
   var sidebarNode = document.getElementById("sidebar");
   var mainNode = document.getElementById("main");
@@ -449,7 +448,6 @@ if (deployExamBtn) {
 
 updateAdminUI();
 
-// Background Decorative Matrix Particles
 var container = document.getElementById('particles');
 if (container) {
   for (var i = 0; i < 35; i++) {

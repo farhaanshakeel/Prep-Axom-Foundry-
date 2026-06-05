@@ -20,8 +20,8 @@
     if (!firebase.apps.length) {
       firebase.initializeApp(firebaseConfig);
     }
-    // Correct Native Root Assignment (no hardcoded string overrides)
-    window.db = firebase.firestore();
+    // Fixed: Explicitly binding legacy compat interface to the custom "default" storage instance
+    window.db = firebase.firestore.prototype.constructor(firebase.apps[0], "default");
   } else {
     window.db = null;
   }
