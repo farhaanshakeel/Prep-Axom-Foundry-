@@ -73,7 +73,7 @@
   <div class="sidebar-footer">
     <div id="globalLoginWidget" style="margin-bottom: 12px;">
       <div id="globalLoginForm" style="display:none;">
-        <input type="text" id="globalLoginUsername" placeholder="Discord Username" style="display:block; width:100%; padding:8px; margin-bottom:8px; background:rgba(0,170,255,0.05); border:1px solid rgba(0,170,255,0.2); color:var(--white); font-family:'Rajdhani',sans-serif; font-size:12px; box-sizing:border-box;"/>
+        <input type="text" id="globalLoginUsername" placeholder="Discord Username" style="display:block; width:100%; padding:8px; margin-bottom:8px; background:rgba(0,170,255,0.05); border:1px solid rgba(0,170,255,0.2); color:var(--white); font-family:'Rajdhani',sans-serif; font-size:12px; box-sizing:border-box Pap;"/>
         <input type="password" id="globalLoginPassword" placeholder="Password" style="display:block; width:100%; padding:8px; margin-bottom:8px; background:rgba(0,170,255,0.05); border:1px solid rgba(0,170,255,0.2); color:var(--white); font-family:'Rajdhani',sans-serif; font-size:12px; box-sizing:border-box;"/>
         <button id="globalLoginBtn" style="width:100%; padding:8px; background:var(--blue); color:var(--black); border:none; font-family:'Orbitron',sans-serif; font-size:11px; font-weight:700; cursor:pointer; margin-bottom:6px;">Sign In</button>
         <button id="globalLoginCancel" style="width:100%; padding:6px; background:transparent; color:var(--blue); border:1px solid var(--blue); font-family:'Rajdhani',sans-serif; font-size:11px; cursor:pointer;">Cancel</button>
@@ -288,7 +288,7 @@
     if (!firebase.apps.length) {
       firebase.initializeApp(firebaseConfig);
     }
-    // CORRECT FIX: Match standard window assignment initialization
+    // CORRECT FIX: Align inline configuration with custom named instance
     window.db = firebase.app().firestore("default"); 
   })();
 

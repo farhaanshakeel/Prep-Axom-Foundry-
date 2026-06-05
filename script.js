@@ -19,7 +19,7 @@
     if (!firebase.apps.length) {
       firebase.initializeApp(firebaseConfig);
     }
-    // CORRECT FIX: Standard named database assignment
+    // CORRECT FIX: Explicitly target the custom named "default" database instance
     window.db = firebase.app().firestore("default");
   } else {
     window.db = null;
@@ -228,13 +228,11 @@ document.addEventListener('DOMContentLoaded', function() {
 (function() {
   if (typeof IntersectionObserver === 'undefined') return;
   var revealObserver = new IntersectionObserver(function(entries) {
-    entries.forEach(function(entries) {
-      entries.forEach(function(entry) {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('visible');
-          revealObserver.unobserve(entry.target);
-        }
-      });
+    entries.forEach(function(entry) {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        revealObserver.unobserve(entry.target);
+      }
     });
   }, { threshold: 0.1, rootMargin: '0px 0px -60px 0px' });
   document.querySelectorAll('.reveal').forEach(function(el) { revealObserver.observe(el); });
