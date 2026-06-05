@@ -288,8 +288,8 @@
     if (!firebase.apps.length) {
       firebase.initializeApp(firebaseConfig);
     }
-    // Forcing custom default database map route globally inside the window interface frame
-    window.db = firebase.firestore.prototype.constructor(firebase.apps[0], "default"); 
+    // CORRECT FIX: Match standard window assignment initialization
+    window.db = firebase.app().firestore("default"); 
   })();
 
   // REAL-TIME OPERATIONS ENGINE FOR SITE SETTINGS

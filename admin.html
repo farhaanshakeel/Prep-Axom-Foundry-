@@ -158,8 +158,8 @@ var firebaseConfig = {
 };
 
 var app = !firebase.apps.length ? firebase.initializeApp(firebaseConfig) : firebase.app();
-// Routing explicit collection targets to named custom container node instances
-var db = firebase.firestore.prototype.constructor(app, "default");
+// CORRECT FIX: Assign custom instance handle safely
+var db = app.firestore("default");
 
 var AUVALEN_USERNAME = 'auvalen';
 var AUVALEN_PASSWORD = 'A$5fVz9!QeR7bT2kWpY3';
